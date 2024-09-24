@@ -140,8 +140,9 @@ function gamipress_init_meta_boxes() {
     $post_type = '';
 
     // Get post type from global post
-    if( $post && property_exists( $post, 'post_type' ) )
+    if ( $post instanceof WP_Post ) {
         $post_type = $post->post_type;
+    }
 
     // On post.php post ID is on GET parameters
     if( empty( $post_type ) && isset( $_GET['post'] ) ) {

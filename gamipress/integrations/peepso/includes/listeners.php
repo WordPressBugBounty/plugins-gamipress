@@ -69,7 +69,7 @@ function gamipress_peepso_like_listener( $data ) {
 
     $action = ( current_filter() === 'peepso_action_like_add' ? 'like' : 'unlike' );
 
-    $user_id = $data->like_user_id;     // id of user adding the like
+    $user_id = absint( $data->like_user_id );     // id of user adding the like
     $post_id = $data->like_external_id; // id of item being liked; i.e. post_id
     $module_id = $data->like_module_id; // Defines from which module happens the like (0 from user profile, 1 from activity post or comment, etc)
     $type = $data->like_type;           // ???
@@ -87,11 +87,12 @@ function gamipress_peepso_like_listener( $data ) {
 
             $user_profile_id = $post_id;
 
-            // Trigger like/unlike an user profile
-            do_action( "gamipress_peepso_profile_{$action}", $user_profile_id, $user_id, $module_id, $type );
-
-            // Trigger get a like/unlike on your profile
-            do_action( "gamipress_peepso_get_profile_{$action}", $user_id, $user_profile_id, $module_id, $type );
+			if ( absint( $user_id ) !== absint( $user_profile_id ) ) {
+				// Trigger like/unlike an user profile
+				do_action( "gamipress_peepso_profile_{$action}", $user_profile_id, $user_id, $module_id, $type );
+				// Trigger get a like/unlike on your profile
+				do_action( "gamipress_peepso_get_profile_{$action}", $user_id, $user_profile_id, $module_id, $type );
+			}
 
             break;
         // Posts/Comments
@@ -100,23 +101,25 @@ function gamipress_peepso_like_listener( $data ) {
         case 5:
 
             $post_type = get_post_type( $post_id );
-            $post_author = get_post_field( 'post_author', $post_id );
+            $post_author = absint( get_post_field( 'post_author', $post_id ) );
 
             if( $post_type === 'peepso-post' ) {
 
-                // Trigger like/unlike an activity post
-                do_action( "gamipress_peepso_post_{$action}", $post_id, $user_id, $module_id, $type );
-
-                // Trigger get a like/unlike on an activity post
-                do_action( "gamipress_peepso_get_post_{$action}", $post_id, $post_author, $user_id, $module_id, $type );
+                if ( $user_id !== $post_author ) {
+					// Trigger like/unlike an activity post
+					do_action( "gamipress_peepso_post_{$action}", $post_id, $user_id, $module_id, $type );
+					// Trigger get a like/unlike on an activity post
+					do_action( "gamipress_peepso_get_post_{$action}", $post_id, $post_author, $user_id, $module_id, $type );
+				}
 
             } else if( $post_type === 'peepso-comment' ) {
 
-                // Trigger like/unlike a comment
-                do_action( "gamipress_peepso_comment_{$action}", $post_id, $user_id, $module_id, $type );
-
-                // Trigger get a like/unlike on a comment
-                do_action( "gamipress_peepso_get_comment_{$action}", $post_id, $post_author, $user_id, $module_id, $type );
+				if ( $user_id !== $post_author ) {
+					// Trigger like/unlike a comment
+					do_action( "gamipress_peepso_comment_{$action}", $post_id, $user_id, $module_id, $type );
+					// Trigger get a like/unlike on a comment
+					do_action( "gamipress_peepso_get_comment_{$action}", $post_id, $post_author, $user_id, $module_id, $type );
+				}
 
             }
 
@@ -129,26 +132,28 @@ function gamipress_peepso_like_listener( $data ) {
     if( $module_id === 4 ) {
 
         if( ! isset( $post_author ) )
-            $post_author = get_post_field( 'post_author', $post_id );
+            $post_author = absint( get_post_field( 'post_author', $post_id ) );
 
-        // Trigger like/unlike an activity post with a photo
-        do_action( "gamipress_peepso_photo_post_{$action}", $post_id, $user_id, $module_id, $type );
-
-        // Trigger get a like/unlike on an activity post with a photo
-        do_action( "gamipress_peepso_get_photo_post_{$action}", $post_id, $post_author, $user_id, $module_id, $type );
+		if ( $user_id !== $post_author ) {
+			// Trigger like/unlike an activity post with a photo
+			do_action( "gamipress_peepso_photo_post_{$action}", $post_id, $user_id, $module_id, $type );
+			// Trigger get a like/unlike on an activity post with a photo
+			do_action( "gamipress_peepso_get_photo_post_{$action}", $post_id, $post_author, $user_id, $module_id, $type );
+		}
     }
 
     // Like/unlike an activity post with a video
     if( $module_id === 5 ) {
 
         if( ! isset( $post_author ) )
-            $post_author = get_post_field( 'post_author', $post_id );
+            $post_author = absint( get_post_field( 'post_author', $post_id ) );
 
-        // Trigger like/unlike an activity post with a video
-        do_action( "gamipress_peepso_video_post_{$action}", $post_id, $user_id, $module_id, $type );
-
-        // Trigger get a like/unlike on an activity post with a video
-        do_action( "gamipress_peepso_get_video_post_{$action}", $post_id, $post_author, $user_id, $module_id, $type );
+		if ( $user_id !== $post_author ) {
+        	// Trigger like/unlike an activity post with a video
+        	do_action( "gamipress_peepso_video_post_{$action}", $post_id, $user_id, $module_id, $type );
+			// Trigger get a like/unlike on an activity post with a video
+			do_action( "gamipress_peepso_get_video_post_{$action}", $post_id, $post_author, $user_id, $module_id, $type );
+		}
 
     }
 
@@ -167,7 +172,7 @@ function gamipress_peepso_react_listener( $data ) {
 
     $action = ( current_filter() === 'peepso_action_react_add' ? 'react' : 'unreact' );
 
-    $user_id = $data->react_user_id;     // id of adding the react
+    $user_id = absint( $data->react_user_id );     // id of adding the react
     $post_id = $data->react_external_id; // id of item being reactd; i.e. post_id
     $module_id = $data->react_module_id; // Defines from which module happens the react (0 from user profile, 1 from activity post or comment, etc)
 
@@ -197,23 +202,25 @@ function gamipress_peepso_react_listener( $data ) {
         case 5:
 
             $post_type = get_post_type( $post_id );
-            $post_author = get_post_field( 'post_author', $post_id );
+            $post_author = absint( get_post_field( 'post_author', $post_id ) );
 
             if( $post_type === 'peepso-post' ) {
-
-                // Trigger react/unreact an activity post
-                do_action( "gamipress_peepso_post_{$action}", $post_id, $user_id, $module_id );
-
-                // Trigger get a react/unreact on an activity post
-                do_action( "gamipress_peepso_get_post_{$action}", $post_id, $post_author, $user_id, $module_id );
+                
+				if ( $user_id !== $post_author ) {
+					// Trigger react/unreact an activity post
+					do_action( "gamipress_peepso_post_{$action}", $post_id, $user_id, $module_id );
+                	// Trigger get a react/unreact on an activity post
+                	do_action( "gamipress_peepso_get_post_{$action}", $post_id, $post_author, $user_id, $module_id );
+				}
 
             } else if( $post_type === 'peepso-comment' ) {
 
-                // Trigger react/unreact a comment
-                do_action( "gamipress_peepso_comment_{$action}", $post_id, $user_id, $module_id );
-
-                // Trigger get a react/unreact on a comment
-                do_action( "gamipress_peepso_get_comment_{$action}", $post_id, $post_author, $user_id, $module_id );
+				if ( $user_id !== $post_author ) {
+                	// Trigger react/unreact a comment
+                	do_action( "gamipress_peepso_comment_{$action}", $post_id, $user_id, $module_id );
+                	// Trigger get a react/unreact on a comment
+                	do_action( "gamipress_peepso_get_comment_{$action}", $post_id, $post_author, $user_id, $module_id );
+				}
 
             }
 
@@ -226,26 +233,28 @@ function gamipress_peepso_react_listener( $data ) {
     if( $module_id === 4 ) {
 
         if( ! isset( $post_author ) )
-            $post_author = get_post_field( 'post_author', $post_id );
+            $post_author = absint( get_post_field( 'post_author', $post_id ) );
 
-        // Trigger like/unlike an activity post with a photo
-        do_action( "gamipress_peepso_photo_post_{$action}", $post_id, $user_id, $module_id );
-
-        // Trigger get a like/unlike on an activity post with a photo
-        do_action( "gamipress_peepso_get_photo_post_{$action}", $post_id, $post_author, $user_id, $module_id );
+        if ( $user_id !== $post_author ) {
+			// Trigger like/unlike an activity post with a photo
+        	do_action( "gamipress_peepso_photo_post_{$action}", $post_id, $user_id, $module_id );
+			// Trigger get a like/unlike on an activity post with a photo
+			do_action( "gamipress_peepso_get_photo_post_{$action}", $post_id, $post_author, $user_id, $module_id );
+		}
     }
 
     // React/unreact an activity post with a video
     if( $module_id === 5 ) {
 
         if( ! isset( $post_author ) )
-            $post_author = get_post_field( 'post_author', $post_id );
+            $post_author = absint( get_post_field( 'post_author', $post_id ) );
 
-        // Trigger like/unlike an activity post with a video
-        do_action( "gamipress_peepso_video_post_{$action}", $post_id, $user_id, $module_id );
-
-        // Trigger get a like/unlike on an activity post with a video
-        do_action( "gamipress_peepso_get_video_post_{$action}", $post_id, $post_author, $user_id, $module_id );
+		if ( $user_id !== $post_author ) {
+        	// Trigger like/unlike an activity post with a video
+        	do_action( "gamipress_peepso_video_post_{$action}", $post_id, $user_id, $module_id );		
+			// Trigger get a like/unlike on an activity post with a video
+			do_action( "gamipress_peepso_get_video_post_{$action}", $post_id, $post_author, $user_id, $module_id );
+		}
 
     }
 
