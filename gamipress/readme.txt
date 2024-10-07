@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.6
-Stable tag: 7.1.0
+Stable tag: 7.1.1
 License: GNU AGPL v3.0
 License URI: http://www.gnu.org/licenses/agpl-3.0.html
 
@@ -336,6 +336,11 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.1.1 =
+
+* **Improvements**
+* Updated X/Twitter logo for Social Sharing.
 
 = 7.1.0 =
 

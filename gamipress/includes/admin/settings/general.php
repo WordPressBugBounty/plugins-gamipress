@@ -109,8 +109,9 @@ add_action( 'init', 'gamipress_register_image_sizes' );
  */
 function gamipress_get_manager_capability() {
 
-    $minimum_role = gamipress_get_option( 'minimum_role', 'manage_options' );
+    $minimum_role = gamipress_get_option( 'minimum_role', 'manage_options' );    
     $allowed_capabilities = array_keys( gamipress_get_allowed_manager_capabilities() );
+    
     // Do not allow to bypass subscribers capability in any way
     $excluded_capabilities = array( 'read' );
 
@@ -123,8 +124,9 @@ function gamipress_get_manager_capability() {
 
         // Set minimum role to manage_options
         $minimum_role = 'manage_options';
+        
     }
-       
+    
     return $minimum_role;
 
 }
@@ -143,6 +145,6 @@ function gamipress_get_allowed_manager_capabilities() {
         'delete_others_posts' => __( 'Editor', 'gamipress' ),
         'publish_posts' => __( 'Author', 'gamipress' ), 
     );
-    
+   
     return apply_filters( 'gamipress_allowed_manager_capabilities', $allowed_capabilities );
 }
