@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.6
-Stable tag: 7.1.1
+Stable tag: 7.1.2
 License: GNU AGPL v3.0
 License URI: http://www.gnu.org/licenses/agpl-3.0.html
 
@@ -168,6 +168,9 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 * [Better Messages](https://gamipress.com/add-ons/better-messages-integration/)
 * [WooCommerce Shipstation](https://gamipress.com/add-ons/woocommerce-shipstation-integration/)
 * [PrettyLinks](https://gamipress.com/add-ons/pretty-link-integration/)
+* [QSM](https://gamipress.com/add-ons/qsm-integration/)
+* [GeoDirectory](https://gamipress.com/add-ons/geodirectory-integration/)
+* [WP Booking Calendar](https://gamipress.com/add-ons/wp-booking-calendar-integration/)
 
 [View all integrations](https://gamipress.com/integrations/)
 
@@ -336,6 +339,32 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.1.2 =
+
+* **New Features**
+* New integration: GeoDirectory.
+* GeoDirectory: New event: Add a new place.
+* GeoDirectory: New event: Add a new category.
+* GeoDirectory: New event: Add a new review on any place.
+* GeoDirectory: New event: Add a new review on a specific place.
+* New integration: Quiz and Survey Master.
+* Quiz and Survey Master: New event: Submit a quiz.
+* Quiz and Survey Master: New event: Submit a specific quiz.
+* Quiz and Survey Master: New event: Complete a quiz with a minimum amount of points.
+* Quiz and Survey Master: New event: Complete a specific quiz with a minimum amount of points.
+* Quiz and Survey Master: New event: Complete a quiz with a maximum amount of points.
+* Quiz and Survey Master: New event: Complete a specific quiz with a maximum amount of points.
+* Quiz and Survey Master: New event: Complete a quiz on a range of points.
+* Quiz and Survey Master: New event: Complete a specific quiz on a range of points.
+* New integration: WP Booking Calendar.
+* WP Booking Calendar: New event: New booking scheduled.
+* WP Booking Calendar: New event: Booking is set to approved.
+* WP Booking Calendar: New event: Specific booking is set to approved.
+* WP Booking Calendar: New event: Booking is set to pending.
+* WP Booking Calendar: New event: Specific booking is set to pending.
+* WP Booking Calendar: New event: Booking is set to cancelled.
+* WP Booking Calendar: New event: Specific booking is set to cancelled.
 
 = 7.1.1 =
 
