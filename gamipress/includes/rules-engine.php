@@ -307,7 +307,7 @@ function gamipress_user_has_access_to_points_award( $return = false, $user_id = 
             'post_id'   => absint( $points_award_id ),
             'since'     => absint( gamipress_achievement_last_user_activity( $points_award_id, $user_id ) )
         ) );
-
+        
         // Prevent user to exceed maximum earnings the same points award
         if ( $earned_times >= $maximum_earnings ) {
             $return = false;
