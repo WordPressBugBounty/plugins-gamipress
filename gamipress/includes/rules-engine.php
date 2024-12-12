@@ -1761,6 +1761,8 @@ function gamipress_revoke_achievement_to_user( $achievement_id = 0, $user_id = 0
 
                 foreach( $requirements as $requirement ) {
                     gamipress_revoke_achievement_to_user( $requirement->ID, $user_id );
+                    $last_interaction = current_time( 'timestamp' );
+                    update_user_meta( $user_id, '_gamipress_' . $requirement->ID . '_last_interaction_timestamp', $last_interaction );
                 }
 
             }
