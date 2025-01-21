@@ -179,7 +179,7 @@ function gamipress_activity_recount_comments( $response, $loop, $limit, $offset 
     global $wpdb;
 
     // Get all approved comments count
-    $comments_count = absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->comments} WHERE comment_approved = '1'" ) );
+    $comments_count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->comments} WHERE comment_approved = '1'" ) ) );
 
     // On first loop send an informational text
     if( $loop === 0 && $comments_count > $limit ) {
@@ -192,7 +192,7 @@ function gamipress_activity_recount_comments( $response, $loop, $limit, $offset 
     }
 
     // Get all approved comments
-    $comments = $wpdb->get_results( "SELECT * FROM {$wpdb->comments} WHERE comment_approved = '1' LIMIT {$offset}, {$limit}" );
+    $comments = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->comments} WHERE comment_approved = '1' LIMIT {$offset}, {$limit}" ) );
 
     foreach( $comments as $comment ) {
 
@@ -273,7 +273,7 @@ function gamipress_activity_recount_published_content( $response, $loop, $limit,
         unset( $public_post_types['attachment'] );
 
     // Get all published posts
-    $posts_count = absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type IN ( '" . implode( "', '", $public_post_types ) . "' )" ) );
+    $posts_count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type IN ( '" . implode( "', '", $public_post_types ) . "' )" ) ) );
 
     // On first loop send an informational text
     if( $loop === 0 && $posts_count > $limit ) {
@@ -286,7 +286,7 @@ function gamipress_activity_recount_published_content( $response, $loop, $limit,
     }
 
     // Get all published posts
-    $posts = $wpdb->get_results( "SELECT * FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type IN ( '" . implode( "', '", $public_post_types ) . "' ) LIMIT {$offset}, {$limit}" );
+    $posts = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->posts} WHERE post_status = 'publish' AND post_type IN ( '" . implode( "', '", $public_post_types ) . "' ) LIMIT {$offset}, {$limit}" ) );
 
     foreach( $posts as $post ) {
         // Trigger content publishing action for each post

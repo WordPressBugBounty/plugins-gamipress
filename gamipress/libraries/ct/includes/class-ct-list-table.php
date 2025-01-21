@@ -104,7 +104,7 @@ if ( ! class_exists( 'CT_List_Table' ) ) :
             if( ! empty( $field_id ) && ! empty( $field_labels ) && isset( $ct_table->db->schema->fields[$field_id] ) ) {
 
                 // Get the number of entries per each different field value
-                $results = $wpdb->get_results( "SELECT {$field_id}, COUNT( * ) AS num_entries FROM {$ct_table->db->table_name} GROUP BY {$field_id}", ARRAY_A );
+                $results = $wpdb->get_results( $wpdb->prepare( "SELECT {$field_id}, COUNT( * ) AS num_entries FROM {$ct_table->db->table_name} GROUP BY {$field_id}", ARRAY_A ) );
                 $counts  = array();
 
                 // Loop them to build the counts array
@@ -116,7 +116,7 @@ if ( ! class_exists( 'CT_List_Table' ) ) :
                 $current = isset( $_GET[$field_id] ) ? $_GET[$field_id] : '';
 
                 // Setup the 'All' view
-                $all_count =  absint( $wpdb->get_var( "SELECT COUNT( * ) FROM {$ct_table->db->table_name}" ) );
+                $all_count =  absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT( * ) FROM {$ct_table->db->table_name}" ) ) );
                 $views['all'] = '<a href="' . $list_link . '" class="' . ( empty( $current ) ? 'current' : '' ) . '">' . __( 'All', 'ct' ) . ' <span class="count">(' . $all_count . ')</span></a>';
 
                 foreach( $counts as $value => $count ) {

@@ -402,11 +402,11 @@ function gamipress_ajax_bulk_revokes_tool() {
         $where = ( ! empty( $where ) ? "WHERE (" . implode( ') OR (', $where ) . ")" : '' );
         $join = ( ! empty( $join ) ? implode( ' ', $join ) : '' );
 
-        $sql = "SELECT u.ID 
+        $sql = $wpdb->prepare( "SELECT u.ID 
                 FROM {$wpdb->users} AS u
                 {$join}
                 {$where}
-                ORDER BY u.ID ASC LIMIT {$offset}, {$limit}";
+                ORDER BY u.ID ASC LIMIT {$offset}, {$limit}" );
 
         $users = $wpdb->get_results( $sql );
 
@@ -479,13 +479,13 @@ function gamipress_ajax_bulk_revokes_tool() {
             // Get the users count
             $users_count = gamipress_get_users_count();
         } else {
-            $users_count = absint( $wpdb->get_var(
+            $users_count = absint( $wpdb->get_var( $wpdb->prepare(
                 "SELECT COUNT(*) 
                 FROM {$wpdb->users} AS u 
                 {$join}
                 {$where}
                 ORDER BY u.ID ASC"
-            ) );
+            ) ) );
         }
 
         $remaining_users = $users_count - $awarded_users;

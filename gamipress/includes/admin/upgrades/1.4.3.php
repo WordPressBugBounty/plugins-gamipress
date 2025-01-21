@@ -137,7 +137,7 @@ function gamipress_143_upgrade_size() {
 
         $user_earnings = GamiPress()->db->user_earnings;
 
-        $earnings_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$user_earnings} AS e WHERE e.title = ''" );
+        $earnings_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$user_earnings} AS e WHERE e.title = ''" ) );
 
         $upgrade_size += absint( $earnings_count );
 
@@ -200,7 +200,7 @@ function gamipress_ajax_process_143_upgrade() {
         $user_earnings = GamiPress()->db->user_earnings;
 
         // Retrieve all user earnings without title
-        $results = $wpdb->get_results( "SELECT * FROM {$user_earnings} AS e WHERE e.title = '' LIMIT {$limit}" );
+        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$user_earnings} AS e WHERE e.title = '' LIMIT {$limit}" ) );
 
         foreach( $results as $user_earning ) {
 
@@ -223,7 +223,7 @@ function gamipress_ajax_process_143_upgrade() {
             $current++;
         }
 
-        $earnings_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$user_earnings} AS e WHERE e.title = ''" );
+        $earnings_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$user_earnings} AS e WHERE e.title = ''" ) );
 
         if( absint( $earnings_count ) === 0 ) {
             gamipress_set_upgrade_complete( 'update_user_earnings' );
@@ -279,7 +279,7 @@ function gamipress_143_maybe_upgrade() {
 
         $user_earnings = GamiPress()->db->user_earnings;
 
-        $earnings_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$user_earnings} AS e WHERE e.title = '' LIMIT 1" );
+        $earnings_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$user_earnings} AS e WHERE e.title = '' LIMIT 1" ) );
 
         $upgrade_check += absint( $earnings_count );
 

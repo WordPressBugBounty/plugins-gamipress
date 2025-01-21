@@ -138,7 +138,7 @@ function gamipress_147_upgrade_size() {
 
         $logs = GamiPress()->db->logs;
 
-        $logs_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$logs} AS l WHERE l.trigger_type = ''" );
+        $logs_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$logs} AS l WHERE l.trigger_type = ''" ) );
 
         $upgrade_size += absint( $logs_count );
 
@@ -201,7 +201,7 @@ function gamipress_ajax_process_147_upgrade() {
         $logs = GamiPress()->db->logs;
 
         // Retrieve all user earnings without title
-        $results = $wpdb->get_results( "SELECT l.log_id, l.type FROM {$logs} AS l WHERE l.trigger_type = '' LIMIT {$limit}" );
+        $results = $wpdb->get_results( $wpdb->prepare( "SELECT l.log_id, l.type FROM {$logs} AS l WHERE l.trigger_type = '' LIMIT {$limit}" ) );
 
         foreach( $results as $log ) {
 
@@ -251,7 +251,7 @@ function gamipress_ajax_process_147_upgrade() {
             $current++;
         }
 
-        $logs_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$logs} AS l WHERE l.trigger_type = ''" );
+        $logs_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$logs} AS l WHERE l.trigger_type = ''" ) );
 
         if( absint( $logs_count ) === 0 ) {
             gamipress_set_upgrade_complete( 'update_logs_trigger_type' );
@@ -308,7 +308,7 @@ function gamipress_147_maybe_upgrade() {
 
         $logs = GamiPress()->db->logs;
 
-        $logs_count = $wpdb->get_var( "SELECT COUNT(*) FROM {$logs} AS l WHERE l.trigger_type = '' LIMIT 1" );
+        $logs_count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$logs} AS l WHERE l.trigger_type = '' LIMIT 1" ) );
 
         $upgrade_check += absint( $logs_count );
 

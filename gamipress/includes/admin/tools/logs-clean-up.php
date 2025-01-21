@@ -173,7 +173,7 @@ function gamipress_ajax_logs_clean_up_count_tool() {
 
     $where = gamipress_ajax_logs_clean_up_tool_where();
 
-    $count =  $wpdb->get_var( "SELECT COUNT(*) {$where}" );
+    $count =  $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) {$where}" ) );
 
     // Return a success message
     wp_send_json_success( sprintf( __( '%d logs will be deleted.', 'gamipress' ), $count ) );

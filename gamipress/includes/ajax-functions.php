@@ -54,6 +54,7 @@ function gamipress_ajax_get_logs() {
 	// Sanitize
     foreach( $atts as $attr => $value ) {
         $atts[$attr] = sanitize_text_field( $value );
+		$atts[$attr] = str_replace( array( '[', ']' ), '', $value);
     }
 
 	$atts = shortcode_atts( gamipress_logs_shortcode_defaults(), $atts, 'gamipress_logs' );
@@ -91,6 +92,7 @@ function gamipress_ajax_get_user_earnings() {
     // Sanitize
     foreach( $atts as $attr => $value ) {
         $atts[$attr] = sanitize_text_field( $value );
+		$atts[$attr] = str_replace( array( '[', ']' ), '', $value);
     }
 
     $atts = shortcode_atts( gamipress_earnings_shortcode_defaults(), $atts, 'gamipress_earnings' );
@@ -219,15 +221,15 @@ function gamipress_ajax_get_users() {
 	$offset = $limit * ( $page - 1 );
 
 	// Fetch our results (store as associative array)
-	$results = $wpdb->get_results(
+	$results = $wpdb->get_results( $wpdb->prepare(
 		"SELECT ID, user_login, user_email, display_name
 		 {$from}
 		 {$where}
 		 LIMIT {$offset}, {$limit}",
 		'ARRAY_A'
-    );
+    ) );
 
-	$count = absint( $wpdb->get_var( "SELECT COUNT(*) {$from} {$where}" ) );
+	$count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) {$from} {$where}" ) ) );
 
     /**
      * Ajax users results (used on almost every post selector)
@@ -424,13 +426,13 @@ function gamipress_ajax_get_posts() {
             $from = apply_filters( 'gamipress_ajax_get_posts_site_from', $from, $site_id );
 
 			// On this query, keep $wpdb->posts to get sub site posts
-			$site_results = $wpdb->get_results(
+			$site_results = $wpdb->get_results( $wpdb->prepare(
 				"SELECT p.ID, p.post_title, p.post_type
 				 FROM {$from}
 				 WHERE {$where}
                  ORDER BY {$order_by}
 				 LIMIT {$offset}, {$limit}"
-			);
+			) );
 
 			// Loop all site results to add the site ID and name
 			foreach( $site_results as $index => $site_result ) {
@@ -444,7 +446,7 @@ function gamipress_ajax_get_posts() {
 			// Merge it to all results
 			$results = array_merge( $results, $site_results );
 
-			$count += absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$from} WHERE {$where}" ) );
+			$count += absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$from} WHERE {$where}" ) ) );
 
             // Restore current site
             restore_current_blog();
@@ -454,15 +456,15 @@ function gamipress_ajax_get_posts() {
 	} else {
 
 		// On this query, keep $wpdb->posts to get current site posts
-		$results = $wpdb->get_results(
+		$results = $wpdb->get_results( $wpdb->prepare(
 			"SELECT p.ID, p.post_title, p.post_type
              FROM {$from}
              WHERE {$where}
              ORDER BY {$order_by}
              LIMIT {$offset}, {$limit}"
-		);
+		) );
 
-		$count = absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$from} WHERE {$where}" ) );
+		$count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$from} WHERE {$where}" ) ) );
 
 	}
 
@@ -646,13 +648,13 @@ function gamipress_ajax_get_ranks_options_html() {
 
 	$posts = GamiPress()->db->posts;
 
-	$ranks = $wpdb->get_results(
+	$ranks = $wpdb->get_results( $wpdb->prepare(
 	    "SELECT p.ID, p.post_title
 		FROM {$posts} AS p
 		WHERE p.post_status IN( 'publish', 'private', 'inherit' )
         {$post_type}
 		ORDER BY p.post_type ASC, p.menu_order DESC"
-    );
+    ) );
 
 	// Setup our output
 	$output = '<option value="">' . sprintf( __( 'Choose the %s', 'gamipress' ), $singular_name ) . '</option>';

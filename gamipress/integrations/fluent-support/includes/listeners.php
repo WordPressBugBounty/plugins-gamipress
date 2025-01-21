@@ -35,7 +35,7 @@ function gamipress_fluent_support_open_ticket( $ticket ) {
     } else {
         $user = wp_get_current_user();
 
-        $agent = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}fs_persons WHERE email='{$user->user_email}'" );
+        $agent = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}fs_persons WHERE email='{$user->user_email}'" ) );
 
         // Bail if agent not found
         if( ! $agent ) {
@@ -71,7 +71,7 @@ function gamipress_fluent_support_agent_reply_ticket( $ticket, $response ) {
     $ticket_id = absint( $ticket['id'] );
     $response_id = absint( $response['id'] );
 
-    $agent = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}fs_persons WHERE id={$closed_by}");
+    $agent = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}fs_persons WHERE id={$closed_by}" ) );
 
     // Bail if agent not found
     if( ! $agent ) {
@@ -164,7 +164,7 @@ function gamipress_fluent_support_close_ticket( $ticket ) {
             return;
         }
 
-        $agent = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}fs_persons WHERE id={$agent_id}");
+        $agent = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}fs_persons WHERE id={$agent_id}" ) );
 
         // Bail if agent not found
         if( ! $agent ) {

@@ -280,7 +280,7 @@ function gamipress_ajax_export_setup_tool() {
             $post['meta'] = array();
 
             // Get all post metas
-            $post_metas = $wpdb->get_results( "SELECT meta_key, meta_value FROM {$postmeta} WHERE post_id={$post_id}" );
+            $post_metas = $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value FROM {$postmeta} WHERE post_id={$post_id}" ) );
 
             foreach( $post_metas as $meta ) {
 

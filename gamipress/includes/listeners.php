@@ -660,13 +660,13 @@ function gamipress_get_meta_keys_in_use() {
     $postmeta = GamiPress()->db->postmeta;
 
     // Get an array with the meta keys in use
-    $meta_keys_in_use = $wpdb->get_col(
+    $meta_keys_in_use = $wpdb->get_col( $wpdb->prepare(
         "SELECT pm.meta_value AS 'meta_value'
          FROM {$postmeta} AS pm
          WHERE pm.meta_key = '_gamipress_meta_key_required'
          AND pm.meta_value != '' 
          GROUP BY pm.meta_value"
-    );
+    ) );
 
     if( ! is_array( $meta_keys_in_use ) ) {
         $meta_keys_in_use = array();

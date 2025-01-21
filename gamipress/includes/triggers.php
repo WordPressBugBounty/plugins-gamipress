@@ -1115,7 +1115,7 @@ function gamipress_get_triggers_listeners_count() {
     $postmeta  	= GamiPress()->db->postmeta;
 
     // Get an array with each trigger count
-    $results = $wpdb->get_results(
+    $results = $wpdb->get_results( $wpdb->prepare(
         "SELECT pm.meta_value AS 'trigger', COUNT(*) AS 'count'
          FROM {$postmeta} AS pm
          LEFT JOIN {$posts} AS p ON ( pm.post_id = p.ID )
@@ -1124,7 +1124,7 @@ function gamipress_get_triggers_listeners_count() {
          AND pm.meta_key = '_gamipress_trigger_type'
          AND pm.meta_value != '' 
          GROUP BY pm.meta_value"
-    );
+    ) );
 
     $listeners_count = array();
 

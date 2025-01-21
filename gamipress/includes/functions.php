@@ -171,14 +171,14 @@ function gamipress_get_users( $query_args = array(), $output = OBJECT ) {
     }
 
     // Get the stored users
-    $users = $wpdb->get_results(
+    $users = $wpdb->get_results( $wpdb->prepare(
         "SELECT * 
         {$from} 
         {$where}
         {$orderby}
         {$limit}",
         $output
-    );
+    ) );
 
     return $users;
 
@@ -218,11 +218,11 @@ function gamipress_get_users_count( $query_args = array() ) {
     }
 
     // Get the users count
-    $users_count = absint( $wpdb->get_var(
+    $users_count = absint( $wpdb->get_var( $wpdb->prepare(
         "SELECT COUNT(*) 
         {$from} 
         {$where}"
-    ) );
+    ) ) );
 
     return $users_count;
 

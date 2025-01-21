@@ -61,7 +61,7 @@ function gamipress_get_network_site_ids() {
         if( is_array( $cache ) ) {
             $blog_ids = $cache;
         } else {
-            $blog_ids = $wpdb->get_results( "SELECT blog_id FROM " . $wpdb->base_prefix . "blogs" );
+            $blog_ids = $wpdb->get_results( $wpdb->prepare( "SELECT blog_id FROM " . $wpdb->base_prefix . "blogs" ) );
 
             gamipress_set_cache( 'gamipress_blog_ids', $blog_ids );
         }

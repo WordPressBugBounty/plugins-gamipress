@@ -1309,7 +1309,7 @@ function ct_update_meta_cache( $meta_type, $object_ids) {
     // Get meta info
     $id_list = join( ',', $ids );
 
-    $meta_list = $wpdb->get_results( "SELECT {$primary_key}, meta_key, meta_value FROM {$meta_table_name} WHERE {$primary_key} IN ($id_list) ORDER BY {$meta_primary_key} ASC", ARRAY_A );
+    $meta_list = $wpdb->get_results( $wpdb->prepare( "SELECT {$primary_key}, meta_key, meta_value FROM {$meta_table_name} WHERE {$primary_key} IN ($id_list) ORDER BY {$meta_primary_key} ASC", ARRAY_A ) );
 
     if ( !empty($meta_list) ) {
         foreach ( $meta_list as $metarow) {
