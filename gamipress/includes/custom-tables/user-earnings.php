@@ -424,7 +424,8 @@ function gamipress_user_earnings_get_list_views( $views = array() ) {
     $field_labels = gamipress_user_earnings_views_field_labels();
 
     // Get the number of entries per each different field value
-    $results = $wpdb->get_results( $wpdb->prepare( "SELECT {$field_id}, COUNT( * ) AS num_entries FROM {$ct_table->db->table_name} GROUP BY {$field_id}", ARRAY_A ) );
+    $results = $wpdb->get_results( "SELECT {$field_id}, COUNT( * ) AS num_entries FROM {$ct_table->db->table_name} GROUP BY {$field_id}", ARRAY_A );
+    
     $counts  = array();
 
     // Loop them to build the counts array
@@ -436,7 +437,7 @@ function gamipress_user_earnings_get_list_views( $views = array() ) {
     $current = isset( $_GET[$field_key] ) ? $_GET[$field_key] : '';
 
     // Setup the 'All' view
-    $all_count =  absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT( * ) FROM {$ct_table->db->table_name}" ) ) );
+    $all_count =  absint( $wpdb->get_var( "SELECT COUNT( * ) FROM {$ct_table->db->table_name}" ) );
     $views['all'] = '<a href="' . $list_link . '" class="' . ( empty( $current ) ? 'current' : '' ) . '">' . __( 'All', 'ct' ) . ' <span class="count">(' . $all_count . ')</span></a>';
 
     foreach( $counts as $value => $count ) {

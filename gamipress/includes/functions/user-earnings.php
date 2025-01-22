@@ -179,7 +179,7 @@ function gamipress_get_earnings_count( $query = array() ) {
 
     $user_earnings = GamiPress()->db->user_earnings;
 
-    return absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$user_earnings} AS ue WHERE {$where}" ) ) );
+    return absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$user_earnings} AS ue WHERE {$where}" ) );
 
 }
 
@@ -222,7 +222,7 @@ function gamipress_get_last_earnings( $query = array() ) {
 
     $limit = ( isset( $query['limit'] ) ? absint( $query['limit'] ) : 1 );
 
-    return $wpdb->get_results( $wpdb->prepare( "SELECT ue.* FROM {$user_earnings} AS ue WHERE {$where} ORDER BY ue.date DESC LIMIT {$limit}" ) );
+    return $wpdb->get_results( "SELECT ue.* FROM {$user_earnings} AS ue WHERE {$where} ORDER BY ue.date DESC LIMIT {$limit}" );
 
 }
 
@@ -270,7 +270,7 @@ function gamipress_get_last_earning_post_id( $query = array() ) {
 
     $user_earnings = GamiPress()->db->user_earnings;
 
-    return $wpdb->get_var( $wpdb->prepare( "SELECT ue.post_id FROM {$user_earnings} AS ue WHERE {$where} ORDER BY ue.date DESC LIMIT 1" ) );
+    return $wpdb->get_var( "SELECT ue.post_id FROM {$user_earnings} AS ue WHERE {$where} ORDER BY ue.date DESC LIMIT 1" );
 
 }
 
@@ -294,7 +294,7 @@ function gamipress_get_last_earning_date( $query = array() ) {
 
     $user_earnings = GamiPress()->db->user_earnings;
 
-    return $wpdb->get_var( $wpdb->prepare( "SELECT ue.date FROM {$user_earnings} AS ue WHERE {$where} ORDER BY ue.date DESC LIMIT 1" ) );
+    return $wpdb->get_var( "SELECT ue.date FROM {$user_earnings} AS ue WHERE {$where} ORDER BY ue.date DESC LIMIT 1" );
 
 }
 
