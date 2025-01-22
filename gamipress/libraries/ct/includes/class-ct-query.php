@@ -619,7 +619,7 @@ if ( ! class_exists( 'CT_Query' ) ) :
 
             if ( 'ids' == $q['fields'] ) {
                 if ( null === $this->results ) {
-                    $this->results = $wpdb->get_col( $wpdb->prepare( $this->request ) );
+                    $this->results = $wpdb->get_col(  $this->request );
                 }
 
                 $this->results = array_map( 'intval', $this->results );

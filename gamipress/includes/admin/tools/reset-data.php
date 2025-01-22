@@ -222,7 +222,7 @@ function gamipress_ajax_reset_data_tool() {
             if( in_array( 'earned_points', $_POST['items'] ) || in_array( 'earned_ranks', $_POST['items'] ) ) {
 
                 // Get all stored users
-                $users = $wpdb->get_results( $wpdb->prepare( "SELECT {$wpdb->users}.ID FROM {$wpdb->users}" ) );
+                $users = $wpdb->get_results( "SELECT {$wpdb->users}.ID FROM {$wpdb->users}" );
 
                 foreach( $users as $user ) {
 

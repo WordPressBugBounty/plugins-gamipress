@@ -895,14 +895,14 @@ function gamipress_get_achievement_earners( $achievement_id = 0, $args = array()
         $order_by = $args['orderby'] . ' ' .  $args['order'];
     }
 
-	$earners = $wpdb->get_col( $wpdb->prepare(
+	$earners = $wpdb->get_col(
 	    "SELECT u.user_id
 		FROM {$from}
 		WHERE {$where}
 		GROUP BY {$group_by} "
         . ( ! empty( $order_by ) ? "ORDER BY {$order_by} " : '' )
         . ( ! empty( $limit ) ? "LIMIT {$limit} " : '' )
-    ) );
+    );
 
 	$earned_users = array();
 

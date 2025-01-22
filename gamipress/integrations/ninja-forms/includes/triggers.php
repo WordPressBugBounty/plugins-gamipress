@@ -157,9 +157,9 @@ function gamipress_nf_specific_activity_trigger_permalink( $permalink, $specific
             if( $form->get_setting('allow_public_link') ) {
 
                 // Get the form public key to setup the URL
-                $public_form_key = $wpdb->get_var( $wpdb->prepare( "SELECT link.value
+                $public_form_key = $wpdb->get_var( "SELECT link.value
                     FROM `{$wpdb->prefix}nf3_form_meta` as link
-                    WHERE link.parent_id = {$specific_id}" ) );
+                    WHERE link.parent_id = {$specific_id}" );
 
                 if( $public_form_key ) {
 

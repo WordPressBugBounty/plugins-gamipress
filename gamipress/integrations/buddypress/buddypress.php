@@ -156,7 +156,7 @@ final class GamiPress_Integration_BuddyPress {
             // Setup new setting
             $gamipress_settings['bp_members_achievements_types'] = array();
 
-            $achievement_types = $wpdb->get_results( $wpdb->prepare( "SELECT p.ID, p.post_name FROM {$wpdb->posts} AS p WHERE p.post_type = 'achievement-type'" ) );
+            $achievement_types = $wpdb->get_results( "SELECT p.ID, p.post_name FROM {$wpdb->posts} AS p WHERE p.post_type = 'achievement-type'" );
 
             foreach( $achievement_types as $achievement_type ) {
                 $show = (bool) get_post_meta( $achievement_type->ID, '_gamipress_bp_show_bp_member_menu', true );

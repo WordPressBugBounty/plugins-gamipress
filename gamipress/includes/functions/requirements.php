@@ -237,7 +237,7 @@ function gamipress_query_requirements( $query_args = array() ) {
     $order_by = "ORDER BY " . implode( ', ', $order_by );
 
     // Get all requirements with this trigger and post assigned
-    $results = $wpdb->get_results( $wpdb->prepare( "{$select} {$from} {$where} {$order_by}" ) );
+    $results = $wpdb->get_results( "{$select} {$from} {$where} {$order_by}" );
 
     return $results;
 

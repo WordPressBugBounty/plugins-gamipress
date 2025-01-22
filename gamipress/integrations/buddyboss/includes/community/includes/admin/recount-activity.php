@@ -81,7 +81,7 @@ function gamipress_bp_activity_recount_activated_users( $response, $loop ) {
     $offset = ( $loop !== 0 ? $limit * ( $loop - 1 ) : 0 );
 
     // Get all stored users count
-    $users_count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->users}" ) ) );
+    $users_count = absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->users}" ) );
 
     // On first loop send an informational text
     if( $loop === 0 && $users_count > $limit ) {
@@ -93,7 +93,7 @@ function gamipress_bp_activity_recount_activated_users( $response, $loop ) {
     }
 
     // Get all stored users
-    $users = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->users} LIMIT {$offset}, {$limit}" ) );
+    $users = $wpdb->get_results( "SELECT * FROM {$wpdb->users} LIMIT {$offset}, {$limit}" );
 
     foreach( $users as $user ) {
 
@@ -148,7 +148,7 @@ function gamipress_bp_activity_recount_friendships( $response, $loop ) {
     $bp = buddypress();
 
     // Get all accepted friendships count
-    $friendships_count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$bp->friends->table_name} WHERE is_confirmed = 1" ) ) );
+    $friendships_count = absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$bp->friends->table_name} WHERE is_confirmed = 1" ) );
 
     // On first loop send an informational text
     if( $loop === 0 && $friendships_count > $limit ) {
@@ -160,7 +160,7 @@ function gamipress_bp_activity_recount_friendships( $response, $loop ) {
     }
 
     // Get all accepted friendships
-    $friendships = $wpdb->get_results( $wpdb->prepare( "SELECT id, initiator_user_id, friend_user_id FROM {$bp->friends->table_name} WHERE is_confirmed = 1 LIMIT {$offset}, {$limit}" ) );
+    $friendships = $wpdb->get_results( "SELECT id, initiator_user_id, friend_user_id FROM {$bp->friends->table_name} WHERE is_confirmed = 1 LIMIT {$offset}, {$limit}" );
 
     foreach( $friendships as $friendship ) {
 
@@ -211,7 +211,7 @@ function gamipress_bp_activity_recount_messages( $response, $loop ) {
     $bp = buddypress();
 
     // Get all messages count
-    $messages_count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$bp->messages->table_name}" ) ) );
+    $messages_count = absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$bp->messages->table_name}" ) );
 
     // On first loop send an informational text
     if( $loop === 0 && $messages_count > $limit ) {
@@ -223,7 +223,7 @@ function gamipress_bp_activity_recount_messages( $response, $loop ) {
     }
 
     // Get all messages
-    $messages = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$bp->messages->table_name} LIMIT {$offset}, {$limit}" ) );
+    $messages = $wpdb->get_results( "SELECT * FROM {$bp->messages->table_name} LIMIT {$offset}, {$limit}" );
 
     foreach( $messages as $message ) {
 
@@ -274,7 +274,7 @@ function gamipress_bp_activity_recount_activities( $response, $loop ) {
     $bp = buddypress();
 
     // Get all activities count
-    $activities_count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$bp->activity->table_name} WHERE type = 'activity_update'" ) ) );
+    $activities_count = absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$bp->activity->table_name} WHERE type = 'activity_update'" ) );
 
     // On first loop send an informational text
     if( $loop === 0 && $activities_count > $limit ) {
@@ -286,7 +286,7 @@ function gamipress_bp_activity_recount_activities( $response, $loop ) {
     }
 
     // Get all activities
-    $activities = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$bp->activity->table_name} WHERE type = 'activity_update' LIMIT {$offset}, {$limit}" ) );
+    $activities = $wpdb->get_results( "SELECT * FROM {$bp->activity->table_name} WHERE type = 'activity_update' LIMIT {$offset}, {$limit}" );
 
     foreach( $activities as $activity ) {
 
@@ -337,7 +337,7 @@ function gamipress_bp_activity_recount_activity_comments( $response, $loop ) {
     $bp = buddypress();
 
     // Get all activity comments count
-    $activities_count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$bp->activity->table_name} WHERE type = 'activity_comment'" ) ) );
+    $activities_count = absint( $wpdb->get_var( "SELECT COUNT(*) FROM {$bp->activity->table_name} WHERE type = 'activity_comment'" ) );
 
     // On first loop send an informational text
     if( $loop === 0 && $activities_count > $limit ) {
@@ -349,7 +349,7 @@ function gamipress_bp_activity_recount_activity_comments( $response, $loop ) {
     }
 
     // Get all activity comments
-    $activities = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$bp->activity->table_name} WHERE type = 'activity_comment' LIMIT {$offset}, {$limit}" ) );
+    $activities = $wpdb->get_results( "SELECT * FROM {$bp->activity->table_name} WHERE type = 'activity_comment' LIMIT {$offset}, {$limit}" );
 
     foreach( $activities as $activity ) {
 
