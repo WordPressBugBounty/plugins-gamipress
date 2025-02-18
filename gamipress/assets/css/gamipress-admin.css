@@ -63,6 +63,11 @@
 	color: #0098d7;
 }
 
+/* Admin Menu */
+.toplevel_page_gamipress .wp-submenu li:nth-child(14) {
+	border-top: 1px solid #666;
+}
+
 /* -------------------------------------------
 	Utils
    ------------------------------------------- */

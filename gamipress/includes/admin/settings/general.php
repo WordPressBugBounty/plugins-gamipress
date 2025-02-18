@@ -67,6 +67,11 @@ function gamipress_settings_general_meta_boxes( $meta_boxes ) {
                 'type' => 'checkbox',
                 'classes' => 'gamipress-switch',
             ),
+            'clear_cache' => array(
+                'name' => __( 'Clear Cache', 'gamipress' ),
+                'type' => 'html',
+                'content_cb' => 'gamipress_clear_cache_content_cb',
+            ),
         ) )
     );
 
@@ -147,4 +152,12 @@ function gamipress_get_allowed_manager_capabilities() {
     );
    
     return apply_filters( 'gamipress_allowed_manager_capabilities', $allowed_capabilities );
+}
+
+function gamipress_clear_cache_content_cb( $field_args, $field ) {
+    $url = admin_url( 'admin.php?page=gamipress&gamipress-action=clear_cache' );
+    $nonce_url = wp_nonce_url( $url, 'clear_cache' );
+    ?>
+    <a href="<?php echo esc_attr( $nonce_url ); ?>" class="button button-primary"><?php _e( 'Clear cache now!', 'gamipress' ) ?></a>
+    <?php
 }

@@ -167,7 +167,7 @@ function gamipress_clear_cache_action() {
     // Clear the GamiPress cache
     gamipress_flush_cache();
 
-    wp_redirect( admin_url( 'admin.php?page=gamipress&gamipress-message=cache_cleared' ) );
+    wp_redirect( admin_url( 'admin.php?page=gamipress_settings&gamipress-message=cache_cleared' ) );
     exit;
 
 }

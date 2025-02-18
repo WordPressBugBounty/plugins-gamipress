@@ -19,8 +19,6 @@ if( !defined( 'ABSPATH' ) ) exit;
 function gamipress_user_profile_data( $user = null ) {
     ?>
 
-    <hr>
-
     <?php // Verify user meets minimum role to manage earned achievements
     if ( current_user_can( gamipress_get_manager_capability() ) ) : ?>
 
@@ -296,7 +294,6 @@ function gamipress_profile_user_rank( $user = null ) {
         </tr>
     </table>
 
-    <hr>
     <?php
 }
 
@@ -440,7 +437,6 @@ function gamipress_profile_user_points( $user = null ) {
         </tr>
     </table>
 
-    <hr>
     <?php
 }
 
@@ -479,8 +475,6 @@ function gamipress_profile_user_earnings( $user = null ) {
             'search_box' => false
         )
     ); ?>
-
-    <hr>
 
     <?php
 }
@@ -531,8 +525,6 @@ function gamipress_profile_award_achievement( $user = null ) {
         <?php endforeach; ?>
 
     </div><!-- #gamipress-awards-options -->
-
-    <hr>
 
     <?php
 }
@@ -716,8 +708,6 @@ function gamipress_profile_award_requirement( $user = null ) {
         <?php endforeach; ?>
 
     </div><!-- #gamipress-awards-options -->
-
-    <hr>
 
     <?php
 }

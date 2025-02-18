@@ -144,28 +144,19 @@ function gamipress_admin_submenu() {
 
     // GamiPress sub menus
     add_submenu_page( 'gamipress', __( 'Help / Support', 'gamipress' ), __( 'Help / Support', 'gamipress' ), $minimum_role, 'gamipress_help_support', 'gamipress_help_support_page' );
-    add_submenu_page( 'gamipress', __( 'Add-ons', 'gamipress' ), __( 'Add-ons', 'gamipress' ), $minimum_role, 'gamipress_add_ons', 'gamipress_add_ons_page' );
     add_submenu_page( 'gamipress', __( 'Assets', 'gamipress' ), __( 'Assets', 'gamipress' ), $minimum_role, 'gamipress_assets', 'gamipress_assets_page' );
 
 }
 add_action( 'admin_menu', 'gamipress_admin_submenu', 12 );
 
-/**
- * Add Clear Cache submenu
- *
- * @since 2.1.2
- */
-function gamipress_clear_cache_admin_submenu() {
-
+function gamipress_admin_addons_submenu() {
     // Set minimum role setting for menus
     $minimum_role = gamipress_get_manager_capability();
-    $url = admin_url( 'admin.php?page=gamipress&gamipress-action=clear_cache' );
-    $nonce_url = wp_nonce_url( $url, 'clear_cache' );
 
-    add_submenu_page( 'gamipress', __( 'Clear Cache', 'gamipress' ), __( 'Clear Cache', 'gamipress' ), $minimum_role, $nonce_url, null );
-
+    // Add-ons sub menu
+    add_submenu_page( 'gamipress', __( 'Add-ons', 'gamipress' ), __( 'Add-ons', 'gamipress' ), $minimum_role, 'gamipress_add_ons', 'gamipress_add_ons_page' );
 }
-add_action( 'admin_menu', 'gamipress_clear_cache_admin_submenu', 13 );
+add_action( 'admin_menu', 'gamipress_admin_addons_submenu', 15 );
 
 /**
  * Add Try AutomatorWP submenu
@@ -404,14 +395,6 @@ function gamipress_admin_bar_submenu( $wp_admin_bar ) {
         'href'   => admin_url( 'admin.php?page=gamipress_help_support' )
     ) );
 
-    // Add-ons
-    $wp_admin_bar->add_node( array(
-        'id'     => 'gamipress-add-ons',
-        'title'  => __( 'Add-ons', 'gamipress' ),
-        'parent' => 'gamipress',
-        'href'   => admin_url( 'admin.php?page=gamipress_add_ons' )
-    ) );
-
     // Assets
     $wp_admin_bar->add_node( array(
         'id'     => 'gamipress-assets',
@@ -444,12 +427,12 @@ function gamipress_admin_bar_submenu( $wp_admin_bar ) {
         'href'   => admin_url( 'admin.php?page=gamipress_settings' )
     ) );
 
-    // Clear cache
+    // Add-ons
     $wp_admin_bar->add_node( array(
-        'id'     => 'gamipress-clear-cache',
-        'title'  => __( 'Clear Cache', 'gamipress' ),
+        'id'     => 'gamipress-add-ons',
+        'title'  => __( 'Add-ons', 'gamipress' ),
         'parent' => 'gamipress',
-        'href'   => admin_url( 'admin.php?page=gamipress&gamipress-action=clear_cache' )
+        'href'   => admin_url( 'admin.php?page=gamipress_add_ons' )
     ) );
 
 }
