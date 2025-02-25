@@ -98,15 +98,15 @@ function gamipress_edd_get_download_variations_dropdown( $download_id, $selected
     if( empty( $variations ) ) {
         return '';
     }
-
+    
     $output = '<select>';
 
-    foreach( $variations as $variation ) {
-        $output .= '<option value="' . $variation['index'] . '" ' . selected( $selected, absint( $variation['index'] ), false ) . '>' . $variation['name'] . ' (' . edd_currency_filter( edd_format_amount( $variation['amount'] ) ) . ')</option>';
+    foreach( $variations as $index => $variation ) {
+        $output .= '<option value="' . $index . '" ' . selected( $selected, absint( $index ), false ) . '>' . $variation['name'] . ' (' . edd_currency_filter( edd_format_amount( $variation['amount'] ) ) . ')</option>';
     }
 
     $output .= '</select>';
-
+    
     return $output;
 
 }
@@ -124,8 +124,8 @@ function gamipress_edd_get_download_variation_title( $download_id, $variation_id
 
     $selected_variation = false;
 
-    foreach( $variations as $variation ) {
-        if( absint( $variation['index'] ) === absint( $variation_id ) ) {
+    foreach( $variations as $index => $variation ) {
+        if( absint( $index ) === absint( $variation_id ) ) {
             $selected_variation = $variation;
             break;
         }

@@ -14,7 +14,12 @@ function gamipress_edd_ajax_get_download_variations() {
 
     $download_id = $_POST['post_id'];
     $site_id = $_POST['site_id'];
-    $selected = $_POST['selected'];
+
+    if ( !isset ( $_POST['selected'] ) ) {
+        $selected = 0;
+    } else {
+        $selected = $_POST['selected'];
+    }
 
     if( gamipress_is_network_wide_active() && $site_id !== get_current_blog_id() ) {
         switch_to_blog( $site_id );
