@@ -148,6 +148,12 @@ function gamipress_register_user_points_shortcode() {
                 'type' 	        => 'checkbox',
                 'classes'       => 'gamipress-switch',
             ),
+            'hide_no_earnings' => array(
+                'name'          => __( 'Hide if no earnings', 'gamipress' ),
+                'description'   => __( 'Hide the point balance if no earnings.', 'gamipress' ),
+                'type' 	        => 'checkbox',
+                'classes'       => 'gamipress-switch',
+            ),
         ),
     ) );
 
@@ -190,6 +196,7 @@ function gamipress_user_points_shortcode( $atts = array(), $content = '' ) {
         'layout'            => 'left',
         'align'	  		    => 'none',
         'wpms'              => 'no',
+        'hide_no_earnings'  => 'no',
     ), $atts, $shortcode );
 
     // Single type check to use dynamic template
@@ -308,6 +315,11 @@ function gamipress_user_points_shortcode( $atts = array(), $content = '' ) {
             $points = gamipress_get_user_points( $atts['user_id'], $points_type, $args );
 
             $gamipress_template_args['points'][$points_type] += $points;
+
+            // Hide point type if no earnings
+            if( absint( $points ) === 0 && $atts['hide_no_earnings'] === 'yes' ) {
+                unset($gamipress_template_args['points'][$points_type]);
+            }
 
         }
 

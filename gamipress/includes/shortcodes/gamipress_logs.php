@@ -278,7 +278,50 @@ function gamipress_logs_shortcode_query( $args ) {
     }
 
     // Setup table
-    ct_setup_table( 'gamipress_logs' );
+    $ct_table = ct_setup_table( 'gamipress_logs' );
+
+    // Sanitize query args
+    $query_args = gamipress_sanitize_query_args( $query_args, array(
+        // Query fields
+        'orderby' => array(
+            'type' => 'string',
+            'sanitize' => 'text',
+            'allowed_values' => array_keys( $ct_table->db->schema->fields ),
+        ),
+        'order' => array(
+            'type' => 'string',
+            'sanitize' => 'uppercase',
+            'allowed_values' => array( 'ASC', 'DESC' ),
+        ),
+        'items_per_page' => array(
+            'type' => 'integer',
+        ),
+        'paged' => array(
+            'type' => 'integer',
+        ),
+        // Log fields
+        'type' => array(
+            'type' => 'array',
+            'sanitize' => 'text',
+            'allowed_values' => array_keys( gamipress_get_log_types() ),
+        ),
+        'access' => array(
+            'type' => 'string',
+            'sanitize' => 'lowercase',
+            'allowed_values' => array( 'public', 'private' ),
+        ),
+        'user_id' => array(
+            'type' => 'integer',
+        ),
+        'log__in' => array(
+            'type' => 'array',
+            'sanitize' => 'integer',
+        ),
+        'log__not_in' => array(
+            'type' => 'array',
+            'sanitize' => 'integer',
+        ),
+    ) );
 
     return new CT_Query( $query_args );
 

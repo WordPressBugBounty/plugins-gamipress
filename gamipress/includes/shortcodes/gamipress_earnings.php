@@ -492,7 +492,59 @@ function gamipress_earnings_shortcode_query( $args = array () ) {
     $query_args = apply_filters( 'gamipress_earnings_shortcode_query_args', $query_args, $args );
 
     // Setup table
-    ct_setup_table( 'gamipress_user_earnings' );
+    $ct_table = ct_setup_table( 'gamipress_user_earnings' );
+
+    // Sanitize query args
+    $query_args = gamipress_sanitize_query_args( $query_args, array(
+        // Query fields
+        'orderby' => array(
+            'type' => 'string',
+            'sanitize' => 'text',
+            'allowed_values' => array_keys( $ct_table->db->schema->fields ),
+        ),
+        'order' => array(
+            'type' => 'string',
+            'sanitize' => 'uppercase',
+            'allowed_values' => array( 'ASC', 'DESC' ),
+        ),
+        'items_per_page' => array(
+            'type' => 'integer',
+        ),
+        'paged' => array(
+            'type' => 'integer',
+        ),
+        // Earning fields
+        'user_id' => array(
+            'type' => 'integer',
+        ),
+        'user_earning__in' => array(
+            'type' => 'array',
+            'sanitize' => 'integer',
+        ),
+        'user_earning__not_in' => array(
+            'type' => 'array',
+            'sanitize' => 'integer',
+        ),
+        'post_type' => array(
+            'type' => 'array',
+            'sanitize' => 'text',
+        ),
+        'post_type__not_in' => array(
+            'type' => 'array',
+            'sanitize' => 'text',
+        ),
+        'parent_post_type' => array(
+            'type' => 'array',
+            'sanitize' => 'text',
+        ),
+        'points_type' => array(
+            'type' => 'array',
+            'sanitize' => 'text',
+        ),
+        'force_types' => array(
+            'type' => 'boolean',
+        ),
+    ) );
 
     return new CT_Query( $query_args );
 

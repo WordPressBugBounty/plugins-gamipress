@@ -238,3 +238,123 @@ function gamipress_custom_table_where( $query_vars, $field_id, $table_field, $fi
     return $where;
 
 }
+
+/**
+ * Helper function to sanitize a query args array
+ *
+ * @since 1.0.0
+ *
+ * @param array     $query_args         The query args
+ * @param array     $rules              The rules applied to each query arg entry
+ *
+ * @return array
+ */
+function gamipress_sanitize_query_args( $query_args, $rules ) {
+
+    $sanitized_query_args = array();
+
+    foreach( $rules as $field => $rule ) {
+
+        if( ! isset( $query_args[$field] ) ) {
+            continue;
+        }
+
+        // Parse type
+        switch ( $rule['type'] ) {
+            case 'string':
+                $query_args[$field] = sanitize_text_field( $query_args[$field] );
+                break;
+            case 'integer':
+            case 'int':
+                $query_args[$field] = absint( $query_args[$field] );
+                break;
+            case 'bool':
+            case 'boolean':
+                $query_args[$field] = (bool)( $query_args[$field] );
+                break;
+            case 'array':
+                if( ! is_array( $query_args[$field] ) ) {
+                    $query_args[$field] = array( $query_args[$field] );
+                }
+                break;
+        }
+
+        // Parse sanitize
+        if( isset( $rules['sanitize'] ) ) {
+
+            switch ( $rule['sanitize'] ) {
+                case 'sanitize_text_field':
+                case 'text':
+                    if( $rule['type'] === 'array' ) {
+                        $query_args[$field] = array_map( 'sanitize_text_field', $query_args[$field] );
+                    } else {
+                        $query_args[$field] = sanitize_text_field( $query_args[$field] );
+                    }
+                    break;
+                case 'integer':
+                case 'int':
+                case 'absint':
+                    if( $rule['type'] === 'array' ) {
+                        $query_args[$field] = array_map( 'absint', $query_args[$field] );
+                    } else {
+                        $query_args[$field] = absint( $query_args[$field] );
+                    }
+                    break;
+                case 'uppercase':
+                case 'strtoupper':
+                    if( $rule['type'] === 'array' ) {
+                        $query_args[$field] = array_map( 'strtoupper', $query_args[$field] );
+                    } else {
+                        $query_args[$field] = strtoupper( $query_args[$field] );
+                    }
+                    break;
+                case 'lowercase':
+                case 'strtolower':
+                    if( $rule['type'] === 'array' ) {
+                        $query_args[$field] = array_map( 'strtolower', $query_args[$field] );
+                    } else {
+                        $query_args[$field] = strtolower( $query_args[$field] );
+                    }
+                    break;
+            }
+
+        }
+
+        // Parse allowed values
+        if( isset( $rules['allowed_values'] ) ) {
+
+            if( ! is_array( $rules['allowed_values'] ) ) {
+                $rules['allowed_values'] = array( $rules['allowed_values'] );
+            }
+
+            switch ( $rule['type'] ) {
+                case 'string':
+                case 'integer':
+                case 'int':
+                    if( ! in_array( $query_args[$field], $rules['allowed_values'] ) ) {
+                        $query_args[$field] = $rules['allowed_values'][0];
+                    };
+                    break;
+                case 'array':
+                    $only_allowed = array();
+                    foreach( $query_args[$field] as $k => $v ) {
+
+                        if( in_array( $v, $rules['allowed_values'] ) ) {
+                            $only_allowed[$k] = $v;
+                        };
+
+                    }
+
+                    $query_args[$field] = $only_allowed;
+                    break;
+            }
+
+        }
+
+        $sanitized_query_args[$field] = $query_args[$field];
+
+    }
+
+    return $sanitized_query_args;
+
+}

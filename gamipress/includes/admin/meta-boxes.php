@@ -70,6 +70,7 @@ function gamipress_add_meta_box( $id, $title, $object_types, $fields, $args = ar
 		'tabs'      	=> array(),
 		'context'      	=> 'normal',
 		'priority'     	=> 'default',
+        'show_on_cb'    => '',
 	) );
 
     /**
@@ -101,6 +102,7 @@ function gamipress_add_meta_box( $id, $title, $object_types, $fields, $args = ar
         'vertical_tabs' => $args['vertical_tabs'],
         'context'      	=> $args['context'],
         'priority'     	=> $args['priority'],
+        'show_on_cb'    => $args['show_on_cb'],
         'classes'		=> 'gamipress-form gamipress-box-form',
         'fields' 		=> $fields
     );

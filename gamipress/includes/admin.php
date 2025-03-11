@@ -705,6 +705,7 @@ function gamipress_admin_footer_text( $footer_text ) {
                 || $_GET['page'] === 'gamipress_assets'
                 || $_GET['page'] === 'gamipress_help_support'
                 || $_GET['page'] === 'gamipress_tools'
+                || $_GET['page'] === 'gamipress'
             )
         )
     ) {
