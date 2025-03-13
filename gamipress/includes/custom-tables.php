@@ -327,6 +327,11 @@ function gamipress_sanitize_query_args( $query_args, $rules ) {
                 $rules['allowed_values'] = array( $rules['allowed_values'] );
             }
 
+            if( $field === 'orderby' ) {
+                $rules['allowed_values'][] = 'rand';
+                $rules['allowed_values'][] = 'none';
+            }
+
             switch ( $rule['type'] ) {
                 case 'string':
                 case 'integer':

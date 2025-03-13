@@ -3,35 +3,19 @@
  * Plugin Name:     	GamiPress
  * Plugin URI:      	https://gamipress.com
  * Description:     	The most flexible and powerful gamification system for WordPress.
- * Version:         	7.3.0
+ * Version:         	7.3.1
  * Author:          	GamiPress
  * Author URI:      	https://gamipress.com/
  * Text Domain:     	gamipress
  * Domain Path: 		/languages/
  * Requires at least: 	4.4
  * Tested up to: 		6.7
- * License:         	GNU AGPL v3.0 (http://www.gnu.org/licenses/agpl.txt)
+ * License:         	GPLv3
  *
  * @package         	GamiPress
  * @author          	GamiPress <contact@gamipress.com>, Ruben Garcia <rubengcdev@gmail.com>
  * @copyright       	Copyright (c) GamiPress
 */
-
-/*
- * Copyright (c) GamiPress (contact@gamipress.com), Ruben Garcia (rubengcdev@gmail.com)
- *
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Affero General Public License, version 3,
- * as published by the Free Software Foundation.
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General
- * Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
 
 final class GamiPress {
 
@@ -136,7 +120,7 @@ final class GamiPress {
 	private function constants() {
 
 		// Plugin version
-		define( 'GAMIPRESS_VER', '7.3.0' );
+		define( 'GAMIPRESS_VER', '7.3.1' );
 
 		// Plugin file
 		define( 'GAMIPRESS_FILE', __FILE__ );
