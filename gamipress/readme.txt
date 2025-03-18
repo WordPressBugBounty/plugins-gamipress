@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.7
-Stable tag: 7.3.1
+Stable tag: 7.3.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,11 +343,16 @@ Also, you can check [our customize section](https://gamipress.com/customize/) wh
 
 == Changelog ==
 
+= 7.3.2 =
+
+* **Developer notes**
+* Update related to shortcodes vulnerability.
+
 = 7.3.1 =
 
 * **Developer notes**
 * Updated license to meet WordPress org requirements.
-* Update related o shortcodes vulnerability.
+* Update related to shortcodes vulnerability.
 
 = 7.3.0 =
 

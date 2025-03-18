@@ -280,7 +280,7 @@ function gamipress_sanitize_query_args( $query_args, $rules ) {
         }
 
         // Parse sanitize
-        if( isset( $rules['sanitize'] ) ) {
+        if( isset( $rule['sanitize'] ) ) {
 
             switch ( $rule['sanitize'] ) {
                 case 'sanitize_text_field':
@@ -321,30 +321,30 @@ function gamipress_sanitize_query_args( $query_args, $rules ) {
         }
 
         // Parse allowed values
-        if( isset( $rules['allowed_values'] ) ) {
+        if( isset( $rule['allowed_values'] ) ) {
 
-            if( ! is_array( $rules['allowed_values'] ) ) {
-                $rules['allowed_values'] = array( $rules['allowed_values'] );
+            if( ! is_array( $rule['allowed_values'] ) ) {
+                $rule['allowed_values'] = array( $rule['allowed_values'] );
             }
 
             if( $field === 'orderby' ) {
-                $rules['allowed_values'][] = 'rand';
-                $rules['allowed_values'][] = 'none';
+                $rule['allowed_values'][] = 'rand';
+                $rule['allowed_values'][] = 'none';
             }
 
             switch ( $rule['type'] ) {
                 case 'string':
                 case 'integer':
                 case 'int':
-                    if( ! in_array( $query_args[$field], $rules['allowed_values'] ) ) {
-                        $query_args[$field] = $rules['allowed_values'][0];
+                    if( ! in_array( $query_args[$field], $rule['allowed_values'] ) ) {
+                        $query_args[$field] = $rule['allowed_values'][0];
                     };
                     break;
                 case 'array':
                     $only_allowed = array();
                     foreach( $query_args[$field] as $k => $v ) {
 
-                        if( in_array( $v, $rules['allowed_values'] ) ) {
+                        if( in_array( $v, $rule['allowed_values'] ) ) {
                             $only_allowed[$k] = $v;
                         };
 
