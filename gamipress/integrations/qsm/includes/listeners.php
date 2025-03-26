@@ -23,7 +23,7 @@ function gamipress_qsm_submission_listener( $results_array, $results_id, $qmn_qu
 
     $user_id = get_current_user_id();
     $quiz_id = $qmn_array_for_variables['quiz_id'];
-    $points = $qmn_array_for_variables['total_correct'];
+    $points = $qmn_array_for_variables['total_points'];
 
     // Login is required
     if ( $user_id === 0 ) {
@@ -44,17 +44,17 @@ function gamipress_qsm_submission_listener( $results_array, $results_id, $qmn_qu
     // Trigger event for submit a specific quiz
     do_action( 'gamipress_qsm_specific_new_quiz_submission', absint($post_id[0]), $user_id, $points );
 
-    // Minimum score
-    do_action( 'gamipress_qsm_complete_quiz_score', $post_id[0], $user_id, $points );
-    do_action( 'gamipress_qsm_complete_specific_quiz_score', $post_id[0], $user_id, $points );
+    // Minimum points
+    do_action( 'gamipress_qsm_complete_quiz_points', $post_id[0], $user_id, $points );
+    do_action( 'gamipress_qsm_complete_specific_quiz_points', $post_id[0], $user_id, $points );
 
-    // Maximum score
-    do_action( 'gamipress_qsm_complete_quiz_max_score', $post_id[0], $user_id, $points );
-    do_action( 'gamipress_qsm_complete_specific_quiz_max_score', $post_id[0], $user_id, $points );
+    // Maximum points
+    do_action( 'gamipress_qsm_complete_quiz_max_points', $post_id[0], $user_id, $points );
+    do_action( 'gamipress_qsm_complete_specific_quiz_max_points', $post_id[0], $user_id, $points );
 
-    // Between scores
-    do_action( 'gamipress_qsm_complete_quiz_between_score', $post_id[0], $user_id, $points );
-    do_action( 'gamipress_qsm_complete_specifc_quiz_between_score', $post_id[0], $user_id, $points );
+    // Between pointss
+    do_action( 'gamipress_qsm_complete_quiz_between_points', $post_id[0], $user_id, $points );
+    do_action( 'gamipress_qsm_complete_specifc_quiz_between_points', $post_id[0], $user_id, $points );
 
 }
 add_action( 'qsm_quiz_submitted', 'gamipress_qsm_submission_listener', 10, 4 );

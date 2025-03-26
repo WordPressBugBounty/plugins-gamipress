@@ -24,43 +24,47 @@ function gamipress_qsm_check_if_meets_requirements( $requirement_id, $trigger, $
     // Initialize the return value
     $return = true;
 
-    // If is minimum score trigger, rules engine needs to check the minimum score
-    if( $trigger === 'gamipress_qsm_complete_quiz_score'
-        || $trigger === 'gamipress_qsm_complete_specific_quiz_score' ) {
+    // If is minimum points trigger, rules engine needs to check the minimum points
+    if( $trigger === 'gamipress_qsm_complete_quiz_points'
+        || $trigger === 'gamipress_qsm_complete_specific_quiz_points' ) {
             
-            $score = absint( $args[2] );
+            $points = absint( $args[2] );
+            error_log('$points:');
+            error_log(print_r($points, true));
 
-            $required_score = absint( get_post_meta( $requirement_id, '_gamipress_qsm_score', true ) );
+            $required_points = absint( get_post_meta( $requirement_id, '_gamipress_qsm_points', true ) );
+            error_log('$required_points:');
+            error_log(print_r($required_points, true));
 
-            // True if there is score is bigger than required score
-            $return = (bool) ( $score >= $required_score );
+            // True if there is points is bigger than required points
+            $return = (bool) ( $points >= $required_points );
 
     }
     
-    // If is maximum score trigger, rules engine needs to check the maximum score
-    if( $trigger === 'gamipress_qsm_complete_quiz_max_score'
-    || $trigger === 'gamipress_qsm_complete_specific_quiz_max_score' ) {
+    // If is maximum points trigger, rules engine needs to check the maximum points
+    if( $trigger === 'gamipress_qsm_complete_quiz_max_points'
+    || $trigger === 'gamipress_qsm_complete_specific_quiz_max_points' ) {
         
-        $score = absint( $args[2] );
+        $points = absint( $args[2] );
 
-        $required_score = absint( get_post_meta( $requirement_id, '_gamipress_qsm_score', true ) );
+        $required_points = absint( get_post_meta( $requirement_id, '_gamipress_qsm_points', true ) );
 
-        // True if there is score is bigger than required score
-        $return = (bool) ( $score <= $required_score );
+        // True if there is points is bigger than required points
+        $return = (bool) ( $points <= $required_points );
         
     }
 
-    // If is between score trigger, rules engine needs to check the minimum and maximum score allowed
-    if( $trigger === 'gamipress_qsm_complete_quiz_between_score'
-    || $trigger === 'gamipress_qsm_complete_specifc_quiz_between_score' ) {
+    // If is between points trigger, rules engine needs to check the minimum and maximum points allowed
+    if( $trigger === 'gamipress_qsm_complete_quiz_between_points'
+    || $trigger === 'gamipress_qsm_complete_specifc_quiz_between_points' ) {
         
-        $score = absint( $args[2] );
+        $points = absint( $args[2] );
 
-        $min_score = absint( get_post_meta( $requirement_id, '_gamipress_qsm_min_score', true ) );
-        $max_score = absint( get_post_meta( $requirement_id, '_gamipress_qsm_max_score', true ) );
+        $min_points = absint( get_post_meta( $requirement_id, '_gamipress_qsm_min_points', true ) );
+        $max_points = absint( get_post_meta( $requirement_id, '_gamipress_qsm_max_points', true ) );
 
-        // True if there is score is bigger than required score
-        $return = (bool) ( $score >= $min_score && $score <= $max_score );
+        // True if there is points is bigger than required points
+        $return = (bool) ( $points >= $min_points && $points <= $max_points );
         
     }
 
@@ -102,7 +106,7 @@ function gamipress_qsm_filter_triggered_requirements( $triggered_requirements, $
 add_filter( 'gamipress_get_triggered_requirements', 'gamipress_qsm_filter_triggered_requirements', 20, 5 );
 
 /**
- * Checks if a user is allowed to work on a given requirement related to a minimum of score
+ * Checks if a user is allowed to work on a given requirement related to a minimum of points
  *
  * @since  1.0.0
  *

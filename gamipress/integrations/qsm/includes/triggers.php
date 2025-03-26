@@ -25,17 +25,17 @@ function gamipress_qsm_activity_triggers( $triggers ) {
         'gamipress_qsm_new_quiz_submission'                 => __( 'Submit a quiz', 'gamipress' ),
         'gamipress_qsm_specific_new_quiz_submission'        => __( 'Submit a specific quiz', 'gamipress' ),
 
-        // Minimum score
-        'gamipress_qsm_complete_quiz_score'                 => __( 'Complete a quiz with a minimum amount of points', 'gamipress' ),
-        'gamipress_qsm_complete_specific_quiz_score'        => __( 'Complete a specific quiz with a minimum amount of points', 'gamipress' ),
+        // Minimum points
+        'gamipress_qsm_complete_quiz_points'                 => __( 'Complete a quiz with a minimum amount of points', 'gamipress' ),
+        'gamipress_qsm_complete_specific_quiz_points'        => __( 'Complete a specific quiz with a minimum amount of points', 'gamipress' ),
 
-        // Maximum score
-        'gamipress_qsm_complete_quiz_max_score'             => __( 'Complete a quiz with a maximum amount of points', 'gamipress' ),
-        'gamipress_qsm_complete_specific_quiz_max_score'    => __( 'Complete a specific quiz with a maximum amount of points', 'gamipress' ),
+        // Maximum points
+        'gamipress_qsm_complete_quiz_max_points'             => __( 'Complete a quiz with a maximum amount of points', 'gamipress' ),
+        'gamipress_qsm_complete_specific_quiz_max_points'    => __( 'Complete a specific quiz with a maximum amount of points', 'gamipress' ),
 
-        // Between scores
-        'gamipress_qsm_complete_quiz_between_score'         => __( 'Complete a quiz on a range of points', 'gamipress' ),
-        'gamipress_qsm_complete_specifc_quiz_between_score' => __( 'Complete a specific quiz on a range of points', 'gamipress' ),
+        // Between pointss
+        'gamipress_qsm_complete_quiz_between_points'         => __( 'Complete a quiz on a range of points', 'gamipress' ),
+        'gamipress_qsm_complete_specifc_quiz_between_points' => __( 'Complete a specific quiz on a range of points', 'gamipress' ),
 
     );
     
@@ -56,14 +56,14 @@ function gamipress_qsm_specific_activity_triggers( $specific_activity_triggers )
     // Quizzes
     $specific_activity_triggers['gamipress_qsm_specific_new_quiz_submission'] = array( 'qsm_quiz' );
 
-    // Minimum score
-    $specific_activity_triggers['gamipress_qsm_complete_specific_quiz_score'] = array( 'qsm_quiz' );
+    // Minimum points
+    $specific_activity_triggers['gamipress_qsm_complete_specific_quiz_points'] = array( 'qsm_quiz' );
 
-    // Maximum score
-    $specific_activity_triggers['gamipress_qsm_complete_specific_quiz_max_score'] = array( 'qsm_quiz' );
+    // Maximum points
+    $specific_activity_triggers['gamipress_qsm_complete_specific_quiz_max_points'] = array( 'qsm_quiz' );
 
-    // Between score
-    $specific_activity_triggers['gamipress_qsm_complete_specifc_quiz_between_score'] = array( 'qsm_quiz' );
+    // Between points
+    $specific_activity_triggers['gamipress_qsm_complete_specifc_quiz_between_points'] = array( 'qsm_quiz' );
 
     return $specific_activity_triggers;
 }
@@ -80,37 +80,37 @@ add_filter( 'gamipress_specific_activity_triggers', 'gamipress_qsm_specific_acti
  */
 function gamipress_qsm_activity_trigger_label( $title, $requirement_id, $requirement ) {
 
-    $score = ( isset( $requirement['qsm_score'] ) ) ? absint( $requirement['qsm_score'] ) : 0;
-    $min_score = ( isset( $requirement['qsm_min_score'] ) ) ? absint( $requirement['qsm_min_score'] ) : 0;
-    $max_score = ( isset( $requirement['qsm_max_score'] ) ) ? absint( $requirement['qsm_max_score'] ) : 0;
+    $points = ( isset( $requirement['qsm_points'] ) ) ? absint( $requirement['qsm_points'] ) : 0;
+    $min_points = ( isset( $requirement['qsm_min_points'] ) ) ? absint( $requirement['qsm_min_points'] ) : 0;
+    $max_points = ( isset( $requirement['qsm_max_points'] ) ) ? absint( $requirement['qsm_max_points'] ) : 0;
 
     switch( $requirement['trigger_type'] ) {
 
-        // Minimum score events
-        case 'gamipress_qsm_complete_quiz_score':
-            return sprintf( __( 'Completed a quiz with a score of %d or higher', 'gamipress'), $score );
+        // Minimum points events
+        case 'gamipress_qsm_complete_quiz_points':
+            return sprintf( __( 'Completed a quiz with a points of %d or higher', 'gamipress'), $points );
             break;
-        case 'gamipress_qsm_complete_specific_quiz_score':
+        case 'gamipress_qsm_complete_specific_quiz_points':
             $achievement_post_id = absint( $requirement['achievement_post'] );
-            return sprintf( __( 'Completed the quiz %s with a score of %d or higher', 'gamipress' ), get_the_title( $achievement_post_id ), $score );
+            return sprintf( __( 'Completed the quiz %s with a points of %d or higher', 'gamipress' ), get_the_title( $achievement_post_id ), $points );
             break;
 
-        // Maximum score events
-        case 'gamipress_qsm_complete_quiz_max_score':
-            return sprintf( __( 'Completed a quiz with a maximum score of %d or higher', 'gamipress' ), $score );
+        // Maximum points events
+        case 'gamipress_qsm_complete_quiz_max_points':
+            return sprintf( __( 'Completed a quiz with a maximum points of %d or higher', 'gamipress' ), $points );
             break;
-        case 'gamipress_qsm_complete_specific_quiz_max_score':
+        case 'gamipress_qsm_complete_specific_quiz_max_points':
             $achievement_post_id = absint( $requirement['achievement_post'] );
-            return sprintf( __( 'Completed a quiz %s with a maximum score of %d', 'gamipress' ), get_the_title( $achievement_post_id ), $score );
+            return sprintf( __( 'Completed a quiz %s with a maximum points of %d', 'gamipress' ), get_the_title( $achievement_post_id ), $points );
             break;
 
-        // Between score events
-        case 'gamipress_qsm_complete_quiz_between_score':
-            return sprintf( __( 'Completed a quiz with a score between %d and %d', 'gamipress' ), $min_score, $max_score );
+        // Between points events
+        case 'gamipress_qsm_complete_quiz_between_points':
+            return sprintf( __( 'Completed a quiz with a points between %d and %d', 'gamipress' ), $min_points, $max_points );
             break;
-        case 'gamipress_qsm_complete_specifc_quiz_between_score':
+        case 'gamipress_qsm_complete_specifc_quiz_between_points':
             $achievement_post_id = absint( $requirement['achievement_post'] );
-            return sprintf( __( 'Complete the quiz %s with a score between %d and %d', 'gamipress' ), get_the_title( $achievement_post_id ), $min_score, $max_score );
+            return sprintf( __( 'Complete the quiz %s with a points between %d and %d', 'gamipress' ), get_the_title( $achievement_post_id ), $min_points, $max_points );
             break;
     }
 
@@ -151,12 +151,12 @@ function gamipress_qsm_trigger_get_user_id( $user_id, $trigger, $args ) {
     switch ( $trigger ) {
         case 'gamipress_qsm_new_quiz_submission':
         case 'gamipress_qsm_specific_new_quiz_submission':
-        case 'gamipress_qsm_complete_quiz_score':
-        case 'gamipress_qsm_complete_specific_quiz_score':
-        case 'gamipress_qsm_complete_quiz_max_score':
-        case 'gamipress_qsm_complete_specific_quiz_max_score':
-        case 'gamipress_qsm_complete_quiz_between_score':
-        case 'gamipress_qsm_complete_specifc_quiz_between_score':
+        case 'gamipress_qsm_complete_quiz_points':
+        case 'gamipress_qsm_complete_specific_quiz_points':
+        case 'gamipress_qsm_complete_quiz_max_points':
+        case 'gamipress_qsm_complete_specific_quiz_max_points':
+        case 'gamipress_qsm_complete_quiz_between_points':
+        case 'gamipress_qsm_complete_specifc_quiz_between_points':
             $user_id = $args[1];
             break;
     }
@@ -181,9 +181,9 @@ function gamipress_qsm_specific_trigger_get_id( $specific_id, $trigger = '', $ar
 
     switch( $trigger ) {
         case 'gamipress_qsm_specific_new_quiz_submission':
-        case 'gamipress_qsm_complete_specific_quiz_score':
-        case 'gamipress_qsm_complete_specific_quiz_max_score':
-        case 'gamipress_qsm_complete_specifc_quiz_between_score':
+        case 'gamipress_qsm_complete_specific_quiz_points':
+        case 'gamipress_qsm_complete_specific_quiz_max_points':
+        case 'gamipress_qsm_complete_specifc_quiz_between_points':
             $specific_id = $args[0];
             break;
     }
@@ -210,12 +210,12 @@ function gamipress_qsm_log_event_trigger_meta_data( $log_meta, $user_id, $trigge
     switch( $trigger ) {
         case 'gamipress_qsm_new_quiz_submission':
         case 'gamipress_qsm_specific_new_quiz_submission':
-        case 'gamipress_qsm_complete_quiz_score':
-        case 'gamipress_qsm_complete_specific_quiz_score':
-        case 'gamipress_qsm_complete_quiz_max_score':
-        case 'gamipress_qsm_complete_specific_quiz_max_score':
-        case 'gamipress_qsm_complete_quiz_between_score':
-        case 'gamipress_qsm_complete_quiz_between_score':
+        case 'gamipress_qsm_complete_quiz_points':
+        case 'gamipress_qsm_complete_specific_quiz_points':
+        case 'gamipress_qsm_complete_quiz_max_points':
+        case 'gamipress_qsm_complete_specific_quiz_max_points':
+        case 'gamipress_qsm_complete_quiz_between_points':
+        case 'gamipress_qsm_complete_quiz_between_points':
             
             // Add the quiz ID
             $log_meta['quiz_id'] = $args[0];
@@ -254,16 +254,16 @@ function gamipress_qsm_log_extra_data_fields( $fields, $log_id, $type ) {
     switch( $trigger ) {
         case 'gamipress_qsm_new_quiz_submission':
         case 'gamipress_qsm_specific_new_quiz_submission':
-        case 'gamipress_qsm_complete_quiz_score':
-        case 'gamipress_qsm_complete_specific_quiz_score':
-        case 'gamipress_qsm_complete_quiz_max_score':
-        case 'gamipress_qsm_complete_specific_quiz_max_score':
-        case 'gamipress_qsm_complete_quiz_between_score':
-        case 'gamipress_qsm_complete_quiz_between_score':
+        case 'gamipress_qsm_complete_quiz_points':
+        case 'gamipress_qsm_complete_specific_quiz_points':
+        case 'gamipress_qsm_complete_quiz_max_points':
+        case 'gamipress_qsm_complete_specific_quiz_max_points':
+        case 'gamipress_qsm_complete_quiz_between_points':
+        case 'gamipress_qsm_complete_quiz_between_points':
             $fields[] = array(
                 'name' 	            => __( 'Total points', 'gamipress' ),
                 'desc' 	            => __( 'Total points the user got on complete this quiz.', 'gamipress' ),
-                'id'   	            => $prefix . 'score',
+                'id'   	            => $prefix . 'points',
                 'type' 	            => 'text',
             );
             break;
@@ -291,62 +291,62 @@ add_filter( 'gamipress_log_extra_data_fields', 'gamipress_qsm_log_extra_data_fie
 function gamipress_qsm_get_user_trigger_count_log_meta( $log_meta, $user_id, $trigger, $since, $site_id, $args ) {
 
     switch( $trigger ) {
-        case 'gamipress_qsm_complete_quiz_score':
-        case 'gamipress_qsm_complete_specific_quiz_score':
+        case 'gamipress_qsm_complete_quiz_points':
+        case 'gamipress_qsm_complete_specific_quiz_points':
 
-            $score = 0;
+            $points = 0;
 
             if( isset( $args[2] ) ) {
-                // Add the score
-                $score = $args[2];
+                // Add the points
+                $points = $args[2];
             }
 
             // $args could be a requirement object
-            if( isset( $args['qsm_score'] ) ) {
-                // Add the score
-                $score = $args['qsm_score'];
+            if( isset( $args['qsm_points'] ) ) {
+                // Add the points
+                $points = $args['qsm_points'];
             }
 
-            $log_meta['score'] = array(
-                'key' => 'score',
-                'value' => (int) $score,
+            $log_meta['points'] = array(
+                'key' => 'points',
+                'value' => (int) $points,
                 'compare' => '>=',
                 'type' => 'integer',
             );
             break;
-        case 'gamipress_qsm_complete_quiz_max_score':
-        case 'gamipress_qsm_complete_specific_quiz_max_score':
+        case 'gamipress_qsm_complete_quiz_max_points':
+        case 'gamipress_qsm_complete_specific_quiz_max_points':
             
-            $score = 0;
+            $points = 0;
 
             if( isset( $args[2] ) ) {
-                // Add the score
-                $score = $args[2];
+                // Add the points
+                $points = $args[2];
             }
 
             // $args could be a requirement object
-            if( isset( $args['qsm_score'] ) ) {
-                // Add the score
-                $score = $args['qsm_score'];
+            if( isset( $args['qsm_points'] ) ) {
+                // Add the points
+                $points = $args['qsm_points'];
             }
 
-            $log_meta['score'] = array(
-                'key' => 'score',
-                'value' => (int) $score,
+            $log_meta['points'] = array(
+                'key' => 'points',
+                'value' => (int) $points,
                 'compare' => '<=',
                 'type' => 'integer',
             );
             break;
-        case 'gamipress_qsm_complete_quiz_between_score':
-        case 'gamipress_qsm_complete_quiz_between_score':
+        case 'gamipress_qsm_complete_quiz_between_points':
+        case 'gamipress_qsm_complete_quiz_between_points':
 
             if( isset( $args[2] ) ) {
-                // Add the score
-                $score = $args[2];
+                // Add the points
+                $points = $args[2];
 
-                $log_meta['score'] = array(
-                    'key' => 'score',
-                    'value' => $score,
+                $log_meta['points'] = array(
+                    'key' => 'points',
+                    'value' => $points,
                     'compare' => '>=',
                     'type' => 'integer',
                 );
@@ -354,13 +354,13 @@ function gamipress_qsm_get_user_trigger_count_log_meta( $log_meta, $user_id, $tr
             }
 
             // $args could be a requirement object
-            if( isset( $args['qsm_min_score'] ) ) {
-                // Add the score
-                $min_score = $args['qsm_min_score'];
+            if( isset( $args['qsm_min_points'] ) ) {
+                // Add the points
+                $min_points = $args['qsm_min_points'];
 
-                $log_meta['score'] = array(
-                    'key' => 'score',
-                    'value' => $min_score,
+                $log_meta['points'] = array(
+                    'key' => 'points',
+                    'value' => $min_points,
                     'compare' => '>=',
                     'type' => 'integer',
                 );
@@ -368,13 +368,13 @@ function gamipress_qsm_get_user_trigger_count_log_meta( $log_meta, $user_id, $tr
             }
 
             // $args could be a requirement object
-            if( isset( $args['qsm_max_score'] ) ) {
-                // Add the score
-                $max_score = $args['qsm_max_score'];
+            if( isset( $args['qsm_max_points'] ) ) {
+                // Add the points
+                $max_points = $args['qsm_max_points'];
 
-                $log_meta['score'] = array(
-                    'key' => 'score',
-                    'value' => $max_score,
+                $log_meta['points'] = array(
+                    'key' => 'points',
+                    'value' => $max_points,
                     'compare' => '<=',
                     'type' => 'integer',
                 );
