@@ -163,9 +163,8 @@ add_action( 'fluent_community/space/user_left', 'gamipress_fluentcommunity_leave
  *
  * @param object    $comment    
  * @param object    $feed   
- * @param array     $mentionedUsers 
  */
-function gamipress_fluentcommunity_add_comment( $comment, $feed, $mentionedUsers ) {
+function gamipress_fluentcommunity_add_comment( $comment, $feed ) {
 
     $user_id = get_current_user_id();
 
@@ -183,7 +182,7 @@ function gamipress_fluentcommunity_add_comment( $comment, $feed, $mentionedUsers
     do_action( 'gamipress_fluentcommunity_specific_add_comment', $feed_data['space_id'], $user_id );
 
 }
-add_action( 'fluent_community/comment_added', 'gamipress_fluentcommunity_add_comment', 10, 3 );
+add_action( 'fluent_community/comment_added', 'gamipress_fluentcommunity_add_comment', 10, 2 );
 
 /**
  * Delete comment listener
