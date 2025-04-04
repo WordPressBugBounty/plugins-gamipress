@@ -70,6 +70,15 @@ function gamipress_bp_activity_triggers( $triggers ) {
             'gamipress_bp_publish_media_activity'           => __( 'Publish an image in an activity post', 'gamipress' ),
             'gamipress_bp_publish_video_activity'           => __( 'Publish a video in an activity post', 'gamipress' ),
             'gamipress_bp_publish_document_activity'        => __( 'Publish a document in an activity post', 'gamipress' ),
+            // Reactions
+            'gamipress_bp_user_react_activity'                      => __( 'React an activity post', 'gamipress' ),
+            'gamipress_bp_user_specific_react_activity'             => __( 'React with specific reaction an activity post', 'gamipress' ),
+            'gamipress_bp_user_get_react_activity'                  => __( 'Get a reaction on an activity post', 'gamipress' ),
+            'gamipress_bp_user_get_specific_react_activity'         => __( 'Get a specific reaction on an activity post', 'gamipress' ),
+            'gamipress_bp_user_remove_react_activity'               => __( 'Remove a reaction from an activity post', 'gamipress' ),
+            'gamipress_bp_user_remove_specific_react_activity'      => __( 'Remove a specific reaction from an activity post', 'gamipress' ),
+            'gamipress_bp_user_get_remove_react_activity'           => __( 'Get a reaction removed from an activity post', 'gamipress' ),
+            'gamipress_bp_user_get_remove_specific_react_activity'  => __( 'Get a specific reaction removed from an activity post', 'gamipress' ),
         );
     }
 
@@ -177,6 +186,11 @@ function gamipress_bp_specific_activity_triggers( $specific_activity_triggers ) 
     $specific_activity_triggers['gamipress_bp_promoted_member_specific_group'] = array( 'bp_groups' );
     $specific_activity_triggers['gamipress_bp_update_profile_any_value'] = array( 'bp_fields' );
     $specific_activity_triggers['gamipress_bp_update_profile_specific_value'] = array( 'bp_fields' );
+    //Reactions
+    $specific_activity_triggers['gamipress_bp_user_specific_react_activity'] = array( 'bp_reactions' );
+    $specific_activity_triggers['gamipress_bp_user_get_specific_react_activity'] = array( 'bp_reactions' );
+    $specific_activity_triggers['gamipress_bp_user_remove_specific_react_activity'] = array( 'bp_reactions' );
+    $specific_activity_triggers['gamipress_bp_user_get_remove_specific_react_activity'] = array( 'bp_reactions' );
 
     return $specific_activity_triggers;
 }
@@ -205,6 +219,11 @@ function gamipress_bp_specific_activity_trigger_label( $specific_activity_trigge
     $specific_activity_trigger_labels['gamipress_bp_promote_member_specific_group'] = __( 'Get promoted as moderator/administrator of %s group', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_bp_update_profile_any_value'] = __( 'Update %s field with any value', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_bp_update_profile_specific_value'] = __( 'Update %s field with specific value', 'gamipress' );
+    // Reactions
+    $specific_activity_trigger_labels['gamipress_bp_user_specific_react_activity'] = __( 'React with %s reaction an activity post', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_bp_user_get_specific_react_activity'] = __( 'Get a %s reaction on an activity post', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_bp_user_remove_specific_react_activity'] = __( 'Remove a %s reaction from an activity post', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_bp_user_get_remove_specific_react_activity'] = __( 'Get a %s reaction removed from an activity post', 'gamipress' );
 
 
     return $specific_activity_trigger_labels;
@@ -254,6 +273,17 @@ function gamipress_bp_specific_activity_trigger_post_title( $post_title, $specif
                 $post_title = $field_title;
             }
             break;
+        case 'gamipress_bp_user_specific_react_activity':
+        case 'gamipress_bp_user_get_specific_react_activity':
+        case 'gamipress_bp_user_remove_specific_react_activity':
+        case 'gamipress_bp_user_get_remove_specific_react_activity':
+            if( absint( $specific_id ) !== 0 ) {
+                // Get the reaction title
+                $reaction_title = gamipress_buddyboss_get_reaction_title( $specific_id );
+
+                $post_title = $reaction_title;
+            }
+            break;
 
     }
 
@@ -301,9 +331,15 @@ function gamipress_bp_specific_activity_trigger_permalink( $permalink, $specific
                 $permalink = bp_get_group_permalink( $group );
             }
             break;
-            case 'gamipress_bp_update_profile_any_value':
-            case 'gamipress_bp_update_profile_specific_value':
-                $permalink = '';
+        case 'gamipress_bp_update_profile_any_value':
+        case 'gamipress_bp_update_profile_specific_value':
+            $permalink = '';
+            break;
+        case 'gamipress_bp_user_specific_react_activity':
+        case 'gamipress_bp_user_get_specific_react_activity':
+        case 'gamipress_bp_user_remove_specific_react_activity':
+        case 'gamipress_bp_user_get_remove_specific_react_activity':
+            $permalink = '';
             break;
     }
 
@@ -386,6 +422,15 @@ function gamipress_bp_trigger_get_user_id( $user_id, $trigger, $args ) {
         case 'gamipress_bp_promote_member_specific_group':
         case 'gamipress_bp_promoted_member':
         case 'gamipress_bp_promoted_member_specific_group':
+        // BuddyBoss reactions
+        case 'gamipress_bp_user_react_activity':
+        case 'gamipress_bp_user_specific_react_activity':      
+        case 'gamipress_bp_user_get_react_activity':
+        case 'gamipress_bp_user_get_specific_react_activity':
+        case 'gamipress_bp_user_remove_react_activity':
+        case 'gamipress_bp_user_remove_specific_react_activity':
+        case 'gamipress_bp_user_get_remove_react_activity':
+        case 'gamipress_bp_user_get_remove_specific_react_activity':
             $user_id = $args[1];
             break;
     }
@@ -426,6 +471,11 @@ function gamipress_bp_specific_trigger_get_id( $specific_id, $trigger = '', $arg
         case 'gamipress_bp_promote_member_specific_group':
         case 'gamipress_bp_promoted_member_specific_group':
         case 'gamipress_bp_delete_specific_group':
+        // BuddyBoss reactions
+        case 'gamipress_bp_user_specific_react_activity':      
+        case 'gamipress_bp_user_get_specific_react_activity':
+        case 'gamipress_bp_user_remove_specific_react_activity':
+        case 'gamipress_bp_user_get_remove_specific_react_activity':
             $specific_id = $args[0];
             break;
         case 'gamipress_bp_update_profile_any_value':
@@ -530,6 +580,18 @@ function gamipress_bp_log_event_trigger_meta_data( $log_meta, $user_id, $trigger
             // Add the group and inviter ID (User who invited this user to the group)
             $log_meta['group_id'] = $args[0];
             $log_meta['inviter_id'] = $args[2];
+            break;
+        // BuddyBoss reactions
+        case 'gamipress_bp_user_react_activity':
+        case 'gamipress_bp_user_specific_react_activity':      
+        case 'gamipress_bp_user_get_react_activity':
+        case 'gamipress_bp_user_get_specific_react_activity':
+        case 'gamipress_bp_user_remove_react_activity':
+        case 'gamipress_bp_user_remove_specific_react_activity':
+        case 'gamipress_bp_user_get_remove_react_activity':
+        case 'gamipress_bp_user_get_remove_specific_react_activity':
+            // Reactions ID
+            $log_meta['reaction_id'] = $args[0];
             break;
     }
 

@@ -122,12 +122,34 @@ function gamipress_bp_ajax_get_posts() {
         // Return our results
         wp_send_json_success( $response );
         die;
+    } else if( isset( $_REQUEST['post_type'] ) && in_array( 'bp_reactions', $_REQUEST['post_type'] ) ) {
+
+        $results = array();
+
+        // Pull back the search string
+        $search = isset( $_REQUEST['q'] ) ? sanitize_text_field( $_REQUEST['q'] ) : '';
+        $search = $wpdb->esc_like( $search );
+
+        // Get the reactions
+        $reactions = bb_load_reaction()->bb_get_reactions( 'emotions' );
+
+        foreach ( $reactions as $reaction ) {
+
+            // Results should meet Select2 structure
+            $results[] = array(
+                'ID'            => $reaction['id'],
+                'post_title'    => $reaction['icon_text'],
+            );
+
+        }
+
+        // Return our results
+        wp_send_json_success( $results );
+        die;
     }
 
 }
 add_action( 'wp_ajax_gamipress_get_posts', 'gamipress_bp_ajax_get_posts', 5 );
-
-
 
 /**
  * Helper function to get the table prefix
@@ -161,4 +183,35 @@ function gamipress_bp_get_profile_field_name( $field_id ) {
     ) );
 
     return $name_field;
+}
+
+/**
+ * Get the reaction title
+ *
+ * @since 1.0.0
+ *
+ * @param int $reaction_id
+ *
+ * @return string|null
+ */
+function gamipress_buddyboss_get_reaction_title( $reaction_id ) {
+
+    // Empty title if no ID provided
+    if( absint( $reaction_id ) === 0 ) {
+        return '';
+    }
+
+    $reactions = array();
+
+    // Get the reactions
+    $reactions = bb_load_reaction()->bb_get_reactions( 'emotions' );
+
+    foreach ( $reactions as $reaction ) {
+        if ( absint( $reaction['id'] ) === absint( $reaction_id ) ) {
+            return $reaction['icon_text']; 
+        }
+    }
+
+    return $reactions;
+
 }

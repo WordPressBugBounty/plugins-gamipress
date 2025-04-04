@@ -459,3 +459,75 @@ function gamipress_bp_promoted_member( $user_id, $group_id ) {
 
 }
 add_action( 'groups_promoted_member', 'gamipress_bp_promoted_member', 10, 2 );
+
+/**
+ * Listener add reaction to activity
+ *
+ * @since 1.0.0
+ *
+ * @param int $user_reaction_id
+ * @param array $args
+ */
+function gamipress_bp_add_react_activity( $user_reaction_id, $args ) {
+
+    // Shorthand
+    $activity_id = $args['item_id'];
+    $user_id = $args['user_id'];
+    $reaction_id = $args['reaction_id'];
+
+    $activity = new BP_Activity_Activity( $activity_id );
+    $mode = bp_get_option( 'bb_reaction_mode' );
+    
+    // Bail if emotions not enabled
+    if ( $mode !== 'emotions' ) {
+        return;
+    }
+
+    do_action( 'gamipress_bp_user_react_activity', $reaction_id, $user_id );
+    do_action( 'gamipress_bp_user_specific_react_activity', $reaction_id, $user_id );
+
+    // Get add reaction
+    do_action( 'gamipress_bp_user_get_react_activity', $reaction_id, $activity->user_id );
+    do_action( 'gamipress_bp_user_get_specific_react_activity', $reaction_id, $activity->user_id );
+
+}
+add_action( 'bb_reaction_after_add_user_item_reaction', 'gamipress_bp_add_react_activity', 10, 2 );
+
+/**
+ * Listener remove reaction from activity
+ *
+ * @since 1.0.0
+ *
+ * @param array $args
+ */
+function gamipress_bp_remove_react_activity( $args ) {
+
+    // Shorthand
+    $activity_id = $args['item_id'];
+    $user_id = $args['user_id'];
+
+    $activity = new BP_Activity_Activity( $activity_id );
+    $mode = bp_get_option( 'bb_reaction_mode' );
+    
+    // Bail if emotions not enabled
+    if ( $mode !== 'emotions' ) {
+        return;
+    }
+
+    $reaction_id = bb_load_reaction()->bb_user_reacted_reaction_id(
+        array(
+            'item_id'   => $activity_id,
+            'item_type' => 'activity',
+            'user_id'   => $user_id,
+        )
+    );
+
+    do_action( 'gamipress_bp_user_remove_react_activity', $reaction_id, $user_id );
+    do_action( 'gamipress_bp_user_remove_specific_react_activity', $reaction_id, $user_id );
+
+    // Get remove reaction
+    do_action( 'gamipress_bp_user_get_remove_react_activity', $reaction_id, $activity->user_id );
+    do_action( 'gamipress_bp_user_get_remove_specific_react_activity', $reaction_id, $activity->user_id );
+
+}
+add_action( 'bb_reaction_before_remove_user_item_reactions', 'gamipress_bp_remove_react_activity', 10, 1 );

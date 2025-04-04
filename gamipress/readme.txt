@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.7
-Stable tag: 7.3.5.1
+Stable tag: 7.3.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -342,6 +342,18 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.3.6 =
+
+* **New Features**
+* BuddyBoss: New event: React an activity post.
+* BuddyBoss: New event: React with specific reaction an activity post.
+* BuddyBoss: New event: Get a reaction on an activity post.
+* BuddyBoss: New event: Get a specific reaction on an activity post.
+* BuddyBoss: New event: Remove a reaction from an activity post.
+* BuddyBoss: New event: Remove a specific reaction from an activity post.
+* BuddyBoss: New event: Get a reaction removed from an activity post.
+* BuddyBoss: New event: Get a specific reaction removed from an activity post.
 
 = 7.3.5.1 =
 
