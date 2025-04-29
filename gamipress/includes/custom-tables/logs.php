@@ -10,6 +10,26 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Custom Table Labels
+ *
+ * @since 1.0.0
+ *
+ * @return array
+ */
+function gamipress_logs_labels() {
+
+    return array(
+        'singular' => __( 'Log', 'gamipress' ),
+        'plural' => __( 'Logs', 'gamipress' ),
+        'labels' => array(
+            'list_menu_title' => __( 'Logs', 'gamipress' ),
+        ),
+    );
+
+}
+add_filter( 'ct_gamipress_logs_labels', 'gamipress_logs_labels' );
+
+/**
  * Parse query args for logs
  *
  * @since   1.2.8

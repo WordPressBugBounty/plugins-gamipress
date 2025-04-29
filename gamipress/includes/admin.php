@@ -179,6 +179,26 @@ function gamipress_try_automatorwp_admin_submenu() {
 add_action( 'admin_menu', 'gamipress_try_automatorwp_admin_submenu', 9999 );
 
 /**
+ * Add Try ShortLinks Pro submenu
+ *
+ * @since 2.0.0
+ */
+function gamipress_try_shortlinkspro_admin_submenu() {
+
+    if( class_exists( 'ShortLinksPro' ) ) {
+        return;
+    }
+
+    // Set minimum role setting for menus
+    $minimum_role = gamipress_get_manager_capability();
+
+    $badge = '<span class="gamipress-admin-menu-badge">' . __( 'New', 'gamipress' ) . '</span>';
+
+    add_submenu_page( 'gamipress', __( 'Try ShortLinks Pro!', 'gamipress' ), __( 'Try ShortLinks Pro!', 'gamipress' ) . $badge, $minimum_role, 'https://wordpress.org/plugins/shortlinkspro/', null );
+}
+add_action( 'admin_menu', 'gamipress_try_shortlinkspro_admin_submenu', 9999 );
+
+/**
  * Helper funtion to meet if should show the admin bar menu
  *
  * @since 2.0.3
@@ -468,6 +488,37 @@ function gamipress_try_automatorwp_admin_bar_submenu( $wp_admin_bar ) {
 
 }
 add_action( 'admin_bar_menu', 'gamipress_try_automatorwp_admin_bar_submenu', 999 );
+
+/**
+ * Add Try ShortLinks Pro admin bar submenu
+ *
+ * @since 2.0.0
+ *
+ * @param object $wp_admin_bar The WordPress toolbar object
+ */
+function gamipress_try_shortlinkspro_admin_bar_submenu( $wp_admin_bar ) {
+
+    // Bail if admin bar menu disabled
+    if( ! gamipress_show_admin_bar_menu() ) {
+        return;
+    }
+
+    if( class_exists( 'ShortLinksPro' ) ) {
+        return;
+    }
+
+    $badge = '<span class="gamipress-admin-menu-badge">' . __( 'New', 'gamipress' ) . '</span>';
+
+    // Try AutomatorWP
+    $wp_admin_bar->add_node( array(
+        'id'     => 'gamipress-try-shortlinkspro',
+        'title'  => __( 'Try ShortLinks Pro!', 'gamipress' ) . $badge,
+        'parent' => 'gamipress',
+        'href'   => 'https://wordpress.org/plugins/shortlinkspro/'
+    ) );
+
+}
+add_action( 'admin_bar_menu', 'gamipress_try_shortlinkspro_admin_bar_submenu', 999 );
 
 /**
  * Register our custom columns

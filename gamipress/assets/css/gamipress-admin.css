@@ -265,14 +265,6 @@
 	box-shadow: none;
 }
 
-/* Rounded color pickers */
-.gamipress-form .wp-picker-container .wp-color-result {
-	height: 30px;
-	width: 30px;
-	padding: 0 !important;
-	border-radius: 100%;
-}
-
 .gamipress-form .wp-picker-container .wp-color-result .color-alpha {
 	height: 28px !important;
 	width: 28px !important;
@@ -2745,7 +2737,7 @@ label[for="_gamipress_sequential"] {
 	display: inline-block;
 	float: right;
 	vertical-align: top;
-	margin: 1px -5px -1px 2px;
+	margin: 1px -11px -1px 2px;
 	padding: 0 5px;
 	height: 18px;
 	border-radius: 9px;

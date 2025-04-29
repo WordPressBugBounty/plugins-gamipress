@@ -31,11 +31,6 @@ function gamipress_register_custom_tables() {
 
     // User Earnings Table
     ct_register_table( 'gamipress_user_earnings', array(
-        'singular' => __( 'User Earning', 'gamipress' ),
-        'plural' => __( 'User Earnings', 'gamipress' ),
-        'labels' => array(
-            'not_found' => __( 'This user has not earned anything', 'gamipress' )
-        ),
         'show_ui' => true,
         'show_in_rest' => true,
         'rest_base' => 'gamipress-user-earnings',
@@ -45,7 +40,6 @@ function gamipress_register_custom_tables() {
         'supports' => array( 'meta' ),
         'views' => array(
             'list' => array(
-                'menu_title' => __( 'User Earnings', 'gamipress' ),
                 'parent_slug' => 'gamipress',
                 'priority' => 10,
             ),
@@ -94,8 +88,6 @@ function gamipress_register_custom_tables() {
 
     // Logs Table
     ct_register_table( 'gamipress_logs', array(
-        'singular' => __( 'Log', 'gamipress' ),
-        'plural' => __( 'Logs', 'gamipress' ),
         'show_ui' => true,
         'show_in_rest' => true,
         'rest_base' => 'gamipress-logs',
@@ -105,7 +97,6 @@ function gamipress_register_custom_tables() {
         'supports' => array( 'meta' ),
         'views' => array(
             'list' => array(
-                'menu_title' => __( 'Logs', 'gamipress' ),
                 'parent_slug' => 'gamipress',
                 'priority' => 10,
             ),

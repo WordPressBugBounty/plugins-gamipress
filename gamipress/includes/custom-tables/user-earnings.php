@@ -10,6 +10,27 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Custom Table Labels
+ *
+ * @since 1.0.0
+ *
+ * @return array
+ */
+function gamipress_user_earnings_labels() {
+
+    return array(
+        'singular' => __( 'User Earning', 'gamipress' ),
+        'plural' => __( 'User Earnings', 'gamipress' ),
+        'labels' => array(
+            'not_found' => __( 'This user has not earned anything', 'gamipress' ),
+            'list_menu_title' => __( 'User Earnings', 'gamipress' ),
+        ),
+    );
+
+}
+add_filter( 'ct_gamipress_user_earnings_labels', 'gamipress_user_earnings_labels' );
+
+/**
  * Parse query args for user earnings to be applied on WHERE clause
  *
  * @since   1.2.8
