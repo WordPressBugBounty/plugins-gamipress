@@ -152,9 +152,13 @@ function gamipress_logs_shortcode( $atts = array(), $content = '' ) {
     // Single type check
     $is_single_type = false;
     $types = explode( ',', $atts['type'] );
-
     if( $atts['type'] !== 'all' && count( $types ) === 1 ) {
         $is_single_type = true;
+        
+        // Check if achievement type is valid
+        if ( ! in_array( $atts['type'], array_keys( gamipress_get_log_types() ) ) ) {
+            return gamipress_shortcode_error( __( 'The type provided isn\'t a valid registered log type.', 'gamipress' ), $shortcode );
+        }
     }
 
     // Enqueue assets
