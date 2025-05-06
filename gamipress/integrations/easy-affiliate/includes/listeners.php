@@ -19,25 +19,19 @@ if( !defined( 'ABSPATH' ) ) exit;
  */
 function gamipress_easy_affiliate_become_affiliate_listener( $args ) {
 
-    $user_id = get_current_user_id();
+    // Affiliate user ID
+    $user_id = $args->evt_id;
 
     // Bail if no user
     if ( absint( $user_id ) === 0 ) {
         return;
     }
 
-    $user_affiliate = get_user_meta( $user_id, 'wafp_is_affiliate', true );
-
-    // Bail if user is affiliated
-    if ( isset ( $user_affiliate ) && $user_affiliate === '1' ) {
-        return;
-    }
-
     // Trigger become affiliate
-    do_action( 'gamipress_easy_affiliate_become_affiliate', $event_id, $user_id );
+    do_action( 'gamipress_easy_affiliate_become_affiliate', $user_id );
 
 }
-add_filter( 'esaf_event_affiliate-added', 'gamipress_easy_affiliate_become_affiliate_listener' );
+add_action( 'esaf_event_affiliate-added', 'gamipress_easy_affiliate_become_affiliate_listener' );
 
 
 /**
@@ -51,26 +45,26 @@ add_filter( 'esaf_event_affiliate-added', 'gamipress_easy_affiliate_become_affil
  */
 function gamipress_easy_affiliate_earn_referral_listener( $args ) {
 
-    $user_id = get_current_user_id();
+    // Affiliate user ID
+    $user_id = $args->evt_id;
 
     // Bail if no user
     if ( absint( $user_id ) === 0 ) {
         return;
     }
 
-    $user_affiliate = get_user_meta( $user_id, 'wafp_is_affiliate', true );
+    $user_affiliate = (bool)get_user_meta( $user_id, 'wafp_is_affiliate', true );
 
     // Bail if user is not affiliated
-    if ( !isset ( $user_affiliate ) && $user_affiliate !== '1' ) {
+    if ( ! $user_affiliate ) {
         return;
     }
 
     // Trigger become affiliate
-    do_action( 'gamipress_easy_affiliate_earn_referral', $event_id, $user_id );
+    do_action( 'gamipress_easy_affiliate_earn_referral', $user_id );
 
 }
-
-add_filter( 'esaf_event_transaction-recorded', 'gamipress_easy_affiliate_earn_referral_listener' );
+add_action( 'esaf_event_transaction-recorded', 'gamipress_easy_affiliate_earn_referral_listener' );
 
 /**
  * Get payment listener
@@ -83,23 +77,23 @@ add_filter( 'esaf_event_transaction-recorded', 'gamipress_easy_affiliate_earn_re
  */
 function gamipress_easy_affiliate_get_payment_listener( $args ) {
 
-    $user_id = get_current_user_id();
+    // Affiliate user ID
+    $user_id = $args->evt_id;
 
     // Bail if no user
     if ( absint( $user_id ) === 0 ) {
         return;
     }
 
-    $user_affiliate = get_user_meta( $user_id, 'wafp_is_affiliate', true );
+    $user_affiliate = (bool)get_user_meta( $user_id, 'wafp_is_affiliate', true );
 
     // Bail if user is not affiliated
-    if ( !isset ( $user_affiliate ) && $user_affiliate !== '1' ) {
+    if ( ! $user_affiliate ) {
         return;
     }
 
     // Trigger become affiliate
-    do_action( 'gamipress_easy_affiliate_get_payment', $event_id, $user_id );
+    do_action( 'gamipress_easy_affiliate_get_payment', $user_id );
 
 }
-
-add_filter( 'esaf_event_payment-added', 'gamipress_easy_affiliate_get_payment_listener' );
+add_action( 'esaf_event_payment-added', 'gamipress_easy_affiliate_get_payment_listener' );

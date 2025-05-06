@@ -47,7 +47,7 @@ function gamipress_easy_affiliate_trigger_get_user_id( $user_id, $trigger, $args
         case 'gamipress_easy_affiliate_become_affiliate':
         case 'gamipress_easy_affiliate_earn_referral':
         case 'gamipress_easy_affiliate_get_payment':
-            $user_id = $args[1];
+            $user_id = $args[0];
             break;
     }
 

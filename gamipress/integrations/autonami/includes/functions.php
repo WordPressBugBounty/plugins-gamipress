@@ -82,7 +82,13 @@ function gamipress_autonami_get_contact_user_id( $contact ) {
     $user_id = 0;
 
     $email = $contact->contact->get_email();
+    
 	$user = get_user_by( 'email', $email );
+
+    // Make sure subscriber is a WordPress user
+    if ( empty ( $user ) )
+        return;
+
     $user_id = $user->ID;
 
     return $user_id;
