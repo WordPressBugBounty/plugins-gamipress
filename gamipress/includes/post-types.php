@@ -32,7 +32,7 @@ function gamipress_register_types() {
     gamipress_register_rank_types();
 
 }
-add_action( 'init', 'gamipress_register_types' );
+add_action( 'gamipress_init', 'gamipress_register_types' );
 
 /**
  * Register our various points types for use in the rules engine
