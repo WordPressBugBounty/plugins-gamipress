@@ -884,6 +884,15 @@ function gamipress_delete_requirement_ajax_handler() {
 
     gamipress_delete_trigger_cache( $trigger );
 
+    /**
+     * Action to delete custom requirement
+     *
+     * @since 1.0.0
+     *
+     * @param int   $requirement_id
+     */
+    do_action( 'gamipress_delete_requirement', $requirement_id );
+
     // Delete the requirement post
     wp_delete_post( $requirement_id );
     die;
