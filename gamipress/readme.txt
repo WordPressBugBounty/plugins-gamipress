@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 7.4.2
+Stable tag: 7.4.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -174,6 +174,7 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 * [GeoDirectory](https://gamipress.com/add-ons/geodirectory-integration/)
 * [WP Booking Calendar](https://gamipress.com/add-ons/wp-booking-calendar-integration/)
 * [Paid Membership Subscriptions](https://gamipress.com/add-ons/paid-membership-subscriptions-integration/)
+* [ShortLinks Pro](https://gamipress.com/add-ons/shortlinkspro-integration/)
 
 [View all integrations](https://gamipress.com/integrations/)
 
@@ -342,6 +343,20 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.4.4 =
+
+* **New Features**
+* New integration: ShortLinks Pro.
+* ShortLinks Pro: User clicks a link.
+* ShortLinks Pro: User clicks a specific link.
+* ShortLinks Pro: User clicks a link of a category.
+* ShortLinks Pro: User clicks a link of a tag.
+
+= 7.4.3 =
+
+* **Improvements**
+* Improved hook related to triggers.
 
 = 7.4.2 =
 
@@ -723,224 +738,3 @@ Also, you can check [our customize section](https://gamipress.com/customize/) wh
 * WordPress: Improved check on comments related events.
 * BuddyBoss: Improved check on topic replies events.
 * bbPress: Improved check on topic replies events.
-
-= 6.9.9.1 =
-
-* **Bug Fixes**
-* Fixed typo in H5P generated labels.
-
-= 6.9.9 =
-
-* **Improvements**
-* Prevent PHP errors when a post gets trashed.
-* Improved the functionality of advanced selectors.
-* Style improvements for the requirements UI.
-* **Bug Fixes**
-* Fixed the Javascript error "gamipress_admin_functions is not defined".
-
-= 6.9.8 =
-
-* **Improvements**
-* Save requirements when post gets saved and there are unsaved requirements changes.
-* Added new internal filters to allow extend GamiPress.
-* Removed log pattern settings and turned into filters.
-* Removed style settings.
-* Removed automatic update settings.
-
-= 6.9.7 =
-
-* **Improvements**
-* Check for achievement and rank types.
-* **Bug Fixes**
-* BuddyBoss: Fixed reordering of elements in add-on settings.
-
-= 6.9.6.2 =
-
-* **Bug Fixes**
-* Fixed bug related to get user points.
-
-= 6.9.6.1 =
-
-* **Bug Fixes**
-* Fixed progress bar for upgrade performance.
-
-= 6.9.6 =
-
-* **Improvements**
-* Added support for PHP latest version.
-
-= 6.9.5 =
-
-* **Improvements**
-* WordPress: Check for delete post events.
-
-= 6.9.4.1 =
-
-* **Bug Fixes**
-* Fixed bug related to required file.
-
-= 6.9.4 =
-
-* **Improvements**
-* Performance improvements on logs for large database queries.
-
-= 6.9.3 =
-
-* **Improvements**
-* PeepSo: Correctly display user points on profile with the correct formatting.
-
-= 6.9.2 =
-
-* **Improvements**
-* Improved recount activity for comments.
-
-= 6.9.1 =
-
-* **Improvements**
-* Added new security checks to template rendering.
-
-= 6.9.0 =
-
-* **Improvements**
-* Added new security checks to shortcode parameters.
-
-= 6.8.9 =
-
-* **Improvements**
-* Improved functions related to multisites to improve site loading performance.
-* **Bug Fixes**
-* Fixed bug related to administration rights.
-
-= 6.8.8 =
-
-* **Bug Fixes**
-* Fixed deprecated function to adapt to latest version of PHP.
-* WP User Manager: Fixed event "Remove profile avatar".
-
-= 6.8.7 =
-
-* **Improvements**
-* Improved function to obtain sites ID in multisites.
-* **Bug Fixes**
-* Added security to shortcodes.
-
-= 6.8.6 =
-
-* **Bug Fixes**
-* Added security to clear cache action.
-
-= 6.8.5 =
-
-* **Improvements**
-* Added registration of points obtained from import points in User Earnings.
-
-= 6.8.4 =
-
-* **New Features**
-* BuddyBoss: New event: Reply a comment in a group.
-* BuddyBoss: New event: Reply a comment in a specific group.
-* BuddyBoss: New event: Get a reply on a comment in a group.
-* BuddyBoss: New event: Get a reply on a comment in a specific group.
-* BuddyPress: New event: Reply a comment in a group.
-* BuddyPress: New event: Reply a comment in a specific group.
-* BuddyPress: New event: Get a reply on a comment in a group.
-* BuddyPress: New event: Get a reply on a comment in a specific group.
-* **Improvements**
-* BuddyBoss: New option to hide point types in forums if they have not been earned.
-* BuddyBoss: New option to hide default rank in forums if it is the only earned rank.
-* bbPress: New option to hide point types in forums if they have not been earned.
-* bbPress: New option to hide default rank in forums if it is the only earned rank.
-* **Bug Fixes**
-* BuddyPress: Ensure Hide unearned Ranks compatibility with most themes.
-* BuddyBoss: Ensure Hide unearned Ranks compatibility with most themes.
-
-= 6.8.3 =
-
-* **Bug Fixes**
-* Fixed bug related to show rank earners in multisite.
-
-= 6.8.2 =
-
-* **Bug Fixes**
-* Fixed bug related to JetEngine classes.
-
-= 6.8.1 =
-
-* **Improvements**
-* Code optimization for Ajax calls.
-
-= 6.8.0 =
-
-* **New Features**
-* ARForms: Successful submit a form.
-* ARForms: Successful submit a specific form.
-* ARForms: Submit a specific field value.
-* ARForms: Submit a specific field value on a specific form.
-
-= 6.7.0 =
-
-* **Bug Fixes**
-* WooCommerce: Fixed specific review check.
-
-= 6.6.1 =
-
-* **Bug Fixes**
-* Fixed typo in meta boxes post type check.
-
-= 6.6.0 =
-
-* **Improvements**
-* Prevent PHP warnings related to post types.
-* Ensure compatibility with PHP 8.2.
-* Improved performance for daily visits events.
-
-= 6.5.0 =
-
-* **Improvements**
-* Added filter for requirement field label.
-* BuddyBoss: New option to hide point types in profile and tab if they have not been earned.
-* BuddyBoss: New option to hide default rank if it is the only earned rank.
-* BuddyPress: New option to hide point types in profile and tab if they have not been earned.
-* BuddyPress: New option to hide default rank if it is the only earned rank.
-
-= 6.4.0 =
-
-* **Bug Fixes**
-* BuddyBoss: Fixed recount activity for activity replies.
-
-= 6.3.0 =
-
-* **New Features**
-* LearnDash: New event: Complete a quiz of a category.
-* LearnDash: New event: Complete a quiz of a tag.
-* LearnDash: New event: Successfully pass a quiz of a category.
-* LearnDash: New event: Successfully pass a quiz of a tag.
-* LearnDash: New event: Fail a quiz of a category.
-* LearnDash: New event: Fail a quiz of a tag.
-* LearnDash: New event: Complete a quiz of a category with a minimum percent grade.
-* LearnDash: New event: Complete a quiz of a tag with a minimum percent grade.
-* LearnDash: New event: Complete a quiz of a category with a maximum percent grade.
-* LearnDash: New event: Complete a quiz of a tag with a maximum percent grade.
-* LearnDash: New event: Complete a quiz of a category on a range of percent grade.
-* LearnDash: New event: Complete a quiz of a tag on a range of percent grade.
-* **Bug Fixes**
-* BuddyBoss: Fixed reordering of elements in add-on settings.
-* BuddyBoss: Fixed displaying points and ranks tabs in profile.
-* BuddyPress: Fixed reordering of elements in add-on settings.
-* BuddyPress: Fixed displaying points and ranks tabs in profile.
-
-= 6.2.0 =
-
-* **Improvements**
-* Improved SQL queries to add indexes.
-
-= 6.1.0 =
-
-* **Bug Fixes**
-* BuddyBoss: Fixed recount activity for groups.
-* BuddyPress: Fixed recount activity for groups.
-
-= 6.0.0 =
-
-* **Bug Fixes**
-* Events Manager: Fixed triggers for specific events.

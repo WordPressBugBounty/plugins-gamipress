@@ -489,7 +489,7 @@ function gamipress_load_activity_triggers() {
 	}
 
 }
-add_action( 'init', 'gamipress_load_activity_triggers' );
+add_action( 'gamipress_init', 'gamipress_load_activity_triggers' );
 
 /**
  * Get activity triggers excluded to be loaded automatically from gamipress_load_activity_triggers()
