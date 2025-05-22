@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 7.4.4
+Stable tag: 7.4.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -222,9 +222,10 @@ Other teams have integrated GamiPress into their products like plugins, apps and
 
 = More plugins from the GamiPress team =
 
-If you like GamiPress, you will love [AutomatorWP](https://wordpress.org/plugins/automatorwp/)! The most powerful no-code automator plugin that lets you connect +200 plugins together or with apps, platforms with webhooks plus other WordPress sites.
+If you like GamiPress, you will love our other plugins!
 
-[More about AutomatorWP](https://wordpress.org/plugins/automatorwp/)
+* [AutomatorWP](https://wordpress.org/plugins/automatorwp/) - The most powerful no-code automator plugin that lets you connect +200 plugins together or with apps, platforms with webhooks plus other WordPress sites.
+* [ShortLinks Pro](https://wordpress.org/plugins/shortlinkspro/) - The most complete link management plugin that not only powers WordPress websites with shortened URLs, also empowers site owners to create clean, branded and unique affiliate links easily.
 
 == Installation ==
 
@@ -343,6 +344,11 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.4.5 =
+
+* **Improvements**
+* ACF: Improved query for ACF events.
 
 = 7.4.4 =
 
