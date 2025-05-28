@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 7.4.5
+Stable tag: 7.4.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -126,6 +126,7 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 = Other integrations =
 
 * [AutomatorWP](https://gamipress.com/add-ons/automatorwp-integration/)
+* [ShortLinks Pro](https://gamipress.com/add-ons/shortlinkspro-integration/)
 * [WooCommerce](https://gamipress.com/add-ons/woocommerce-integration/)
 * [Easy Digital Downloads](https://gamipress.com/add-ons/easy-digital-downloads-integration/)
 * [AffiliateWP](https://gamipress.com/add-ons/affiliatewp-integration/)
@@ -174,7 +175,6 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 * [GeoDirectory](https://gamipress.com/add-ons/geodirectory-integration/)
 * [WP Booking Calendar](https://gamipress.com/add-ons/wp-booking-calendar-integration/)
 * [Paid Membership Subscriptions](https://gamipress.com/add-ons/paid-membership-subscriptions-integration/)
-* [ShortLinks Pro](https://gamipress.com/add-ons/shortlinkspro-integration/)
 
 [View all integrations](https://gamipress.com/integrations/)
 
@@ -344,6 +344,13 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.4.6 =
+
+* **Improvements**
+* Improved load text.
+* **Bug Fixes**
+* Vulnerability Fixed.
 
 = 7.4.5 =
 
