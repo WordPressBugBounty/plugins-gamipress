@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 7.4.7
+Stable tag: 7.4.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -344,6 +344,18 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.4.8 =
+
+* **New Features**
+* H5P: Complete any interactive content of a tag.
+* H5P: Complete any interactive content at maximum score of a tag.
+* H5P: Complete any interactive content with a minimum score of a tag.
+* H5P: Complete any interactive content with a maximum score of a tag.
+* H5P: Complete any interactive content on a range of scores of a tag.
+* H5P: Complete any interactive content with a minimum percentage score of a tag.
+* H5P: Complete any interactive content with a maximum percentage score of a tag.
+* H5P: Complete any interactive content on a range of percentages scores of a tag.
 
 = 7.4.7 =
 
