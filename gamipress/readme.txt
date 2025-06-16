@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 7.4.8
+Stable tag: 7.4.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -344,6 +344,13 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.4.9 =
+
+* **Improvements**
+* ACF: Improved events when meta value is added first time.
+* Improved CT library.
+* Improved events Daily visit to avoid archives.
 
 = 7.4.8 =
 
