@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 7.4.9
+Stable tag: 7.5.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -83,6 +83,7 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 
 = Forms integrations =
 
+* [BBForms](https://gamipress.com/add-ons/bbforms-integration/)
 * [Gravity Forms](https://gamipress.com/add-ons/gravity-forms-integration/)
 * [Contact Form 7](https://gamipress.com/add-ons/contact-form-7-integration/)
 * [Ninja Forms](https://gamipress.com/add-ons/ninja-forms-integration/)
@@ -344,6 +345,13 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.5.0 =
+
+* **Improvements**
+* Improved how to display add-on information.
+* Improved logs for points importation.
+* Fixed warning related to point type key when creating a new item. 
 
 = 7.4.9 =
 
