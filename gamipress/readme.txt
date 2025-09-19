@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 7.5.1
+Stable tag: 7.5.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -83,6 +83,7 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 
 = Forms integrations =
 
+* [BBForms](https://gamipress.com/add-ons/bbforms-integration/)
 * [Gravity Forms](https://gamipress.com/add-ons/gravity-forms-integration/)
 * [Contact Form 7](https://gamipress.com/add-ons/contact-form-7-integration/)
 * [Ninja Forms](https://gamipress.com/add-ons/ninja-forms-integration/)
@@ -226,6 +227,7 @@ If you like GamiPress, you will love our other plugins!
 
 * [AutomatorWP](https://wordpress.org/plugins/automatorwp/) - The most powerful no-code automator plugin that lets you connect +200 plugins together or with apps, platforms with webhooks plus other WordPress sites.
 * [ShortLinks Pro](https://wordpress.org/plugins/shortlinkspro/) - The most complete link management plugin that not only powers WordPress websites with shortened URLs, also empowers site owners to create clean, branded and unique affiliate links easily.
+* [BBForms](https://wordpress.org/plugins/bbforms/) - BBForms is a code form plugin designed to help you build multipurpose forms in seconds!
 
 == Installation ==
 
@@ -344,6 +346,17 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.5.2 =
+
+* **New Features**
+* New integration: BBForms.
+* BBForms: Submit a form.
+* BBForms: Submit a specific form.
+* BBForms: Submit a form of a category.
+* BBForms: Submit a form of a tag.
+* BBForms: Submit a specific field value.
+* BBForms: Submit a specific field value on a specific form.
 
 = 7.5.1 =
 

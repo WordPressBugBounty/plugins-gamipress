@@ -183,6 +183,13 @@ function gamipress_get_try_option() {
         );
     }
 
+    if( ! class_exists( 'BBForms' ) ) {
+        $options[] = array(
+            'label' => __( 'Try BBForms!', 'gamipress' ),
+            'slug' => 'bbforms'
+        );
+    }
+
     $count = count( $options );
 
     // Bail if no options found
