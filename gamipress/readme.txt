@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.8
-Stable tag: 7.5.2
+Stable tag: 7.5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -123,6 +123,7 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 * [wpDiscuz](https://gamipress.com/add-ons/wpdiscuz-integration/)
 * [ARMember](https://gamipress.com/add-ons/armember-integration/)
 * [FluentCommunity](https://gamipress.com/add-ons/fluentcommunity-integration/)
+* [Asgaros Forum](https://gamipress.com/add-ons/asgaros-forum-integration/)
 
 = Other integrations =
 
@@ -147,6 +148,7 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 * [Eventin](https://gamipress.com/add-ons/eventin-integration/)
 * [Events Manager](https://gamipress.com/add-ons/events-manager-integration/)
 * [Favorites](https://gamipress.com/add-ons/favorites-integration/)
+* [FluentBooking](https://gamipress.com/add-ons/fluentbooking-integration/)
 * [Fluent Support](https://gamipress.com/add-ons/fluent-support-integration/)
 * [FluentCRM](https://gamipress.com/add-ons/fluentcrm-integration/)
 * [Give](https://gamipress.com/add-ons/give-integration/)
@@ -346,6 +348,40 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.5.3 =
+
+* **New Features**
+* New integration: Asgaros Forum.
+* Asgaros Forum: Reply to a topic.
+* Asgaros Forum: Reply to a specific topic.
+* Asgaros Forum: Reply to a topic on a specific forum.
+* Asgaros Forum: Create a new topic.
+* Asgaros Forum: Create a new topic on a specific forum.
+* Asgaros Forum: Like a post.
+* Asgaros Forum: Like a post on a specific topic.
+* Asgaros Forum: Like a post on a specific forum.
+* Asgaros Forum: Get a like on a post.
+* Asgaros Forum: Dislike a post.
+* Asgaros Forum: Dislike a post on a specific topic.
+* Asgaros Forum: Dislike a post on a specific forum.
+* Asgaros Forum: Get a dislike on a post.
+* Asgaros Forum: Delete a reply.
+* Asgaros Forum: Delete a topic.
+* **New Features**
+* New integration: FluentBooking.
+* FluentBooking: Schedule a one-to-one meeting.
+* FluentBooking: Schedule a specific one-to-one meeting.
+* FluentBooking: Schedule one-to-one meeting with specific host.
+* FluentBooking: Cancel a one-to-one meeting.
+* FluentBooking: Cancel a specific one-to-one meeting.
+* FluentBooking: Cancel one-to-one meeting with specific host.
+* FluentBooking: Schedule a team meeting.
+* FluentBooking: Schedule a specific team meeting.
+* FluentBooking: Schedule team meeting with specific host.
+* FluentBooking: Cancel a team meeting.
+* FluentBooking: Cancel a specific team meeting.
+* FluentBooking: Cancel team meeting with specific host.
 
 = 7.5.2 =
 
