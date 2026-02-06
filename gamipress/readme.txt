@@ -2,8 +2,8 @@
 Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flabernardez
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
-Tested up to: 6.8
-Stable tag: 7.5.5
+Tested up to: 6.9
+Stable tag: 7.6.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -348,6 +348,54 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.6.4 =
+
+* **Bug Fixes**
+* Fixed vulnerability related to gamipress_logs shortcode.
+
+= 7.6.3 =
+
+* **Bug Fixes**
+* Fixed Warning related to menus in multisite.
+
+= 7.6.2 =
+
+* **Bug Fixes**
+* Fixed vulnerability.
+
+= 7.6.1 =
+
+* **Bug Fixes**
+* Minor fix.
+
+= 7.6.0 =
+
+* **Bug Fixes**
+* Fixed vulnerability.
+
+= 7.5.9 =
+* **New Features**
+* LearnDash: New event: Review any course.
+* LearnDash: New event: Review a specific course.
+
+= 7.5.8 =
+
+* **Developer Notes**
+* Tested with WordPress 6.9.
+
+= 7.5.7 =
+
+* **Bug Fixes**
+* Links fixed in Add-ons section.
+
+= 7.5.6 =
+
+* **Improvements**
+* Improved dashboard information.
+* Added tooltip library to improve descriptions.
+* **Bug Fixes**
+* Sensei LMS: Fixed bug related to enrollment event.
 
 = 7.5.5 =
 

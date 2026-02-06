@@ -901,14 +901,14 @@ function gamipress_get_rank_requirements( $rank_id = 0, $post_status = 'publish'
 function gamipress_get_rank_post_thumbnail( $post_id = 0, $image_size = 'gamipress-rank', $class = 'gamipress-rank-thumbnail' ) {
 
     // Get our rank thumbnail
-    $image = get_the_post_thumbnail( $post_id, $image_size, array( 'class' => $class ) );
+    $image = gamipress_get_the_post_thumbnail( $post_id, $image_size, array( 'class' => $class ) );
 
     // If we don't have an image...
     if ( ! $image ) {
 
         // Grab our rank type's post thumbnail
         $rank = get_page_by_path( gamipress_get_post_type( $post_id ), OBJECT, 'rank-type' );
-        $image = is_object( $rank ) ? get_the_post_thumbnail( $rank->ID, $image_size, array( 'class' => $class ) ) : false;
+        $image = is_object( $rank ) ? gamipress_get_the_post_thumbnail( $rank->ID, $image_size, array( 'class' => $class ) ) : false;
 
         // If we still have no image
         if ( ! $image ) {

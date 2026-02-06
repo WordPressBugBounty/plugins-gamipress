@@ -129,15 +129,11 @@ function gamipress_render_plugin_card( $plugin ) {
 
         $class = 'gamipress-third-party-add-on';
 
-        $details_link = '';
-
         // "More Information" action
         $action_links[] = '<a href="https://gamipress.com/add-ons/' . $plugin->info->slug . '" class="button" target="_blank">' . __( 'More Information', 'gamipress' ) . '</a>';
 
     } else if( gamipress_plugin_has_category( $plugin, 'integrations' ) ) {
         $class = 'gamipress-integration-add-on';
-
-        $details_link = '';
 
         // "More Information" action
         $action_links[] = '<a href="https://gamipress.com/add-ons/' . $plugin->info->slug . '" class="button" target="_blank">' . __( 'More Information', 'gamipress' ) . '</a>';
@@ -282,7 +278,7 @@ function gamipress_render_plugin_card( $plugin ) {
         }
     }
 
-    if( ! empty( $details_link ) ) {
+    if(  ! gamipress_plugin_has_category( $plugin, '3rd-party' ) &&  ! gamipress_plugin_has_category( $plugin, 'integrations' ) ) {
         // "More Details" action
         $action_links[] = '<a href="https://gamipress.com/add-ons/' . $plugin->info->slug . '" class="more-details" aria-label="' . esc_attr( sprintf( __( 'More information about %s' ), $name ) ) . '" data-title="' . esc_attr( $name ) . '" target="_blank">' . __( 'More Details' ) . '</a>';
     } ?>
@@ -333,6 +329,13 @@ function gamipress_render_plugin_card( $plugin ) {
  */
 function gamipress_plugins_api() {
 
+    $cache = gamipress_get_cache( 'gamipress_plugins_api', false, false );
+
+    // If result already cached, return it
+    if( $cache !== false ) {
+        return $cache;
+    }
+
     // If a plugins api request has been cached already, then use cached plugins
     if ( false !== ( $res = get_transient( 'gamipress_plugins_api' ) ) ) {
         return $res;
@@ -377,6 +380,8 @@ function gamipress_plugins_api() {
 
         // Set a transient for 1 week with api plugins
         set_transient( 'gamipress_plugins_api', $res, ( 24 * 7 ) * HOUR_IN_SECONDS );
+
+        gamipress_set_cache( 'gamipress_plugins_api', $res );
     }
 
     return $res;
