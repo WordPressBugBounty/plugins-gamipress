@@ -3067,3 +3067,24 @@ body.toplevel_page_gamipress {
 	font-size: 11px;
 	line-height: 1.6;
 }
+
+/* Sortable icon */
+.gamipress-sortable-multicheck .cmb2-list li {
+    position: relative;
+    padding-right: 28px;
+}
+
+.gamipress-sortable-multicheck .cmb2-list li::before {
+    content: "\f333"; /* dashicons-menu */
+    font-family: dashicons;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: move;
+    color: #777;
+}
+
+.gamipress-sortable-multicheck .cmb2-list li.ui-sortable-helper::before {
+    cursor: move;
+}
