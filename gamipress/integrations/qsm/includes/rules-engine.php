@@ -29,12 +29,8 @@ function gamipress_qsm_check_if_meets_requirements( $requirement_id, $trigger, $
         || $trigger === 'gamipress_qsm_complete_specific_quiz_points' ) {
             
             $points = absint( $args[2] );
-            error_log('$points:');
-            error_log(print_r($points, true));
 
             $required_points = absint( get_post_meta( $requirement_id, '_gamipress_qsm_points', true ) );
-            error_log('$required_points:');
-            error_log(print_r($required_points, true));
 
             // True if there is points is bigger than required points
             $return = (bool) ( $points >= $required_points );
