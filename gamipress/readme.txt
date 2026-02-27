@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.9
-Stable tag: 7.6.8
+Stable tag: 7.7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,44 +21,48 @@ https://youtu.be/sinW2JjxsdA
 
 GamiPress is extremely powerful and infinitely extensible. Check out some of the built in features:
 
-= 3 powerful ways to award your users =
+= 3 powerful ways to reward your users =
 
 GamiPress combines three of the most powerful award systems you could add to your site:
 
-* **Points** to automatically award your users for interacting with your site.
-* **Achievements** to award users for completing all the requirements, sequentially or otherwise.
-* **Ranks** to let your users climb through the ranks by completing all the rank requirements.
+* **Points** to reward your users automatically for interacting with your site.
+* **Achievements** to award users for meeting all requirements, sequentially or otherwise.
+* **Ranks** to let users progress through ranks by fulfilling every requirement.
 
-= Unlimited ways to define how to award the different points, achievements and ranks =
+= Unlimited options to reward your users =
 
-* Site activity (events based on publishing posts and pages, commenting, daily visits or logging in to your site).
-* Completing specific other achievements, once or a specified number of times.
-* Completing one or all achievements of a specified type.
-* Points thresholds.
-* Admin awarded achievements.
-* Reaching a specific rank.
-* Expending an amount of points.
+* Site interactions (sign-ups, logins, daily visits).
+* Content creation (posts, comments, reviews).
+* Course progress (courses completed, lessons finished, quizzes passed)
+* Store activity (purchases, subscriptions, memberships, lifetime value)
+* Community participation (groups, friendships, forums)
+* Affiliate actions (referrals, inviting friends, sharing links)
+* Gamification unlocks (expending points, unlocking badges, reaching higher ranks)
 
 = Features =
 
-* **Points Types:** Configure as many types of points as you like (Credits, Gems, Coins, etc).
-* **Achievement Types:** Configure as many types of achievement as you like (Quests, Badges, etc).
-* **Rank Types:** Configure as many types of rank as you like (Level, Grade, etc).
+* **Points Types:** Set up unlimited points types like Credits, Gems, Coins, etc.
+* **Achievement Types:** Set up unlimited achievement types like Badges, Quests, etc.
+* **Rank Types:** Set up unlimited rank types like Grade, Level, etc.
 * **Automatic points awards and deductions:** Easily configure automatic ways to award or deduct points to your users.
 * **Custom requirements:** Define conditional requirements the user needs to meet for unlock any achievement or rank.
 * **Time limit requirements:** Limit by time period when the user can complete a specific requirement (minutely, hourly, daily, weekly, monthly or yearly).
-* **Drag and drop controls:** Powerful controls to setup your gamification environment in minutes.
+* **Drag and drop controls:** Powerful controls to set up your gamification environment in minutes.
+* **Badge Builder:** Create fully customizable badge images quickly and effortlessly with our built-in Badge Builder. No design skills required!
 * **Social sharing:** Users can share the achievements and ranks they have earned on any social network of their choice.
 * **Unlock achievements and ranks using points:** Let users to optionally unlock any achievement or rank by expending an amount of points without meet the requirements.
 * **Emails:** Your users will get notified automatically about new awards.
-* **Logs:** Flexible log system with support for public and private logs.
-* **Open Badges compatible:** Connect your site achievements with [Badgr](https://gamipress.com/add-ons/gamipress-badgr/) or [Credly](https://gamipress.com/add-ons/gamipress-credly/) to issue open badges as an official recognition of the skills of your users.
-* **Blocks, Shortcodes & Widgets:** WordPress-friendly blocks, shortcodes and widgets to show the user points wallet, earned achievements, latest logs, and more.
-* **Live shortcode editor:** Missing a shortcode parameter? Just press the "GamiPress Shortcode" button and set up any shortcode without a worry.
-* **GDPR Support:** Support for WordPress personal data exports and deletions.
+* **Open Badges:** Connect your site achievements with [Badgr](https://gamipress.com/add-ons/gamipress-badgr/) or [Credly](https://gamipress.com/add-ons/gamipress-credly/) to issue open badges as an official recognition of the skills of your users.
+* **Blocks, Shortcodes & Widgets:** WordPress-friendly blocks, shortcodes and widgets to show the user points wallet, earned achievements, latest earnings, and more.
+* **GDPR Support:** Support for WordPress personal data export and deletion tools.
+
+= Advanced Features =
+
 * **Theme Agnostic:** GamiPress works with just about any standard WordPress theme. No special hooks or theme updates are needed.
 * **Templates System:** Overwritable templates system to allow you customize everything you want through your GamiPress theme folder.
 * **Data centralization on Multisite:** Centralize all the data on multisite installs and show anything you want on any sub-site.
+* **Logs:** Flexible log system with support for public and private logs.
+* **Live shortcode editor:** Missing a shortcode parameter? Just press the "GamiPress Shortcode" button and set up any shortcode without a worry.
 * **Rest API:** Full support to WordPress rest API brings you new ways to connect GamiPress with external applications.
 * **Developer-friendly:** GamiPress is extremely flexible with plenty of hooks to add custom features and functionalities.
 
@@ -67,6 +71,8 @@ GamiPress combines three of the most powerful award systems you could add to you
 GamiPress integrates with a large number of plugins allowing you to add gamification in any environment.
 
 = LMS integrations =
+
+Boost students motivation and improve completion rates with game-like rewards.
 
 * [LearnDash](https://gamipress.com/add-ons/learndash-integration/)
 * [H5P](https://gamipress.com/add-ons/h5p-integration/)
@@ -81,7 +87,48 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 * [Sensei](https://gamipress.com/add-ons/sensei-integration/)
 * [WP Courseware](https://gamipress.com/add-ons/wp-courseware-integration/)
 
+= Community integrations =
+
+Increase participation by rewarding your community members interactions.
+
+* [BuddyBoss](https://gamipress.com/add-ons/buddyboss-integration/)
+* [BuddyPress](https://gamipress.com/add-ons/buddypress-integration/)
+* [bbPress](https://gamipress.com/add-ons/bbpress-integration/)
+* [Ultimate Member](https://gamipress.com/add-ons/ultimate-member-integration/)
+* [PeepSo](https://gamipress.com/add-ons/peepso-integration/)
+* [Simple:Press](https://gamipress.com/add-ons/simplepress-integration/)
+* [WP User Manager](https://gamipress.com/add-ons/wp-user-manager-integration/)
+* [wpForo](https://gamipress.com/add-ons/wpforo-integration/)
+* [DigiMember](https://gamipress.com/add-ons/digimember-integration/)
+* [MemberPress](https://gamipress.com/add-ons/memberpress-integration/)
+* [Paid Memberships Pro](https://gamipress.com/add-ons/paid-memberships-pro-integration/)
+* [Simple:Press](https://gamipress.com/add-ons/simplepress-integration/)
+* [WishList Member](https://gamipress.com/add-ons/wishlist-member-integration/)
+* [wpDiscuz](https://gamipress.com/add-ons/wpdiscuz-integration/)
+* [ARMember](https://gamipress.com/add-ons/armember-integration/)
+* [FluentCommunity](https://gamipress.com/add-ons/fluentcommunity-integration/)
+* [Asgaros Forum](https://gamipress.com/add-ons/asgaros-forum-integration/)
+* [SureMembers](https://gamipress.com/add-ons/suremembers-integration/)
+
+= eCommerce & membership integrations =
+
+Turn shopping into an interactive experience that drives customer loyalty & bring exclusive rewards to improve your members engagement and retention..
+
+* [WooCommerce](https://gamipress.com/add-ons/woocommerce-integration/)
+* [Easy Digital Downloads](https://gamipress.com/add-ons/easy-digital-downloads-integration/)
+* [Studiocart](https://gamipress.com/add-ons/studiocart-integration/)
+* [Download Manager](https://gamipress.com/add-ons/download-manager-integration/)
+* [Give](https://gamipress.com/add-ons/give-integration/)
+* [Restrict Content Pro](https://gamipress.com/add-ons/restrict-content-pro-integration/)
+* [SureCart](https://gamipress.com/add-ons/surecart-integration/)
+* [Upsell Plugin](https://gamipress.com/add-ons/upsell-plugin-integration/)
+* [WooCommerce Shipstation](https://gamipress.com/add-ons/woocommerce-shipstation-integration/)
+* [WP Simple Pay](https://gamipress.com/add-ons/wp-simple-pay-integration/)
+* [Paid Membership Subscriptions](https://gamipress.com/add-ons/paid-membership-subscriptions-integration/)
+
 = Forms integrations =
+
+Increase form completion and participation by rewarding your users submissions.
 
 * [BBForms](https://gamipress.com/add-ons/bbforms-integration/)
 * [Gravity Forms](https://gamipress.com/add-ons/gravity-forms-integration/)
@@ -105,40 +152,17 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 * [Kali Forms](https://gamipress.com/add-ons/kali-forms-integration/)
 * [weForms](https://gamipress.com/add-ons/weforms-integration/)
 
-= Community integrations =
-
-* [BuddyBoss](https://gamipress.com/add-ons/buddyboss-integration/)
-* [BuddyPress](https://gamipress.com/add-ons/buddypress-integration/)
-* [bbPress](https://gamipress.com/add-ons/bbpress-integration/)
-* [Ultimate Member](https://gamipress.com/add-ons/ultimate-member-integration/)
-* [PeepSo](https://gamipress.com/add-ons/peepso-integration/)
-* [Simple:Press](https://gamipress.com/add-ons/simplepress-integration/)
-* [WP User Manager](https://gamipress.com/add-ons/wp-user-manager-integration/)
-* [wpForo](https://gamipress.com/add-ons/wpforo-integration/)
-* [DigiMember](https://gamipress.com/add-ons/digimember-integration/)
-* [MemberPress](https://gamipress.com/add-ons/memberpress-integration/)
-* [Paid Memberships Pro](https://gamipress.com/add-ons/paid-memberships-pro-integration/)
-* [Simple:Press](https://gamipress.com/add-ons/simplepress-integration/)
-* [WishList Member](https://gamipress.com/add-ons/wishlist-member-integration/)
-* [wpDiscuz](https://gamipress.com/add-ons/wpdiscuz-integration/)
-* [ARMember](https://gamipress.com/add-ons/armember-integration/)
-* [FluentCommunity](https://gamipress.com/add-ons/fluentcommunity-integration/)
-* [Asgaros Forum](https://gamipress.com/add-ons/asgaros-forum-integration/)
-* [SureMembers](https://gamipress.com/add-ons/suremembers-integration/)
-
 = Other integrations =
+
+Gamify your CRM, Affiliate Program, Event Booking, Job Boards even your Support Platform. GamiPress connects with almost any plugin and platform and if it doesn't, just ask us for it!
 
 * [AutomatorWP](https://gamipress.com/add-ons/automatorwp-integration/)
 * [ShortLinks Pro](https://gamipress.com/add-ons/shortlinkspro-integration/)
-* [WooCommerce](https://gamipress.com/add-ons/woocommerce-integration/)
-* [Easy Digital Downloads](https://gamipress.com/add-ons/easy-digital-downloads-integration/)
 * [AffiliateWP](https://gamipress.com/add-ons/affiliatewp-integration/)
 * [Youtube](https://gamipress.com/add-ons/youtube-integration/) & [Vimeo](https://gamipress.com/add-ons/vimeo-integration/)
 * [The Events Calendar](https://gamipress.com/add-ons/the-events-calendar-integration/)
 * [Advanced Custom Fields (ACF)](https://gamipress.com/add-ons/advanced-custom-fields-integration/)
 * [Meta Box](https://gamipress.com/add-ons/meta-box-integration/)
-* [Studiocart](https://gamipress.com/add-ons/studiocart-integration/)
-* [Download Manager](https://gamipress.com/add-ons/download-manager-integration/)
 * [Presto Player](https://gamipress.com/add-ons/presto-player-integration/)
 * [Advanced Ads](https://gamipress.com/add-ons/advanced-ads-integration/)
 * [Amelia](https://gamipress.com/add-ons/ameliabooking-integration/)
@@ -152,33 +176,26 @@ GamiPress integrates with a large number of plugins allowing you to add gamifica
 * [FluentBooking](https://gamipress.com/add-ons/fluentbooking-integration/)
 * [Fluent Support](https://gamipress.com/add-ons/fluent-support-integration/)
 * [FluentCRM](https://gamipress.com/add-ons/fluentcrm-integration/)
-* [Give](https://gamipress.com/add-ons/give-integration/)
 * [Groundhogg](https://gamipress.com/add-ons/groundhogg-integration/)
 * [Invite Anyone](https://gamipress.com/add-ons/invite-anyone-integration/)
 * [JetEngine](https://gamipress.com/add-ons/jetengine-integration/)
 * [Jetpack](https://gamipress.com/add-ons/jetpack-integration/)
 * [Meta Box](https://gamipress.com/add-ons/meta-box-integration/)
 * [Modern Events Calendar](https://gamipress.com/add-ons/modern-events-calendar-integration/)
-* [Restrict Content Pro](https://gamipress.com/add-ons/restrict-content-pro-integration/)
 * [SliceWP](https://gamipress.com/add-ons/slicewp-integration/)
-* [SureCart](https://gamipress.com/add-ons/surecart-integration/)
 * [Thrive Quiz Builder](https://gamipress.com/add-ons/thrive-quiz-builder-integration/)
-* [Upsell Plugin](https://gamipress.com/add-ons/upsell-plugin-integration/)
 * [WP Job Manager](https://gamipress.com/add-ons/wp-job-manager-integration/)
 * [WP PostRatings](https://gamipress.com/add-ons/wp-postratings-integration/)
-* [WP Simple Pay](https://gamipress.com/add-ons/wp-simple-pay-integration/)
 * [WP Ulike](https://gamipress.com/add-ons/wp-ulike-integration/)
 * [WP-Polls](https://gamipress.com/add-ons/wp-polls-integration/)
 * [WPAdverts](https://gamipress.com/add-ons/wpadverts-integration/)
 * [Charitable](https://gamipress.com/add-ons/charitable-integration/)
 * [Gravity Kit](https://gamipress.com/add-ons/gravity-kit-integration/)
 * [Better Messages](https://gamipress.com/add-ons/better-messages-integration/)
-* [WooCommerce Shipstation](https://gamipress.com/add-ons/woocommerce-shipstation-integration/)
 * [PrettyLinks](https://gamipress.com/add-ons/pretty-link-integration/)
 * [QSM](https://gamipress.com/add-ons/qsm-integration/)
 * [GeoDirectory](https://gamipress.com/add-ons/geodirectory-integration/)
 * [WP Booking Calendar](https://gamipress.com/add-ons/wp-booking-calendar-integration/)
-* [Paid Membership Subscriptions](https://gamipress.com/add-ons/paid-membership-subscriptions-integration/)
 
 [View all integrations](https://gamipress.com/integrations/)
 
@@ -218,9 +235,13 @@ If you’re looking for something endorsed and maintained by the developers who 
 
 Other teams have integrated GamiPress into their products like plugins, apps and themes, including:
 
-* (ActiveMember360)[https://gamipress.com/add-ons/activemember360-integration/]
-* (Better Messages)[https://gamipress.com/add-ons/better-messages-integration/]
-* (Masteriyo)[https://gamipress.com/add-ons/masteriyo-integration/]
+* [Academy LMS](https://gamipress.com/add-ons/academy-lms-integration/)
+* [ActiveMember360](https://gamipress.com/add-ons/activemember360-integration/)
+* [Better Messages](https://gamipress.com/add-ons/better-messages-integration/)
+* [Directorist](https://gamipress.com/add-ons/directorist-integration/)
+* [Masteriyo](https://gamipress.com/add-ons/masteriyo-integration/)
+* [Memberium](https://gamipress.com/add-ons/memberium-integration/)
+* [WP Fusion](https://gamipress.com/add-ons/wpfusion-integration/)
 
 [View all 3rd party integrations](https://gamipress.com/add-ons/#3rd-party)
 
@@ -249,18 +270,19 @@ If you like GamiPress, you will love our other plugins!
 
 == Screenshots ==
 
-1. A huge number of shortcodes and widgets with a lot of display options.
-2. Configure as many points types as you like: Credits, Gems, Coins, etc.
-3. Configure as many achievement types as you like: Badges, Quests, etc.
-4. Configure as many rank types as you like: Grade, Level, etc.
+1. A huge number of blocks, shortcodes and widgets plenty of display options.
+2. Configure as many points as you like: Credits, Gems, Coins, etc.
+3. Set up as many achievements as you want: Badges, Quests, etc.
+4. Create as many ranks as you need: Grade, Level, etc.
 5. Let users to optionally unlock any achievement or rank by expending an amount of points without meet the requirements.
 6. Simple yet powerful admin interface to manage your gamification elements.
 7. Drag and drop control to define the requirements for any achievement, points type or rank.
-8. Built-in support for Gutenberg including a great number of blocks to place them anywhere.
-9. Live shortcode editor appears in the toolbar of all WordPress content editor areas, allowing you to transform any page or post into part of your gamification system without referencing any of the shortcodes.
-10. WordPress-friendly widgets to show the user points wallet, earned achievements, latest logs, and more.
-11. Configurable email templates to let your users get notified automatically about new awards.
-12. Flexible log system with support for public and private logs.
+8. Create fully customizable badge images quickly and effortlessly with our built-in Badge Builder. No design skills required!
+9. Built-in support for Gutenberg including a great number of blocks to place them anywhere.
+10. Live shortcode editor appears in the toolbar of all WordPress content editor areas, allowing you to transform any page or post into part of your gamification system without referencing any of the shortcodes.
+11. WordPress-friendly widgets to show the user points wallet, earned achievements, latest logs, and more.
+12. Configurable email templates to let your users get notified automatically about new awards.
+13. Flexible log system with support for public and private logs.
 
 == Frequently Asked Questions ==
 
@@ -296,7 +318,11 @@ Check [our customize section](https://gamipress.com/customize/) where you can fi
 
 = Where can I find images to customize the GamiPress elements? =
 
-Check [our assets section](https://gamipress.com/assets/) where you can find a huge number of resources to decorate your gamification elements to take the design of them to the next level.
+GamiPress now includes a built-in Badge Builder, letting you create your custom images with ease.
+
+Packed with tools like a badge generator and multiple color palettes to help you create stunning badges even without design skills.
+
+In addition, you can check [our assets section](https://gamipress.com/assets/) where you can find a huge number of resources to decorate your gamification elements to take the design of them to the next level.
 
 = Which shortcodes come bundled with GamiPress? =
 
@@ -350,6 +376,19 @@ Also, you can check [our customize section](https://gamipress.com/customize/) wh
 
 == Changelog ==
 
+= 7.7.0 =
+
+* **New Features**
+* Added our brand new Badge Builder!
+
+= 7.6.9 =
+
+* **New Features**
+* ARMember: New event: Renew any membership plan.
+* ARMember: New event: Renew a specific membership plan.
+* **Improvements**
+* Added points and points type tags in achievement email templates.
+
 = 7.6.8 =
 
 * **Improvements**
@@ -401,6 +440,7 @@ Also, you can check [our customize section](https://gamipress.com/customize/) wh
 * Fixed vulnerability.
 
 = 7.5.9 =
+
 * **New Features**
 * LearnDash: New event: Review any course.
 * LearnDash: New event: Review a specific course.

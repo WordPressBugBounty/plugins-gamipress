@@ -646,6 +646,36 @@
 
 	}
 
+	// Default badge
+	$('body').on('click', '.gamipress-badge-builder-default-badge-thumb', function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		var $this = $(this);
+		var image = $this.data('image');
+		var post  = $this.data('post');
+
+		$('.gamipress-badge-builder-default-badge-thumb').removeClass('active');
+		$this.addClass('active');
+
+		$.post(
+			ajaxurl,
+			{
+				action: 'gamipress_badge_builder_set_featured_image',
+				nonce: gamipress_admin.nonce,
+				image: image,
+				post_id: post
+			}).done(function (response) {
+
+			if ( ! response || ! response.success )
+				return;
+
+			if (wp && wp.media && wp.media.featuredImage) {
+				wp.media.featuredImage.set( response.data );
+			}
+		});
+	});
+
 	// Hide review notice
     $('body').on('click', '.gamipress-hide-review-notice', function(e) {
 

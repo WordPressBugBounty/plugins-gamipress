@@ -16,12 +16,14 @@
 
 .cmb-tooltip .dashicons-cmb-tooltip:before {
     display: inline-block;
+    font-family: sans-serif;
     content: "?";
     font-weight: 999;
-    font-size: 13px;
+    font-size: 14px;
+    width: 14px;
     border: 2px solid #222;
     border-radius: 100%;
-    padding: 0px 4px 3px 4px;
+    padding: 1px;
     vertical-align: text-top;
 }
 
@@ -73,8 +75,11 @@
     bottom: -8px;
 }
 
+/* Block Editor */
 .editor-sidebar .cmb-tooltip-desc.cmb-tooltip-top,
-.editor-sidebar .cmb-tooltip-desc.cmb-tooltip-bottom {
+.editor-sidebar .cmb-tooltip-desc.cmb-tooltip-bottom,
+.columns-2 #side-sortables .cmb-tooltip-desc.cmb-tooltip-top,
+.columns-2 #side-sortables .cmb-tooltip-desc.cmb-tooltip-bottom {
     left: auto;
     margin-left: 0;
     right: -10px;
@@ -83,7 +88,9 @@
 }
 
 .editor-sidebar .cmb-tooltip-desc.cmb-tooltip-top:after,
-.editor-sidebar .cmb-tooltip-desc.cmb-tooltip-bottom:before {
+.editor-sidebar .cmb-tooltip-desc.cmb-tooltip-bottom:before,
+.columns-2 #side-sortables .cmb-tooltip-desc.cmb-tooltip-top:after,
+.columns-2 #side-sortables .cmb-tooltip-desc.cmb-tooltip-bottom:before {
     left: auto;
     right: 13px;
 }

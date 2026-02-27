@@ -16,6 +16,7 @@ require_once GAMIPRESS_DIR . 'includes/admin/meta-boxes/rank-type.php';
 require_once GAMIPRESS_DIR . 'includes/admin/meta-boxes/ranks.php';
 require_once GAMIPRESS_DIR . 'includes/admin/meta-boxes/requirements.php';
 require_once GAMIPRESS_DIR . 'includes/admin/meta-boxes/requirements-ui.php';
+require_once GAMIPRESS_DIR . 'includes/admin/meta-boxes/default-badge.php';
 require_once GAMIPRESS_DIR . 'includes/admin/meta-boxes/earners.php';
 require_once GAMIPRESS_DIR . 'includes/admin/meta-boxes/logs.php';
 require_once GAMIPRESS_DIR . 'includes/admin/meta-boxes/log-extra-data-ui.php';

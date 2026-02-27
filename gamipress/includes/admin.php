@@ -25,6 +25,7 @@ require_once GAMIPRESS_DIR . 'includes/admin/upgrades.php';
 // Admin pages
 require_once GAMIPRESS_DIR . 'includes/admin/pages/dashboard.php';
 //require_once GAMIPRESS_DIR . 'includes/admin/pages/support.php';
+require_once GAMIPRESS_DIR . 'includes/admin/pages/badge-builder.php';
 require_once GAMIPRESS_DIR . 'includes/admin/pages/tools.php';
 require_once GAMIPRESS_DIR . 'includes/admin/pages/settings.php';
 require_once GAMIPRESS_DIR . 'includes/admin/pages/licenses.php';
@@ -125,14 +126,16 @@ function gamipress_admin_menu_fix( $parent_file ) {
 
         }
 
-        // Reorder licenses, tools & settings
-        $licenses = $submenu['gamipress'][6];
-        $tools = $submenu['gamipress'][7];
-        $settings = $submenu['gamipress'][8];
+    // Reorder licenses, badge builder, tools & settings
+        $badge_builder = $submenu['gamipress'][6];
+        $licenses = $submenu['gamipress'][7];
+        $tools = $submenu['gamipress'][8];
+        $settings = $submenu['gamipress'][9];
 
-        $submenu['gamipress'][6] = $tools;
-        $submenu['gamipress'][7] = $settings;
-        $submenu['gamipress'][8] = $licenses;
+        $submenu['gamipress'][6] = $badge_builder;
+        $submenu['gamipress'][7] = $tools;
+        $submenu['gamipress'][8] = $settings;
+        $submenu['gamipress'][9] = $licenses;
     }
 
     return $parent_file;
@@ -150,6 +153,10 @@ function gamipress_admin_submenu() {
     // Set minimum role setting for menus
     $minimum_role = gamipress_get_manager_capability();
 
+    // Assets sub menu
+    add_submenu_page( 'gamipress', __( 'Badge Builder', 'gamipress' ), __( 'Badge Builder', 'gamipress' ), $minimum_role, 'gamipress_badge_builder', 'gamipress_badge_builder_page' );
+
+
 }
 add_action( 'admin_menu', 'gamipress_admin_submenu', 12 );
 
@@ -159,6 +166,7 @@ function gamipress_admin_addons_submenu() {
 
     // Assets sub menu
     add_submenu_page( 'gamipress', __( 'Assets', 'gamipress' ), __( 'Assets', 'gamipress' ), $minimum_role, 'gamipress_assets', 'gamipress_assets_page' );
+
     // Add-ons sub menu
     add_submenu_page( 'gamipress', __( 'Add-ons', 'gamipress' ), __( 'Add-ons', 'gamipress' ), $minimum_role, 'gamipress_add_ons', 'gamipress_add_ons_page' );
 }
@@ -440,6 +448,14 @@ function gamipress_admin_bar_submenu( $wp_admin_bar ) {
     if( ! gamipress_show_admin_bar_menu() ) {
         return;
     }
+
+    // Badge Builder
+    $wp_admin_bar->add_node( array(
+        'id'     => 'gamipress-badge-builder',
+        'title'  => __( 'Badge Builder', 'gamipress' ),
+        'parent' => 'gamipress',
+        'href'   => admin_url( 'admin.php?page=gamipress_badge_builder' )
+    ) );
 
     // Tools
     $wp_admin_bar->add_node( array(
@@ -755,6 +771,7 @@ function gamipress_admin_footer_text( $footer_text ) {
                 || $_GET['page'] === 'gamipress_add_ons'
                 || $_GET['page'] === 'gamipress_assets'
                 || $_GET['page'] === 'gamipress_help_support'
+                || $_GET['page'] === 'gamipress_badge_builder'
                 || $_GET['page'] === 'gamipress_tools'
                 || $_GET['page'] === 'gamipress'
             )

@@ -744,6 +744,7 @@ function gamipress_dashboard_getting_started_docs_box() {
         <hr>
         <li><a href="https://gamipress.com/docs/getting-started/requirements-ui/" target="_blank"><?php esc_html_e( 'Requirements UI', 'gamipress' ); ?></a></li>
         <li><a href="https://gamipress.com/docs/getting-started/events/" target="_blank"><?php esc_html_e( 'Events', 'gamipress' ); ?></a></li>
+        <li><a href="https://gamipress.com/docs/getting-started/badge-builder/" target="_blank"><?php esc_html_e( 'Badge Builder', 'gamipress' ); ?></a></li>
     </ul>
     <?php
 }
@@ -761,6 +762,7 @@ function gamipress_dashboard_tutorials_docs_box() {
         <li><a href="https://gamipress.com/docs/tutorials/creating-a-rank-type/" target="_blank"><?php esc_html_e( 'Creating a Rank Type', 'gamiress' ); ?></a></li>
         <li><a href="https://gamipress.com/docs/tutorials/unlock-achievements-and-ranks-by-expending-points/" target="_blank"><?php esc_html_e( 'Unlock achievements and ranks by expending points', 'gamiress' ); ?></a></li>
         <li><a href="https://gamipress.com/docs/tutorials/how-the-awards-engine-works/" target="_blank"><?php esc_html_e( 'How the awards engine works', 'gamiress' ); ?></a></li>
+        <li><a href="https://gamipress.com/docs/tutorials/create-your-custom-badges-images/" target="_blank"><?php esc_html_e( 'Create your custom badges images', 'gamiress' ); ?></a></li>
     </ul>
     <?php
 }
@@ -795,6 +797,7 @@ function gamipress_dashboard_support_box() {
         <li><a href="https://wordpress.org/support/plugin/gamipress" target="_blank"><?php esc_html_e( 'Support Forums', 'gamipress' ); ?></a></li>
         <li><a href="https://gamipress.com/docs/faq/" target="_blank"><?php esc_html_e( 'FAQ', 'gamipress' ); ?></a></li>
         <li><a href="https://gamipress.com/docs/troubleshooting/" target="_blank"><?php esc_html_e( 'Troubleshooting', 'gamipress' ); ?></a></li>
+        <li><a href="https://gamipress.com/feature-requests/" target="_blank"><?php esc_html_e( 'Feature Requests', 'gamipress' ); ?></a></li>
     </ul>
     <?php
 }
