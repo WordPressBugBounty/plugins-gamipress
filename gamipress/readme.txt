@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 6.9
-Stable tag: 7.7.1
+Stable tag: 7.7.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -228,6 +228,7 @@ If you’re looking for something endorsed and maintained by the developers who 
 * [Referrals](https://gamipress.com/add-ons/gamipress-referrals/)
 * [Transfers](https://gamipress.com/add-ons/gamipress-transfers/)
 * [Zapier](https://gamipress.com/add-ons/gamipress-zapier/)
+* [Limited-Time Rewards](https://gamipress.com/add-ons/limited-time-rewards/)
 
 [View all add-ons](https://gamipress.com/add-ons/)
 
@@ -375,6 +376,16 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.7.2 =
+
+* **New Features**
+* FluentCommunity: New event: Attempt any quiz.
+* FluentCommunity: New event: Attempt a specific quiz.
+* FluentCommunity: New event: Pass any quiz.
+* FluentCommunity: New event: Pass a specific quiz.
+* FluentCommunity: New event: Fail any quiz.
+* FluentCommunity: New event: Fail a specific quiz.
 
 = 7.7.1 =
 
