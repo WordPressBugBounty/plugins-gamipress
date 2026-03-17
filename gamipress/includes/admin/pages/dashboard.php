@@ -634,9 +634,11 @@ function gamipress_dashboard_add_ons_section() {
     $add_ons_to_display = array(
       'gamipress-leaderboards',
       'gamipress-notifications',
-      'gamipress-wc-points-gateway',
+      'gamipress-referrals',
       'gamipress-progress',
       'gamipress-restrict-content',
+      'gamipress-points-cards',
+      'gamipress-birthdays',
     );
 
     $add_ons = array();
@@ -687,6 +689,8 @@ function gamipress_dashboard_assets_section() {
         'trophy-icons',
         'sticker-icons',
         'flat-badges',
+        'learning-icons',
+        'points-types-icons',
     );
 
     $add_ons = array();
