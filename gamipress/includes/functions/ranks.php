@@ -121,9 +121,10 @@ function gamipress_get_user_rank_id( $user_id = null, $rank_type = '' ) {
         $meta = "_gamipress_{$rank_type}_rank";
     }
 
-    $current_rank_id = gamipress_get_user_meta( $user_id, $meta );
+    $current_rank_id = absint( gamipress_get_user_meta( $user_id, $meta ) );
+    $is_rank = $current_rank_id > 0 ? gamipress_is_rank( $current_rank_id ) : false;
 
-    if( ! $current_rank_id ) {
+    if( ! $is_rank ) {
 
         $posts  = GamiPress()->db->posts;
 
@@ -141,7 +142,7 @@ function gamipress_get_user_rank_id( $user_id = null, $rank_type = '' ) {
 
     }
 
-    return apply_filters( 'gamipress_get_user_rank_id', absint( $current_rank_id ), $user_id );
+    return apply_filters( 'gamipress_get_user_rank_id', $current_rank_id, $user_id );
 
 }
 
