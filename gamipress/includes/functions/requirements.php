@@ -357,3 +357,109 @@ function gamipress_can_user_earn_requirement( $requirement_id = 0, $user_id = 0 
     return apply_filters( 'gamipress_can_user_earn_requirement', $can_earn, $requirement_id, $user_id );
 
 }
+
+/**
+ * Get the reward requirements count
+ *
+ * @since 1.0.0
+ *
+ * @param integer   $post_id    The reward ID to check (achievement, rank or points type)
+ * @param string    $post_type  The children post type (step, rank-requirement, points-award or points-deduct)
+ *
+ * @return integer
+ */
+function gamipress_get_reward_requirements_count( $post_id, $post_type = '' ) {
+
+    global $wpdb;
+
+    $post_id = absint( $post_id );
+
+    // Bail if post ID not valid
+    if( $post_id === 0 ) return 0;
+
+    // Bail if post type is not a valid requirement type
+    if( ! in_array( $post_type, gamipress_get_requirement_types_slugs() ) ) return 0;
+
+    $cache = gamipress_get_cache( 'reward_requirement_count', array(), false );
+
+    // If result already cached, return it
+    if( isset( $cache[$post_id] ) && isset( $cache[$post_id][$post_type] ) ) {
+        return absint( $cache[$post_id][$post_type] );
+    }
+
+    $posts_table = GamiPress()->db->posts;
+
+    $count = absint( $wpdb->get_var(
+        "SELECT COUNT(*) 
+                FROM {$posts_table} 
+                WHERE 1=1
+                AND post_parent = '{$post_id}'
+                AND post_type = '{$post_type}'
+                AND post_status = 'publish'"
+    ) );
+
+    // Cache function result
+    if( ! isset( $cache[$post_id] ) ){
+        $cache[$post_id] = array();
+    }
+
+    $cache[$post_id][$post_type] = $count;
+
+    gamipress_set_cache( 'reward_requirement_count', $cache );
+
+    // Return requirements count
+    return $count;
+
+}
+
+/**
+ * Get the achievement steps count
+ *
+ * @since 1.0.0
+ *
+ * @param integer $achievement_id
+ *
+ * @return integer
+ */
+function gamipress_get_achievement_steps_count( $achievement_id ) {
+    return gamipress_get_reward_requirements_count( $achievement_id, 'step' );
+}
+
+/**
+ * Get the rank requirements count
+ *
+ * @since 1.0.0
+ *
+ * @param integer $rank_id
+ *
+ * @return integer
+ */
+function gamipress_get_rank_requirements_count( $rank_id ) {
+    return gamipress_get_reward_requirements_count( $rank_id, 'rank-requirement' );
+}
+
+/**
+ * Get the points awards count
+ *
+ * @since 1.0.0
+ *
+ * @param integer $points_type_id
+ *
+ * @return integer
+ */
+function gamipress_get_points_awards_count( $points_type_id ) {
+    return gamipress_get_reward_requirements_count( $points_type_id, 'points-award' );
+}
+
+/**
+ * Get the points deducts count
+ *
+ * @since 1.0.0
+ *
+ * @param integer $points_type_id
+ *
+ * @return integer
+ */
+function gamipress_get_points_deducts_count( $points_type_id ) {
+    return gamipress_get_reward_requirements_count( $points_type_id, 'points-deduct' );
+}

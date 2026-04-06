@@ -82,6 +82,14 @@ class WP_REST_GamiPress_Posts_Controller extends WP_REST_Controller {
             unset($args['filter']);
         }
 
+        if( $args['post_type'] === null ) {
+            $args['post_type'] = array_merge(
+                gamipress_get_points_types_slugs(),
+                gamipress_get_achievement_types_slugs(),
+                gamipress_get_rank_types_slugs(),
+            );
+        }
+
         // Ensure array of post_types
         if ( ! is_array( $args['post_type'] ) ) {
             $args['post_type'] = explode( ',', $args['post_type'] );
@@ -201,6 +209,7 @@ class WP_REST_GamiPress_Posts_Controller extends WP_REST_Controller {
 
         $valid_vars = array_flip($this->get_allowed_query_vars($request['type']));
         $query_args = array();
+
         foreach ($valid_vars as $var => $index) {
             if (isset($prepared_args[$var])) {
                 /**
@@ -217,7 +226,7 @@ class WP_REST_GamiPress_Posts_Controller extends WP_REST_Controller {
         }
 
         // Only allow sticky psts if 'post' is one of the requested post types.
-        if (in_array('post', $query_args['post_type']) || !isset($query_args['ignore_sticky_posts'])) {
+        if ( in_array('post', $query_args['post_type'] ) || !isset( $query_args['ignore_sticky_posts'] ) ) {
             $query_args['ignore_sticky_posts'] = true;
         }
 
