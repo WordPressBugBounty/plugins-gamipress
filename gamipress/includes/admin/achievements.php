@@ -140,14 +140,16 @@ function gamipress_achievement_posts_custom_columns( $column_name, $post_id ) {
 
             break;
         case 'maximum_earnings':
+            $unlimited = __( 'Unlimited', 'gamipress' );
+            $unlimited_symbol = '<span title="' . esc_attr( $unlimited ) . '">&infin;</span>';
             $maximum_earnings = absint( gamipress_get_post_meta( $post_id, $prefix . 'maximum_earnings' ) );
-            $label = '<strong>' . ( $maximum_earnings === 0 ? __( 'Unlimited', 'gamipress' ) : $maximum_earnings ) . '</strong>';
+            $label = '<strong>' . ( $maximum_earnings === 0 ? $unlimited_symbol : $maximum_earnings ) . '</strong>';
 
             echo sprintf( __( '%s time(s) per user', 'gamipress' ), $label );
             echo "<br>";
 
             $global_maximum_earnings = absint( gamipress_get_post_meta( $post_id, $prefix . 'global_maximum_earnings' ) );
-            $label = '<strong>' . ( $global_maximum_earnings === 0 ? __( 'Unlimited', 'gamipress' ) : $global_maximum_earnings ) . '</strong>';
+            $label = '<strong>' . ( $global_maximum_earnings === 0 ? $unlimited_symbol : $global_maximum_earnings ) . '</strong>';
 
             echo sprintf( __( '%s time(s) for all users', 'gamipress' ), $label );
             break;

@@ -61,7 +61,7 @@ function gamipress_points_type_meta_boxes() {
         'points-type',
         array(
             $prefix . 'label_position' => array(
-                'name' => __( 'Label position', 'gamipress' ),
+                'name' => __( 'Label Position', 'gamipress' ),
                 'tooltip'   => __( 'Location of the points type label.', 'gamipress' ),
                 'label_cb' => 'cmb_tooltip_label_cb',
                 'type' => 'select',
@@ -69,11 +69,20 @@ function gamipress_points_type_meta_boxes() {
                 'default' => 'after'
             ),
             $prefix . 'thousands_separator' => array(
-                'name' => __( 'Thousands separator', 'gamipress' ),
+                'name' => __( 'Thousands Separator', 'gamipress' ),
                 'tooltip'   => __( 'The symbol (usually , or .) to separate thousands.', 'gamipress' ),
                 'label_cb' => 'cmb_tooltip_label_cb',
                 'type' => 'text_small',
                 'default' => ''
+            ),
+            $prefix . 'html_display' => array(
+                'name' => __( 'HTML Display', 'gamipress' ),
+                'tooltip'   => __( 'Set how this points type should get displayed when HTML is allowed.', 'gamipress' ),
+                'label_cb' => 'cmb_tooltip_label_cb',
+                'type' => 'radio',
+                'classes' => 'gamipress-switch',
+                'options_cb' => 'gamipress_options_cb_points_html_display',
+                'default' => 'label_image_after'
             ),
         ),
         array( 'context'  => 'side', )
@@ -81,3 +90,38 @@ function gamipress_points_type_meta_boxes() {
 
 }
 add_action( 'gamipress_init_points-type_meta_boxes', 'gamipress_points_type_meta_boxes' );
+
+// Options callback to return the points label position options using the current points type label
+function gamipress_options_cb_points_label_position( $field ) {
+
+    $plural = gamipress_get_points_type_plural( $field->object_id, true );
+
+    return array(
+        'after' => sprintf( __( 'After (10 %s)', 'gamipress' ), $plural ),
+        'before' => sprintf( __( 'Before (%s 10)', 'gamipress' ), $plural ),
+    );
+
+}
+
+// Options callback for the points html display option
+function gamipress_options_cb_points_html_display( $field ) {
+
+    $plural = gamipress_get_points_type_plural( $field->object_id, true );
+    $image = gamipress_get_points_type_thumbnail( $field->object_id, 'gamipress-points', 'gamipress-points-thumbnail gamipress-points-thumbnail-inline' );
+
+    if( ! $image ) {
+        $image = '<img src="' . GAMIPRESS_URL . 'assets/badges/points/gamipress-star.png' . '" class="gamipress-points-thumbnail gamipress-points-thumbnail-inline" />';
+    }
+
+    $image_label = $image . ' ' . $plural;
+
+    return array(
+        'label_image_after' => sprintf( __( '10 %s', 'gamipress' ), $image_label ),
+        'image_after' => sprintf( __( '10 %s', 'gamipress' ), $image ),
+        'label_after' => sprintf( __( '10 %s', 'gamipress' ), $plural ),
+        'label_image_before' => sprintf( __( '%s 10', 'gamipress' ), $image_label ),
+        'image_before' => sprintf( __( '%s 10', 'gamipress' ), $image ),
+        'label_before' => sprintf( __( '%s 10', 'gamipress' ), $plural ),
+    );
+
+}

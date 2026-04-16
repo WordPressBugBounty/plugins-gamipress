@@ -442,18 +442,6 @@ function gamipress_options_cb_log_types( $field ) {
 
 }
 
-// Options callback to return the points label position options using the current points type label
-function gamipress_options_cb_points_label_position( $field ) {
-
-	$plural = gamipress_get_points_type_plural( $field->object_id, true );
-
-	return array(
-		'after' => sprintf( __( 'After (10 %s)', 'gamipress' ), $plural ),
-		'before' => sprintf( __( 'Before (%s 10)', 'gamipress' ), $plural ),
-	);
-
-}
-
 // Common callback for options_cb functions that support custom args
 function gamipress_options_cb_init_options( $field ) {
 

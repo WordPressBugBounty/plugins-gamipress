@@ -317,6 +317,14 @@
 	display: none;
 }
 
+/* Inline points image */
+img.gamipress-points-thumbnail-inline {
+	height: 1.1em;
+	width: auto;
+	vertical-align: middle !important;
+	margin-top: -0.3em;
+}
+
 /* -------------------------------------------
 	Requirements UI
    ------------------------------------------- */

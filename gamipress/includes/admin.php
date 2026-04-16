@@ -574,6 +574,12 @@ function gamipress_posts_columns( $posts_columns, $post_type ) {
     $chunks[0]['plural_name']   = __( 'Plural Name', 'gamipress' );
     $chunks[0]['post_name']     = __( 'Slug', 'gamipress' );
 
+    if( $post_type === 'achievement-type' ) {
+        $chunks[0]['posts_count']     = __( 'Achievements', 'gamipress' );
+    } else if( $post_type === 'rank-type' ) {
+        $chunks[0]['posts_count']     = __( 'Ranks', 'gamipress' );
+    }
+
     return call_user_func_array( 'array_merge', $chunks );
 }
 add_filter( 'manage_posts_columns', 'gamipress_posts_columns', 10, 2 );
@@ -588,6 +594,8 @@ add_filter( 'manage_posts_columns', 'gamipress_posts_columns', 10, 2 );
  * @param $post_id
  */
 function gamipress_posts_custom_columns( $column_name, $post_id ) {
+
+    global $wpdb;
 
     if( ! in_array( gamipress_get_post_type( $post_id ), array( 'points-type', 'achievement-type', 'rank-type' ) ) ) {
         return;
@@ -614,7 +622,16 @@ function gamipress_posts_custom_columns( $column_name, $post_id ) {
             echo esc_html( gamipress_get_post_meta( $post_id, '_gamipress_plural_name' ) );
             break;
         case 'post_name':
-            echo esc_html( get_post_field( 'post_name', $post_id ) );
+            echo esc_html( gamipress_get_post_field( 'post_name', $post_id ) );
+            break;
+        case 'posts_count':
+            $posts = GamiPress()->db->posts;
+            $post_type = gamipress_get_post_field( 'post_name', $post_id );
+
+            $count = absint( $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$posts} WHERE post_type = %s", $post_type ) ) );
+            $url = admin_url( 'edit.php?post_type=' . $post_type );
+
+            echo '<a href="' . esc_attr( $url ) . '">' . esc_html( $count ) . '</a>';
             break;
     }
 }

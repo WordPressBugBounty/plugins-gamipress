@@ -1186,15 +1186,15 @@ function gamipress_build_requirement_title( $requirement_id, $requirement = arra
     switch ( $trigger_type ) {
         // Points triggers
         case 'earn-points':
-            $title = sprintf( __( 'Earn %s', 'gamipress' ), gamipress_format_points( $points_required, $points_type_required ) );
+            $title = sprintf( __( 'Earn %s', 'gamipress' ), gamipress_format_points( $points_required, $points_type_required, false ) );
             break;
         case 'points-balance':
             $points_conditions = gamipress_number_condition_options();
 
-            $title = sprintf( __( 'Reach a balance %s %s', 'gamipress' ), $points_conditions[$points_condition], gamipress_format_points( $points_required, $points_type_required ) );
+            $title = sprintf( __( 'Reach a balance %s %s', 'gamipress' ), $points_conditions[$points_condition], gamipress_format_points( $points_required, $points_type_required, false ) );
             break;
         case 'gamipress_expend_points':
-            $title = sprintf( __( 'Expend %s', 'gamipress' ), gamipress_format_points( $points_required, $points_type_required ) );
+            $title = sprintf( __( 'Expend %s', 'gamipress' ), gamipress_format_points( $points_required, $points_type_required, false ) );
             break;
         // Rank triggers
         case 'earn-rank':
@@ -1305,9 +1305,9 @@ function gamipress_build_requirement_title( $requirement_id, $requirement = arra
             $points_title = '';
 
             if( $requirement_type === 'points-award' ) {
-                $points_title = sprintf( __( '%s for', 'gamipress' ), gamipress_format_points( $points, $points_type ) ); // 1 Points for
+                $points_title = sprintf( __( '%s for', 'gamipress' ), gamipress_format_points( $points, $points_type, false ) ); // 1 Points for
             } else if( $requirement_type === 'points-deduct' ) {
-                $points_title = sprintf( __( '-%s for', 'gamipress' ), gamipress_format_points( $points, $points_type ) ); // -1 Points for
+                $points_title = sprintf( __( '-%s for', 'gamipress' ), gamipress_format_points( $points, $points_type, false ) ); // -1 Points for
             }
 
             // Prepend the points title to the title

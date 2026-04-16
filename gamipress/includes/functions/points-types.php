@@ -288,6 +288,39 @@ function gamipress_get_points_type_thousands_separator( $points_type ) {
 
 }
 
+/**
+ * Get the desired points type HTML display
+ *
+ * @since  7.8.4
+ *
+ * @param string|int|WP_Post    $points_type
+ *
+ * @return string                              The points type plural name if is registered, if not return false
+ */
+function gamipress_get_points_type_html_display( $points_type ) {
+
+    $html_display = 'label_image_after';
+
+    $points_type_id = gamipress_get_points_type_id( $points_type );
+
+    if( $points_type_id ) {
+
+        // Get the points type HTML display
+        $html_display = gamipress_get_post_meta( $points_type_id, '_gamipress_html_display' );
+    }
+
+    /**
+     * Points type HTML display (default label_image_after)
+     *
+     * @since  7.8.4
+     *
+     * @param string                $html_display   The points type HTML display
+     * @param string|int|WP_Post    $points_type    The points type given
+     */
+    return apply_filters( 'gamipress_get_points_type_html_display', $html_display, $points_type );
+
+}
+
 
 /**
  * Format an amount based on a points type to append the points type label
@@ -296,27 +329,74 @@ function gamipress_get_points_type_thousands_separator( $points_type ) {
  *
  * @param int                   $amount         The amount to be formatted
  * @param string|int|WP_Post    $points_type    The points type
+ * @param bool                  $html           To meet if HTML is allowed and format with the HTML format
  *
  * @return string                               The amount of points formatted using the points type plural or singular
  */
-function gamipress_format_points( $amount, $points_type ) {
+function gamipress_format_points( $amount, $points_type, $html = true ) {
 
     $amount = floatval( $amount );
 
     // Get the singular or plural label based on points amount
     $label = gamipress_get_points_amount_label( $amount, $points_type, true );
-
     $formatted_amount = gamipress_format_amount( $amount, $points_type );
 
-    // Apply points type settings of label position (after or before)
-    $label_position = gamipress_get_points_type_label_position( $points_type );
+    $label_position = 'after';
+    $html_display = 'label_image_after';
 
-    if( $label_position === 'before' ) {
-        $formatted_amount = $label . ' ' . $formatted_amount;
+    if( $html ) {
+        // Apply points type settings for HTML
+        $html_display = gamipress_get_points_type_html_display( $points_type );
+        $image = '';
+
+        // Check if format uses the points type image
+        if( strpos( $html_display, 'image' ) !== false ) {
+            $image = gamipress_get_points_type_thumbnail( $points_type, 'gamipress-points', 'gamipress-points-thumbnail gamipress-points-thumbnail-inline' );
+
+            if( $image === '' ) {
+                // If desired format wants to use an image but points type does not have one assigned, fallback to label only format
+                if( strpos( $html_display, 'before' ) !== false ) {
+                    $html_display = 'label_before';
+                } else {
+                    $html_display = 'label_after';
+                }
+            }
+
+        }
+
+        switch( $html_display ) {
+            case 'label_image_after':
+                $formatted_amount = $formatted_amount . ' ' . $image . ' ' . $label;
+                break;
+            case 'image_after':
+                $formatted_amount = $formatted_amount . ' ' . $image;
+                break;
+            case 'label_after':
+                $formatted_amount = $formatted_amount . ' ' . $label;
+                break;
+            case 'label_image_before':
+                $formatted_amount = $image . ' ' . $label . ' ' . $formatted_amount;
+                break;
+            case 'image_before':
+                $formatted_amount = $image . ' ' . $formatted_amount;
+                break;
+            case 'label_before':
+                $formatted_amount = $label . ' ' . $formatted_amount;
+                break;
+        }
     } else {
-        // Make default after the default label position
-        $formatted_amount .= ' ' . $label;
+        // Apply points type settings of label position (after or before)
+        $label_position = gamipress_get_points_type_label_position( $points_type );
+
+        if( $label_position === 'before' ) {
+            $formatted_amount = $label . ' ' . $formatted_amount;
+        } else {
+            // Make default after the default label position
+            $formatted_amount .= ' ' . $label;
+        }
     }
+
+
 
     /**
      * Format points filter
@@ -328,7 +408,7 @@ function gamipress_format_points( $amount, $points_type ) {
      * @param string|int|WP_Post    $points_type        The points type given
      * @param string                $label_position     The points type label position (after or before)
      */
-    return apply_filters( 'gamipress_format_points', $formatted_amount, $amount, $points_type, $label_position );
+    return apply_filters( 'gamipress_format_points', $formatted_amount, $amount, $points_type, $html, $label_position, $html_display );
 
 }
 

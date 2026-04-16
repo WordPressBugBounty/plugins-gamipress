@@ -578,8 +578,8 @@ if( ! class_exists( 'RGC_CMB2_Field_EDD_License' ) ) {
 
             // Transient data
             $key                    = substr( md5( $license_key ), 0, 10 );
-            $data_lifetime          = apply_filters( 'cmb2_edd_license_data_lifetime', 48 * 60 * 60 );              // Default is set to two days
-            $activation_lifetime    = apply_filters( 'cmb2_edd_license_activation_lifetime', 365 * 24 * 60 * 60 );  // Default is set to one year
+            $data_lifetime          = apply_filters( 'cmb2_edd_license_data_lifetime', 7 * 24 * 60 * 60 );          // Default is set to 7 days
+            $activation_lifetime    = apply_filters( 'cmb2_edd_license_activation_lifetime', 365 * 24 * 60 * 60 );  // Default is set to 1 year
 
             if ( $action == 'activate_license') {
 
