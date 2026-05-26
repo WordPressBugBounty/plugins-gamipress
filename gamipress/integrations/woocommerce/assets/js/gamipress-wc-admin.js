@@ -23,7 +23,11 @@
 
         if( post_id && post_id.length
             && ( trigger_type === 'gamipress_wc_product_variation_purchase'
-                || trigger_type === 'gamipress_wc_product_variation_refund' ) ) {
+                || trigger_type === 'gamipress_wc_product_variation_refund'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_purchase'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_renewal'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_cancelled'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_expired' ) ) {
 
             $('<span class="spinner is-active" style="float: none; margin: 0 2px 0 4px;"></span>').insertAfter( variation_input );
 
@@ -82,7 +86,11 @@
 
         if( post_id && post_id.length
             && ( trigger_type === 'gamipress_wc_product_variation_purchase'
-                || trigger_type === 'gamipress_wc_product_variation_refund' ) ) {
+                || trigger_type === 'gamipress_wc_product_variation_refund'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_purchase'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_renewal'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_cancelled'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_expired' ) ) {
             variation_input.show();
         } else {
             variation_input.hide();
@@ -138,7 +146,11 @@
 
         if( post_id && post_id.length
             && ( trigger_type === 'gamipress_wc_product_variation_purchase'
-                || trigger_type === 'gamipress_wc_product_variation_refund' ) ) {
+                || trigger_type === 'gamipress_wc_product_variation_refund'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_purchase'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_renewal'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_cancelled'
+                || trigger_type === 'gamipress_wc_specific_subscription_variation_expired' ) ) {
             variation_input.show();
         } else {
             variation_input.hide();
@@ -183,7 +195,11 @@
 
         // Add the variation field
         if( requirement_details.trigger_type === 'gamipress_wc_product_variation_purchase' 
-            || requirement_details.trigger_type === 'gamipress_wc_product_variation_refund' ) {
+            || requirement_details.trigger_type === 'gamipress_wc_product_variation_refund'
+            || requirement_details.trigger_type === 'gamipress_wc_specific_subscription_variation_purchase'
+            || requirement_details.trigger_type === 'gamipress_wc_specific_subscription_variation_renewal'
+            || requirement_details.trigger_type === 'gamipress_wc_specific_subscription_variation_cancelled'
+            || requirement_details.trigger_type === 'gamipress_wc_specific_subscription_variation_expired' ) {
             requirement_details.wc_variation_id = requirement.find( '.wc-variation select' ).val();
         }
 

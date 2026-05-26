@@ -37,7 +37,12 @@ function gamipress_wc_check_if_meets_requirements( $requirement_id, $trigger, $a
     }
 
     // If is product variation trigger, rules engine needs to check the variation ID
-    if( $trigger === 'gamipress_wc_product_variation_purchase' || $trigger === 'gamipress_wc_product_variation_refund' ) {
+    if( $trigger === 'gamipress_wc_product_variation_purchase'
+        || $trigger === 'gamipress_wc_product_variation_refund'
+        || $trigger === 'gamipress_wc_specific_subscription_variation_purchase'
+        || $trigger === 'gamipress_wc_specific_subscription_variation_renewal'
+        || $trigger === 'gamipress_wc_specific_subscription_variation_cancelled'
+        || $trigger === 'gamipress_wc_specific_subscription_variation_expired' ) {
 
         $variation_id = absint( $args[2] );
         $required_variation_id = absint( gamipress_get_post_meta( $requirement_id, '_gamipress_wc_variation_id', true ) );

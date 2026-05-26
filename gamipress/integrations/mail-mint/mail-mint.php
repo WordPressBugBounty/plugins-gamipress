@@ -1,28 +1,26 @@
 <?php
 /**
- * Plugin Name:           GamiPress - WooCommerce integration
- * Plugin URI:            https://wordpress.org/plugins/gamipress-woocommerce-integration/
- * Description:           Connect GamiPress with WooCommerce.
- * Version:               1.4.3
+ * Plugin Name:           GamiPress - Mail Mint integration
+ * Plugin URI:            https://wordpress.org/plugins/gamipress-mail-mint-integration/
+ * Description:           Connect GamiPress with Mail Mint.
+ * Version:               1.0.0
  * Author:                GamiPress
  * Author URI:            https://gamipress.com/
- * Text Domain:           gamipress-woocommerce-integration
+ * Text Domain:           gamipress-mail-mint-integration
  * Domain Path:           /languages/
  * Requires at least:     4.4
  * Tested up to:          7.0
- * WC requires at least:  3.0
- * WC tested up to:       7.4
  * License:               GNU AGPL v3.0 (http://www.gnu.org/licenses/agpl.txt)
  *
- * @package               GamiPress\WooCommerce
+ * @package               GamiPress\Mail Mint
  * @author                GamiPress
  * @copyright             Copyright (c) GamiPress
  */
 
-final class GamiPress_Integration_WooCommerce {
+final class GamiPress_Integration_Mail_Mint {
 
     /**
-     * @var         GamiPress_Integration_WooCommerce $instance The one true GamiPress_Integration_WooCommerce
+     * @var         GamiPress_Integration_Mail_Mint $instance The one true GamiPress_Integration_Mail_Mint
      * @since       1.0.0
      */
     private static $instance;
@@ -32,11 +30,11 @@ final class GamiPress_Integration_WooCommerce {
      *
      * @access      public
      * @since       1.0.0
-     * @return      GamiPress_Integration_WooCommerce self::$instance The one true GamiPress_Integration_WooCommerce
+     * @return      GamiPress_Integration_Mail_Mint self::$instance The one true GamiPress_Integration_Mail_Mint
      */
     public static function instance() {
         if( !self::$instance ) {
-            self::$instance = new GamiPress_Integration_WooCommerce();
+            self::$instance = new GamiPress_Integration_Mail_Mint();
             self::$instance->constants();
             self::$instance->includes();
             self::$instance->hooks();
@@ -55,13 +53,13 @@ final class GamiPress_Integration_WooCommerce {
      */
     private function constants() {
         // Plugin version
-        define( 'GAMIPRESS_WC_VER', '1.4.3' );
+        define( 'GAMIPRESS_MAIL_MINT_VER', '1.0.0' );
 
         // Plugin path
-        define( 'GAMIPRESS_WC_DIR', plugin_dir_path( __FILE__ ) );
+        define( 'GAMIPRESS_MAIL_MINT_DIR', plugin_dir_path( __FILE__ ) );
 
         // Plugin URL
-        define( 'GAMIPRESS_WC_URL', plugin_dir_url( __FILE__ ) );
+        define( 'GAMIPRESS_MAIL_MINT_URL', plugin_dir_url( __FILE__ ) );
     }
 
     /**
@@ -75,14 +73,10 @@ final class GamiPress_Integration_WooCommerce {
 
         if( $this->meets_requirements() ) {
 
-            require_once GAMIPRESS_WC_DIR . 'includes/admin.php';
-            require_once GAMIPRESS_WC_DIR . 'includes/ajax-functions.php';
-            require_once GAMIPRESS_WC_DIR . 'includes/functions.php';
-            require_once GAMIPRESS_WC_DIR . 'includes/listeners.php';
-            require_once GAMIPRESS_WC_DIR . 'includes/requirements.php';
-            require_once GAMIPRESS_WC_DIR . 'includes/rules-engine.php';
-            require_once GAMIPRESS_WC_DIR . 'includes/triggers.php';
-            require_once GAMIPRESS_WC_DIR . 'includes/scripts.php';
+            require_once GAMIPRESS_MAIL_MINT_DIR . 'includes/admin.php';
+            require_once GAMIPRESS_MAIL_MINT_DIR . 'includes/functions.php';
+            require_once GAMIPRESS_MAIL_MINT_DIR . 'includes/listeners.php';
+            require_once GAMIPRESS_MAIL_MINT_DIR . 'includes/triggers.php';
 
         }
     }
@@ -107,7 +101,7 @@ final class GamiPress_Integration_WooCommerce {
      *
      * @since  1.0.0
      */
-    function activate() {
+    public function activate() {
 
         if( $this->meets_requirements() ) {
 
@@ -120,7 +114,7 @@ final class GamiPress_Integration_WooCommerce {
      *
      * @since  1.0.0
      */
-    function deactivate() {
+    public function deactivate() {
 
     }
 
@@ -137,14 +131,18 @@ final class GamiPress_Integration_WooCommerce {
             return false;
 
         // Requirements on multisite install
-        if( is_multisite() && is_main_site() && function_exists('gamipress_is_network_wide_active') && gamipress_is_network_wide_active() ) {
+        if( is_multisite() &&  is_main_site() && function_exists('gamipress_is_network_wide_active') && gamipress_is_network_wide_active() ) {
+
             // On main site, need to check if integrated plugin is installed on any sub site to load all configuration files
-            if( gamipress_is_plugin_active_on_network( 'woocommerce/woocommerce.php' ) )
+            if( gamipress_is_plugin_active_on_network( 'mail-mint/mail-mint.php' ) ) {
                 return true;
+            }
+
         }
 
-        if ( ! class_exists( 'WooCommerce' ) )
+        if ( ! defined( 'MRM_VERSION' ) ) {
             return false;
+        }
 
         return true;
 
@@ -153,12 +151,12 @@ final class GamiPress_Integration_WooCommerce {
 }
 
 /**
- * The main function responsible for returning the one true GamiPress_Integration_WooCommerce instance to functions everywhere
+ * The main function responsible for returning the one true GamiPress_Integration_Mail_Mint instance to functions everywhere
  *
  * @since       1.0.0
- * @return      \GamiPress_Integration_WooCommerce The one true GamiPress_Integration_WooCommerce
+ * @return      \GamiPress_Integration_Mail_Mint The one true GamiPress_Integration_Mail_Mint
  */
-function GamiPress_WC() {
-    return GamiPress_Integration_WooCommerce::instance();
+function GamiPress_Integration_Mail_Mint() {
+    return GamiPress_Integration_Mail_Mint::instance();
 }
-add_action( 'gamipress_pre_init', 'GamiPress_WC' );
+add_action( 'gamipress_pre_init', 'GamiPress_Integration_Mail_Mint' );

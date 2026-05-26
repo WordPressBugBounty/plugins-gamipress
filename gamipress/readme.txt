@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 7.0
-Stable tag: 7.8.8
+Stable tag: 7.8.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -198,6 +198,9 @@ Gamify your CRM, Affiliate Program, Event Booking, Job Boards even your Support 
 * [QSM](https://gamipress.com/add-ons/qsm-integration/)
 * [GeoDirectory](https://gamipress.com/add-ons/geodirectory-integration/)
 * [WP Booking Calendar](https://gamipress.com/add-ons/wp-booking-calendar-integration/)
+* [AffiliatePress](https://gamipress.com/add-ons/affiliatepress-integration/)
+* [BookingPress](https://gamipress.com/add-ons/bookingpress-integration/)
+* [Mail Mint](https://gamipress.com/add-ons/mail-mint-integration/)
 
 [View all integrations](https://gamipress.com/integrations/)
 
@@ -379,6 +382,42 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.8.9 =
+
+* **New Features**
+* New integration: AffiliatePress.
+* AffiliatePress: New event: Become as affiliate.
+* AffiliatePress: New event: Earn a commission.
+* AffiliatePress: New event: Get a generated payment.
+* New integration: BookingPress.
+* BookingPress: New event: Register as a customer.
+* BookingPress: New event: Book an appointment for a service.
+* BookingPress: New event: Book an appointment for a specific service.
+* BookingPress: New event: Approve an appointment for a service.
+* BookingPress: New event: Approve an appointment for a specific service.
+* BookingPress: New event: Reject an appointment for a service.
+* BookingPress: New event: Reject an appointment for for a specific service.
+* BookingPress: New event: Cancel an appointment for a service.
+* BookingPress: New event: Cancel an appointment for a specific service.
+* BookingPress: New event: An appointment is set to pending for a service.
+* BookingPress: New event: An appointment is set to pending for a specific service.
+* New integration: Mail Mint.
+* Mail Mint: New event: A tag added.
+* Mail Mint: New event: Specific tag added.
+* Mail Mint: New event: Added to a list.
+* Mail Mint: New event: Added to a specific list.
+* Mail Mint: New event: A tag removed.
+* Mail Mint: New event: Specific tag removed.
+* Mail Mint: New event: Removed from a list.
+* Mail Mint: New event: Removed from specific list.
+* Mail Mint: New event: Submit a form.
+* Mail Mint: New event: Submit a specific form.
+* Mail Mint: New event: Register as a contact.
+* WooCommerce: New event: Purchase a specific subscription variation of a product.
+* WooCommerce: New event: Renew a specific subscription variation of a product.
+* WooCommerce: New event: Cancel a specific subscription variation of a product.
+* WooCommerce: New event: Specific subscription variation of a product expires.
 
 = 7.8.8 =
 

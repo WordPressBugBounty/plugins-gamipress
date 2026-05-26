@@ -30,7 +30,11 @@ function gamipress_wc_requirement_object( $requirement, $requirement_id ) {
 
     if( isset( $requirement['trigger_type'] )
         && ( $requirement['trigger_type'] === 'gamipress_wc_product_variation_purchase'
-            || $requirement['trigger_type'] === 'gamipress_wc_product_variation_refund' ) ) {
+            || $requirement['trigger_type'] === 'gamipress_wc_product_variation_refund'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_purchase'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_renewal'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_cancelled'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_expired' ) ) {
         // Product variation
         $requirement['wc_variation_id'] = gamipress_get_post_meta( $requirement_id, '_gamipress_wc_variation_id', true );
     }
@@ -177,7 +181,11 @@ function gamipress_wc_ajax_update_requirement( $requirement_id, $requirement ) {
 
     if( isset( $requirement['trigger_type'] )
         && ( $requirement['trigger_type'] === 'gamipress_wc_product_variation_purchase'
-            || $requirement['trigger_type'] === 'gamipress_wc_product_variation_refund' ) ) {
+            || $requirement['trigger_type'] === 'gamipress_wc_product_variation_refund'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_purchase'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_renewal'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_cancelled'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_expired' ) ) {
         // Save the variation field
         gamipress_update_post_meta( $requirement_id, '_gamipress_wc_variation_id', $requirement['wc_variation_id'] );
     }

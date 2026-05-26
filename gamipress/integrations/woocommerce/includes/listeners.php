@@ -580,6 +580,7 @@ function gamipress_wc_subscription_purchase_listener( $subscription ) {
 
         $product_id     = $item->get_product_id();
         $quantity       = $item->get_quantity();
+        $variation_id   = $item->get_variation_id();
 
         // Skip items not assigned to a product
         if( $product_id === 0 ) {
@@ -588,6 +589,13 @@ function gamipress_wc_subscription_purchase_listener( $subscription ) {
 
         // Trigger events same times as item quantity
         for ( $i = 0; $i < $quantity; $i++ ) {
+
+            if( $variation_id !== 0 ) {
+
+                // Trigger specific subscription product variation purchase
+                do_action( 'gamipress_wc_specific_subscription_variation_purchase', $product_id, $user_id, $variation_id, $order_id, $quantity );
+
+            }
 
             // Any product subscription purchase
             do_action( 'gamipress_wc_subscription_purchase', $product_id, $user_id, $subscription->get_id() );
@@ -629,6 +637,7 @@ function gamipress_wc_subscription_renewal_listener( $order_id ) {
 
         $product_id     = $item->get_product_id();
         $quantity       = $item->get_quantity();
+        $variation_id   = $item->get_variation_id();
 
         // Skip items not assigned to a product
         if( $product_id === 0 ) {
@@ -637,6 +646,13 @@ function gamipress_wc_subscription_renewal_listener( $order_id ) {
         
         // Trigger events same times as item quantity
         for ( $i = 0; $i < $quantity; $i++ ) {
+
+            if( $variation_id !== 0 ) {
+
+                // Trigger specific subscription product variation renewal
+                do_action( 'gamipress_wc_specific_subscription_variation_renewal', $product_id, $user_id, $variation_id, $order_id );
+
+            }
 
             // Any product subscription renewal
             do_action( 'gamipress_wc_subscription_renewal', $product_id, $user_id, $order_id );
@@ -687,6 +703,7 @@ function gamipress_wc_subscription_status_updated_listener( $subscription ) {
 
         $product_id     = $item->get_product_id();
         $quantity       = $item->get_quantity();
+        $variation_id   = $item->get_variation_id();
 
         // Skip items not assigned to a product
         if( $product_id === 0 ) {
@@ -695,6 +712,13 @@ function gamipress_wc_subscription_status_updated_listener( $subscription ) {
 
         // Trigger events same times as item quantity
         for ( $i = 0; $i < $quantity; $i++ ) {
+
+            if( $variation_id !== 0 ) {
+
+                // Trigger specific subscription product variation cancel/expire
+                do_action( "gamipress_wc_specific_subscription_variation_{$status}", $product_id, $user_id, $variation_id, $order_id );
+
+            }
 
             // Any product subscription cancelled or expired
             do_action( "gamipress_wc_subscription_{$status}", $product_id, $user_id, $subscription->get_id() );

@@ -55,14 +55,18 @@ function gamipress_wc_activity_triggers( $triggers ) {
 
     $triggers[__( 'WooCommerce Subscriptions', 'gamipress' )] = array(
         // Subscriptions
-        'gamipress_wc_subscription_purchase'                => __( 'Purchase a subscription product', 'gamipress' ),
-        'gamipress_wc_specific_subscription_purchase'       => __( 'Purchase a specific subscription product', 'gamipress' ),
-        'gamipress_wc_subscription_renewal'                 => __( 'Renew a subscription product', 'gamipress' ),
-        'gamipress_wc_specific_subscription_renewal'        => __( 'Renew a specific subscription product', 'gamipress' ),
-        'gamipress_wc_subscription_cancelled'               => __( 'Cancel a subscription product', 'gamipress' ),
-        'gamipress_wc_specific_subscription_cancelled'      => __( 'Cancel a specific subscription product', 'gamipress' ),
-        'gamipress_wc_subscription_expired'                 => __( 'Subscription product expires', 'gamipress' ),
-        'gamipress_wc_specific_subscription_expired'        => __( 'Specific subscription product expires', 'gamipress' ),
+        'gamipress_wc_subscription_purchase'                        => __( 'Purchase a subscription product', 'gamipress' ),
+        'gamipress_wc_specific_subscription_purchase'               => __( 'Purchase a specific subscription product', 'gamipress' ),
+        'gamipress_wc_specific_subscription_variation_purchase'     => __( 'Purchase a specific subscription variation of a product', 'gamipress' ),
+        'gamipress_wc_subscription_renewal'                         => __( 'Renew a subscription product', 'gamipress' ),
+        'gamipress_wc_specific_subscription_renewal'                => __( 'Renew a specific subscription product', 'gamipress' ),
+        'gamipress_wc_specific_subscription_variation_renewal'      => __( 'Renew a specific subscription variation of a product', 'gamipress' ),
+        'gamipress_wc_subscription_cancelled'                       => __( 'Cancel a subscription product', 'gamipress' ),
+        'gamipress_wc_specific_subscription_cancelled'              => __( 'Cancel a specific subscription product', 'gamipress' ),
+        'gamipress_wc_specific_subscription_variation_cancelled'    => __( 'Cancel a specific subscription variation of a product', 'gamipress' ),
+        'gamipress_wc_subscription_expired'                         => __( 'Subscription product expires', 'gamipress' ),
+        'gamipress_wc_specific_subscription_expired'                => __( 'Specific subscription product expires', 'gamipress' ),
+        'gamipress_wc_specific_subscription_variation_expired'      => __( 'Specific subscription variation of a product expires', 'gamipress' ),
     );
 
     $triggers[__( 'WooCommerce Memberships', 'gamipress' )] = array(
@@ -105,6 +109,10 @@ function gamipress_wc_specific_activity_triggers( $specific_activity_triggers ) 
     $specific_activity_triggers['gamipress_wc_specific_subscription_renewal'] = array( 'product' );
     $specific_activity_triggers['gamipress_wc_specific_subscription_cancelled'] = array( 'product' );
     $specific_activity_triggers['gamipress_wc_specific_subscription_expired'] = array( 'product' );
+    $specific_activity_triggers['gamipress_wc_specific_subscription_variation_purchase'] = array( 'product' );
+    $specific_activity_triggers['gamipress_wc_specific_subscription_variation_renewal'] = array( 'product' );
+    $specific_activity_triggers['gamipress_wc_specific_subscription_variation_cancelled'] = array( 'product' );
+    $specific_activity_triggers['gamipress_wc_specific_subscription_variation_expired'] = array( 'product' );
 
     // Memberships
     $specific_activity_triggers['gamipress_wc_specific_membership_added'] = array( 'wc_membership_plan' );
@@ -131,6 +139,10 @@ function gamipress_wc_activity_trigger_label( $title, $requirement_id, $requirem
         // Product variation
         case 'gamipress_wc_product_variation_purchase':
         case 'gamipress_wc_product_variation_refund':
+        case 'gamipress_wc_specific_subscription_variation_purchase':
+        case 'gamipress_wc_specific_subscription_variation_renewal':
+        case 'gamipress_wc_specific_subscription_variation_cancelled':
+        case 'gamipress_wc_specific_subscription_variation_expired':
             $variation_id = ( isset( $requirement['wc_variation_id'] ) ) ? absint( $requirement['wc_variation_id'] ) : 0;
 
             if( $variation_id !== 0 ) {
@@ -140,6 +152,18 @@ function gamipress_wc_activity_trigger_label( $title, $requirement_id, $requirem
 
                 if( $requirement['trigger_type'] === 'gamipress_wc_product_variation_refund' ) {
                     $pattern = __( 'Refund %s', 'gamipress' );
+                }
+
+                if( $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_renewal' ) {
+                    $pattern = __( 'Renewal %s', 'gamipress' );
+                }
+
+                if( $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_cancelled' ) {
+                    $pattern = __( 'Cancel %s', 'gamipress' );
+                }
+
+                if( $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_variation_expired' ) {
+                    $pattern = __( 'Expire %s', 'gamipress' );
                 }
 
                 // Return the custom title
@@ -234,6 +258,10 @@ function gamipress_wc_specific_activity_trigger_label( $specific_activity_trigge
     $specific_activity_trigger_labels['gamipress_wc_specific_subscription_renewal'] = __( 'Renew %s subscription', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_wc_specific_subscription_cancelled'] = __( 'Cancel %s subscription', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_wc_specific_subscription_expired'] = __( '%s subscription expires', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_wc_specific_subscription_variation_purchase'] = __( 'Purchase %s subscription variation', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_wc_specific_subscription_variation_renewal'] = __( 'Renew %s subscription variation', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_wc_specific_subscription_variation_cancelled'] = __( 'Cancel %s subscription variation', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_wc_specific_subscription_variation_expired'] = __( '%s subscription variation expires', 'gamipress' );
 
     // Memberships
     $specific_activity_trigger_labels['gamipress_wc_specific_membership_added'] = __( 'Get added to %s membership', 'gamipress' );
@@ -291,6 +319,10 @@ function gamipress_wc_trigger_get_user_id( $user_id, $trigger, $args ) {
         case 'gamipress_wc_specific_subscription_cancelled':
         case 'gamipress_wc_subscription_expired':
         case 'gamipress_wc_specific_subscription_expired':
+        case 'gamipress_wc_specific_subscription_variation_purchase':
+        case 'gamipress_wc_specific_subscription_variation_renewal':
+        case 'gamipress_wc_specific_subscription_variation_cancelled':
+        case 'gamipress_wc_specific_subscription_variation_expired':
         // Memberships
         case 'gamipress_wc_membership_added':
         case 'gamipress_wc_specific_membership_added':
@@ -345,6 +377,10 @@ function gamipress_wc_specific_trigger_get_id( $specific_id, $trigger, $args ) {
         case 'gamipress_wc_specific_subscription_cancelled':
         case 'gamipress_wc_specific_subscription_purchase':
         case 'gamipress_wc_specific_subscription_expired':
+        case 'gamipress_wc_specific_subscription_variation_purchase':
+        case 'gamipress_wc_specific_subscription_variation_renewal':
+        case 'gamipress_wc_specific_subscription_variation_cancelled':
+        case 'gamipress_wc_specific_subscription_variation_expired':
             $specific_id = $args[0];
             break;
     }
@@ -400,6 +436,10 @@ function gamipress_wc_log_event_trigger_meta_data( $log_meta, $user_id, $trigger
             break;
         case 'gamipress_wc_product_variation_purchase':
         case 'gamipress_wc_product_variation_refund':
+        case 'gamipress_wc_specific_subscription_variation_purchase':
+        case 'gamipress_wc_specific_subscription_variation_renewal':
+        case 'gamipress_wc_specific_subscription_variation_cancelled':
+        case 'gamipress_wc_specific_subscription_variation_expired':
             // Add the product, variation and order IDs
             $log_meta['product_id'] = $args[0];
             $log_meta['post_id'] = $args[0]; // Post ID added to make column visible on logs list
@@ -488,6 +528,10 @@ function gamipress_wc_get_user_trigger_count_log_meta( $log_meta, $user_id, $tri
         // Variation
         case 'gamipress_wc_product_variation_purchase':
         case 'gamipress_wc_product_variation_refund':
+        case 'gamipress_wc_specific_subscription_variation_purchase':
+        case 'gamipress_wc_specific_subscription_variation_renewal':
+        case 'gamipress_wc_specific_subscription_variation_cancelled':
+        case 'gamipress_wc_specific_subscription_variation_expired':
             if( isset( $args[0] ) && isset( $args[2] ) ) {
                 // Add the product and variation IDs
                 $log_meta['product_id'] = absint( $args[0] );
@@ -562,6 +606,10 @@ function gamipress_wc_log_extra_data_fields( $fields, $log_id, $type ) {
         // Product variation
         case 'gamipress_wc_product_variation_purchase':
         case 'gamipress_wc_product_variation_refund':
+        case 'gamipress_wc_specific_subscription_variation_purchase':
+        case 'gamipress_wc_specific_subscription_variation_renewal':
+        case 'gamipress_wc_specific_subscription_variation_cancelled':
+        case 'gamipress_wc_specific_subscription_variation_expired':
 
             // TODO: Important! call to wc_get_product() causes a value lost on all extra data fields
 
