@@ -43,7 +43,7 @@
 .wp-media-buttons-icon.dashicons-gamipress,
 .wp-media-buttons-icon.dashicons-gamipress:before {
 	color: #0098d7;
-	line-height: 18px !important;
+	/*line-height: 18px !important;*/
 }
 
 #dashboard-widgets #gamipress h2 {
@@ -511,7 +511,6 @@ li.requirement-row input, li.requirement-row select, li.requirement-row textarea
 	vertical-align: middle;
 	background-color: #f0f0f0;
 	border-color: #f0f0f0;
-	margin-bottom: 5px;
 }
 
 li.requirement-row input:hover, li.requirement-row select:hover, li.requirement-row textarea:hover,
@@ -535,18 +534,20 @@ li.requirement-row input[readonly]:active {
 	background-color: #222;
 }
 
-li.requirement-row .gamipress-select2 {
-	margin-bottom: 5px;
-}
-
 li.requirement-row .gamipress-select2 .select2-selection {
 	background-color: #f0f0f0 !important;
 	border: 1px solid #f0f0f0 !important;
 	box-shadow: none !important;
+	height: 40px;
 }
 
 li.requirement-row .gamipress-select2 .select2-selection--single .select2-selection__arrow {
 	background-color: #f0f0f0 !important;
+	height: 40px;
+}
+
+li.requirement-row .gamipress-select2 .select2-selection--single .select2-selection__rendered {
+	line-height: 40px;
 }
 
 li.requirement-row label {
@@ -567,14 +568,10 @@ li.requirement-row.requirement-disabled {
 
 .gamipress-add-requirement .dashicons,
 .gamipress-save-requirements .dashicons {
-	line-height: 32px;
+	line-height: 2 !important;
 	opacity: 0.8;
 	margin-right: 4px;
 	margin-left: -4px;
-}
-
-.gamipress-save-requirements .dashicons {
-	line-height: 28px;
 }
 
 /* Requirements UI Mobile */
@@ -1137,7 +1134,7 @@ body.wp-customizer > .gamipress-select2 {
 
 .gamipress-select2 .select2-selection--single .select2-selection__clear {
 	font-size: 18px;
-	line-height: 26px;
+	line-height: 36px;
 	margin-right: 5px;
 }
 
@@ -2134,6 +2131,9 @@ body.toplevel_page_gamipress {
 	text-decoration: none !important;
 	float: right;
 	margin-bottom: -7px;
+	min-height: 30px;
+	line-height: 2.30769231;
+	padding: 0 12px;
 }
 
 .gamipress-dashboard .postbox .hndle .dashicons {
@@ -2526,6 +2526,18 @@ body.toplevel_page_gamipress {
 	}
 }
 
+/* Fix WP 7.0 */
+@media only screen and (min-width: 1500px) and (max-width: 1800px) {
+	.gamipress-dashboard #dashboard-widgets .postbox-container {
+		width: 25% !important;
+	}
+
+	.gamipress-dashboard #dashboard-widgets #postbox-container-3,
+	.gamipress-dashboard #dashboard-widgets #postbox-container-4 {
+		float: left !important;
+	}
+}
+
 /* -------------------------------------------
     Add-ons
    ------------------------------------------- */
@@ -2574,6 +2586,8 @@ body.toplevel_page_gamipress {
 
 	background: transparent;
 	border: none;
+
+	overflow: initial;
 }
 
 .gamipress-plugin-card .plugin-card-top {

@@ -282,7 +282,7 @@ function gamipress_dashboard_points_types_box() {
         <br>
 
         <div class="center">
-            <a href="<?php echo admin_url( 'post-new.php?post_type=points-type' ); ?>" class="button button-primary button-large"><?php esc_html_e( 'Create your first points type', 'gamipress' ); ?></a>
+            <a href="<?php echo admin_url( 'post-new.php?post_type=points-type' ); ?>" class="button button-primary"><?php esc_html_e( 'Create your first points type', 'gamipress' ); ?></a>
         </div>
 
     <?php else : ?>
@@ -321,7 +321,7 @@ function gamipress_dashboard_achievement_types_box() {
         <br>
 
         <div class="center">
-            <a href="<?php echo admin_url( 'post-new.php?post_type=achievement-type' ); ?>" class="button button-primary button-large"><?php esc_html_e( 'Create your first achievement type', 'gamipress' ); ?></a>
+            <a href="<?php echo admin_url( 'post-new.php?post_type=achievement-type' ); ?>" class="button button-primary"><?php esc_html_e( 'Create your first achievement type', 'gamipress' ); ?></a>
         </div>
 
     <?php else : ?>
@@ -360,7 +360,7 @@ function gamipress_dashboard_rank_types_box() {
         <br>
 
         <div class="center">
-            <a href="<?php echo admin_url( 'post-new.php?post_type=rank-type' ); ?>" class="button button-primary button-large"><?php esc_html_e( 'Create your first rank type', 'gamipress' ); ?></a>
+            <a href="<?php echo admin_url( 'post-new.php?post_type=rank-type' ); ?>" class="button button-primary"><?php esc_html_e( 'Create your first rank type', 'gamipress' ); ?></a>
         </div>
 
     <?php else : ?>
