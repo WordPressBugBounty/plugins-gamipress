@@ -81,9 +81,6 @@ add_filter( 'gamipress_specific_activity_trigger_label', 'gamipress_suremembers_
  */
 function gamipress_suremembers_trigger_get_user_id( $user_id, $trigger, $args ) {
 
-    error_log('$args:');
-    error_log(print_r($args, true));
-    
     switch ( $trigger ) {
         case 'gamipress_suremembers_user_added_to_any_access_group':
         case 'gamipress_suremembers_user_added_to_specific_access_group':

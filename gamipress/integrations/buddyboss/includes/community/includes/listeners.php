@@ -158,9 +158,17 @@ add_action( 'messages_message_sent', 'gamipress_bp_send_message' );
 function gamipress_bp_publish_activity( $content, $user_id, $activity_id ) {
 
     $activity = new BP_Activity_Activity( $activity_id );
-    $media_types = array( 'document', 'video', 'media' );
+    
+    // Images
+    $media = bp_activity_get_meta( $activity_id, 'bp_media_ids', true );
+
+    // Videos
+    $videos = bp_activity_get_meta( $activity_id, 'bp_video_ids', true );
+
+    // Documents
+    $documents = bp_activity_get_meta( $activity_id, 'bp_document_ids', true );
         
-    if ( in_array( $activity->privacy, $media_types )) {
+    if ( !empty( $media ) || !empty( $videos ) || !empty( $documents ) ) {
         return;
     }
 
