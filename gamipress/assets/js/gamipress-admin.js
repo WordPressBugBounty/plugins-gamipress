@@ -676,25 +676,6 @@
 		});
 	});
 
-	// Hide review notice
-    $('body').on('click', '.gamipress-hide-review-notice', function(e) {
-
-        e.preventDefault();
-
-        $.ajax({
-			url: ajaxurl,
-			data: {
-				action: 'gamipress_hide_review_notice',
-				nonce: gamipress_admin.nonce,
-			},
-			success: function(response) {
-				// Hide the notice on success
-				$('.gamipress-review-notice').slideUp('fast');
-			}
-		});
-
-    });
-
 	// Target blank on featured menu links
 	$('#adminmenu .gamipress-admin-menu-badge, '
 		+ '#wp-admin-bar-gamipress .gamipress-admin-menu-badge').each( function() {

@@ -3084,10 +3084,17 @@ body.toplevel_page_gamipress {
 	border-color: #0098d7;
 }
 
-.gamipress-review-notice a {
-	color: #fff;
+.gamipress-review-notice a:not(.button) {
+	color: #fff !important;
 }
 
+.gamipress-review-notice a.button:not(.button-primary) {
+	background-color: #fff !important;
+}
+
+.gamipress-review-notice > p {
+	color: #fff !important;
+}
 .gamipress-review-notice p span {
 	opacity: 0.7;
 }

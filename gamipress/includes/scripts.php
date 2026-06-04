@@ -81,6 +81,7 @@ function gamipress_admin_register_scripts() {
     // Scripts
     wp_register_script( 'gamipress-admin-functions-js', GAMIPRESS_URL . 'assets/js/gamipress-admin-functions' . $suffix . '.js', array( 'jquery' ), GAMIPRESS_VER, true );
     wp_register_script( 'gamipress-admin-js', GAMIPRESS_URL . 'assets/js/gamipress-admin' . $suffix . '.js', array( 'jquery', 'gamipress-admin-functions-js', 'gamipress-select2-js' ), GAMIPRESS_VER, true );
+    wp_register_script( 'gamipress-admin-notices-js', GAMIPRESS_URL . 'assets/js/gamipress-admin-notices' . $suffix . '.js', array( 'jquery' ), GAMIPRESS_VER, false );
     wp_register_script( 'gamipress-admin-widgets-js', GAMIPRESS_URL . 'assets/js/gamipress-admin-widgets' . $suffix . '.js', array( 'jquery', 'gamipress-admin-functions-js', 'gamipress-select2-js' ), GAMIPRESS_VER, true );
     wp_register_script( 'gamipress-requirements-ui-js', GAMIPRESS_URL . 'assets/js/gamipress-requirements-ui' . $suffix . '.js', array( 'jquery', 'jquery-ui-sortable', 'gamipress-admin-functions-js', 'gamipress-select2-js' ), GAMIPRESS_VER, true );
     wp_register_script( 'gamipress-log-extra-data-ui-js', GAMIPRESS_URL . 'assets/js/gamipress-log-extra-data-ui' . $suffix . '.js', array( 'jquery' ), GAMIPRESS_VER, true );
@@ -110,8 +111,15 @@ function gamipress_admin_enqueue_scripts( $hook ) {
         'nonce' => gamipress_get_admin_nonce(),
     ) );
 
+    // Localize admin script
+    wp_localize_script( 'gamipress-admin-notices-js', 'gamipress_admin_notices', array(
+        'nonce' => gamipress_get_admin_nonce(),
+    ) );
+
     // Scripts
     wp_enqueue_script( 'gamipress-admin-js' );
+    wp_enqueue_script( 'gamipress-admin-notices-js' );
+
 
     // Enqueue admin functions
     gamipress_enqueue_admin_functions_script();
