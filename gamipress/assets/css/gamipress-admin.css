@@ -3197,14 +3197,14 @@ body.toplevel_page_gamipress {
 }
 
 .gamipress-badge-builder .gamipress-logo h1 {
-	padding: 6px 0;
+	padding: 10px 0;
 }
 
 .gamipress-badge-builder .gamipress-badge-builder-top {
 	background: #fff;
 	box-shadow: 0 1px 0 0 rgba(0, 0, 0, .133);
 	padding: 0px 12px;
-	min-height: 42px;
+	min-height: 52px;
 }
 
 .gamipress-badge-builder .gamipress-badge-builder-top .gamipress-logo {
@@ -3247,7 +3247,7 @@ body.toplevel_page_gamipress {
 .gamipress-badge-builder .gamipress-badge-builder-action-dropdown,
 .gamipress-badge-builder .gamipress-badge-builder-preview-action-dropdown {
 	position: absolute;
-	top: 16px;
+	top: 25px;
 	right: 0;
 	background: #fff;
 	border: 1px solid #d0d0d1;
@@ -3268,11 +3268,12 @@ body.toplevel_page_gamipress {
 .gamipress-badge-builder .gamipress-badge-builder-preview-action-dropdown li {
 	margin: 0;
 	padding: 0px 8px;
+	line-height: 2em;
 }
 
 .gamipress-badge-builder .gamipress-badge-builder-action-dropdown li:hover,
 .gamipress-badge-builder .gamipress-badge-builder-preview-action-dropdown li:hover {
-	background: #2271b1;
+	background: var( --wp-admin-theme-color, #2271b1 );
 	color: #fff;
 }
 
@@ -3305,7 +3306,7 @@ body.toplevel_page_gamipress {
 
 .gamipress-badge-builder .gamipress-badge-builder-toolbar .gamipress-badge-builder-toolbar-control {
 	display: inline-block;
-	padding: 4px 8px;
+	padding: 6px 8px;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -3415,7 +3416,7 @@ body.toplevel_page_gamipress {
 
 .cmb2-id-badge-palette .cmb-td .cmb2-list li input:checked + label,
 .cmb2-id-multiple-palette .cmb-td .cmb2-list li input:checked + label {
-	border-color: #2271b1;
+	border-color: var( --wp-admin-theme-color, #2271b1 );
 }
 
 .cmb2-id-badge-palette .cmb-td .cmb2-list li input:not(:checked) + label:hover,
@@ -3443,7 +3444,7 @@ body.toplevel_page_gamipress {
 	height: 95%;
 	left: -84%;
 	position: absolute;
-	top: 72px;
+	top: 86px;
 	background: #fff;
 	border-right: 1px solid #d0d0d1;
 	padding: 6px 16px;
@@ -3488,7 +3489,7 @@ body.toplevel_page_gamipress {
 	width: 19%;
 	height: 95%;
 	position: absolute;
-	top: 72px;
+	top: 86px;
 	right: -24%;
 	background: #fff;
 	border-left: 1px solid #d0d0d1;
@@ -3594,7 +3595,7 @@ body.toplevel_page_gamipress {
 }
 
 .gamipress-badge-builder .gamipress-badge-builder-icons .gamipress-badge-builder-icon.gamipress-badge-builder-icon-selected {
-	border-color: #2271b1;
+	border-color: var( --wp-admin-theme-color, #2271b1 );
 }
 
 .gamipress-badge-builder .gamipress-badge-builder-icons .gamipress-badge-builder-icon .gamipress-badge-builder-icon-svg {
