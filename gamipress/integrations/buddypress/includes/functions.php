@@ -35,6 +35,14 @@ function gamipress_bp_is_active( $component = '' ) {
  */
 function gamipress_bp_ajax_get_posts() {
 
+    // Security check, forces to die if not security passed
+    check_ajax_referer( 'gamipress_admin', 'nonce' );
+
+    // Check if user can manage GamiPress
+    if( ! current_user_can( gamipress_get_manager_capability() ) ) {
+        wp_send_json_error( __( 'You\'re not allowed to perform this action.', 'gamipress' ) );
+    }
+
     global $wpdb;
 
     if( isset( $_REQUEST['post_type'] ) && in_array( 'bp_groups', $_REQUEST['post_type'] ) ) {
@@ -67,7 +75,7 @@ function gamipress_bp_ajax_get_posts() {
         $results = array();
 
         // Pull back the search string
-        $search = isset( $_REQUEST['q'] ) ? $wpdb->esc_like( $_REQUEST['q'] ) : '';
+        $search = isset( $_REQUEST['q'] ) ? $wpdb->esc_like( sanitize_text_field( $_REQUEST['q'] ) ) : '';
         $page = isset( $_REQUEST['page'] ) ? absint( $_REQUEST['page'] ) : 1;
         $limit = 20;
         $offset = $limit * ( $page - 1 );
@@ -80,7 +88,7 @@ function gamipress_bp_ajax_get_posts() {
                 WHERE name LIKE %s 
                 ORDER BY field_order ASC
                 LIMIT {$offset}, {$limit}",
-                "%{$search}%"
+                "%%{$search}%%"
             ) );
 
             $count = absint( $wpdb->get_var( $wpdb->prepare(

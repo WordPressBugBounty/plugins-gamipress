@@ -16,11 +16,19 @@ if( !defined( 'ABSPATH' ) ) exit;
  */
 function gamipress_nf_ajax_get_posts() {
 
+    // Security check, forces to die if not security passed
+    check_ajax_referer( 'gamipress_admin', 'nonce' );
+
+    // Check if user can manage GamiPress
+    if( ! current_user_can( gamipress_get_manager_capability() ) ) {
+        wp_send_json_error( __( 'You\'re not allowed to perform this action.', 'gamipress' ) );
+    }
+
     if( isset( $_REQUEST['post_type'] ) && in_array( 'nf_form', $_REQUEST['post_type'] ) ) {
         global $wpdb;
 
         // Pull back the search string
-        $search = isset( $_REQUEST['q'] ) ? like_escape( $_REQUEST['q'] ) : '';
+        $search = isset( $_REQUEST['q'] ) ? $wpdb->esc_like( sanitize_text_field( $_REQUEST['q'] ) ) : '';
 
         $results = $wpdb->get_results( $wpdb->prepare(
             "

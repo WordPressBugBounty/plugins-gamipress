@@ -16,21 +16,33 @@ if( !defined( 'ABSPATH' ) ) exit;
  */
 function gamipress_wpep_ajax_get_posts() {
 
+    // Security check, forces to die if not security passed
+    check_ajax_referer( 'gamipress_admin', 'nonce' );
+
+    // Check if user can manage GamiPress
+    if( ! current_user_can( gamipress_get_manager_capability() ) ) {
+        wp_send_json_error( __( 'You\'re not allowed to perform this action.', 'gamipress' ) );
+    }
+    
     global $wpdb;
 
     if( isset( $_REQUEST['post_type'] ) && in_array( 'wpep_lessons', $_REQUEST['post_type'] ) ) {
 
         // Get the user input
-        $search = isset( $_REQUEST['q'] ) ? $wpdb->esc_like( $_REQUEST['q'] ) : '';
+        $search = isset( $_REQUEST['q'] ) ? esc_sql( $wpdb->esc_like( $_REQUEST['q'] ) ) : '';
         $table = $wpdb->prefix . ( defined( 'WPEP_DB_TABLE_COURSE_SECTION_LESSON' ) ? WPEP_DB_TABLE_COURSE_SECTION_LESSON : 'wpep_section_lesson' );
 
-        // Try to find the lessons
-        $lessons = $wpdb->get_results( $wpdb->prepare(
-            "SELECT *
-             FROM {$table}
-             " . ( ! empty( $search ) ? "WHERE ( title LIKE '%{$search}%' OR  title LIKE '{$search}%' )" : '' ) . "
-             ORDER BY `post_id` ASC, `order` ASC"
-        ) );
+        if ( ! empty( $search ) ){
+            $lessons = $wpdb->prepare(
+                "SELECT * FROM {$table} 
+                WHERE ( title LIKE %s OR title LIKE %s ) 
+                ORDER BY post_id ASC, order ASC",
+                "%%{$search}%%",
+                "{$search}%%"
+            );
+        } else {
+            $lessons = "SELECT * FROM {$table} ORDER BY post_id ASC, order ASC";
+        }
 
         // Build the results array
         $results = array();

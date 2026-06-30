@@ -15,12 +15,20 @@ if( !defined( 'ABSPATH' ) ) exit;
  */
 function gamipress_simplepress_ajax_get_posts() {
 
+    // Security check, forces to die if not security passed
+    check_ajax_referer( 'gamipress_admin', 'nonce' );
+
+    // Check if user can manage GamiPress
+    if( ! current_user_can( gamipress_get_manager_capability() ) ) {
+        wp_send_json_error( __( 'You\'re not allowed to perform this action.', 'gamipress' ) );
+    }
+
     global $wpdb;
 
     if( isset( $_REQUEST['post_type'] ) ) {
 
         // Get the user input
-        $search = isset( $_REQUEST['q'] ) ? $wpdb->esc_like( $_REQUEST['q'] ) : '';
+        $search = isset( $_REQUEST['q'] ) ? $wpdb->esc_like( sanitize_text_field( $_REQUEST['q'] ) ) : '';
 
         if( in_array( 'simplepress_forum', $_REQUEST['post_type'] ) ) {
             // Forums
@@ -28,10 +36,15 @@ function gamipress_simplepress_ajax_get_posts() {
             $table = SPFORUMS;
 
             // Try to find the forums
-            $forums = $wpdb->get_results( $wpdb->prepare(
-                "SELECT * FROM {$table}
-                " . ( ! empty( $search ) ? "WHERE ( forum_name LIKE '%{$search}%' OR  forum_name LIKE '{$search}%' )" : '' )
-            ) );
+            if ( ! empty( $search ) ) {
+                $forums = $wpdb->get_results( $wpdb->prepare(
+                    "SELECT * FROM {$table} WHERE ( forum_name LIKE %s OR forum_name LIKE %s )",
+                    "%%{$search}%%",
+                    "{$search}%%"
+                ) );
+            } else {
+                $forums = $wpdb->get_results( "SELECT * FROM {$table}" );
+            }
 
             // Build the results array
             $results = array();
@@ -55,10 +68,15 @@ function gamipress_simplepress_ajax_get_posts() {
             $table = SPTOPICS;
 
             // Try to find the topics
-            $topics = $wpdb->get_results( $wpdb->prepare(
-                "SELECT * FROM {$table}
-                 " . ( ! empty( $search ) ? "WHERE ( topic_name LIKE '%{$search}%' OR  topic_name LIKE '{$search}%' )" : '' )
-            ) );
+            if ( ! empty( $search ) ) {
+                $topics = $wpdb->get_results( $wpdb->prepare(
+                    "SELECT * FROM {$table} WHERE ( topic_name LIKE %s OR topic_name LIKE %s )",
+                    "%%{$search}%%",
+                    "{$search}%%"
+                ) );
+            } else {
+                $topics = $wpdb->get_results( "SELECT * FROM {$table}" );
+            }
 
             // Build the results array
             $results = array();
