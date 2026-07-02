@@ -110,6 +110,7 @@ function gamipress_vimeo_video_change( id, duration, state ) {
                 type: 'POST',
                 data: {
                     action: 'gamipress_vimeo_track_watch_video',
+                    nonce: gamipress.nonce,
                     video_id: id,
                     seconds: gamipress_vimeo_videos[id].seconds,
                     duration: gamipress_vimeo_videos[id].duration,

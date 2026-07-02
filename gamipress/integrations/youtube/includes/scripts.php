@@ -53,7 +53,8 @@ function gamipress_youtube_enqueue_scripts( $hook = null ) {
 
     // Scripts
     wp_localize_script( 'gamipress-youtube-js', 'gamipress_youtube', array(
-        'ajaxurl' => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),
+        'ajaxurl'       => esc_url( admin_url( 'admin-ajax.php', 'relative' ) ),
+        'nonce'         => gamipress_get_nonce(),
         'user_id'       => get_current_user_id(),
         'post_id'       => get_the_ID(),
         'debug_mode'    => gamipress_is_debug_mode(),

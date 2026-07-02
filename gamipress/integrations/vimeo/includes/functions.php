@@ -31,3 +31,25 @@ function gamipress_vimeo_get_video_id_from_url( $url ) {
     return $video_id;
 
 }
+
+/**
+ * Check the video ID format
+ *
+ * @since 1.0.0
+ *
+ * @param string $video_id
+ *
+ * @return string
+ */
+function gamipress_vimeo_check_video_id_format( $video_id ) {
+
+    $video_id = trim( $video_id );
+
+    // Check if video ID has 6 to 11 characters
+    if ( preg_match( '/^[0-9]{6,11}$/', $video_id ) ) {
+        return true;
+    }
+
+    return false;
+
+}

@@ -41,3 +41,29 @@ function gamipress_youtube_get_video_id_from_url( $url ) {
     return $video_id;
 
 }
+
+/**
+ * Check the video ID format
+ *
+ * @since 1.0.0
+ *
+ * @param string $video_id
+ *
+ * @return string
+ */
+function gamipress_youtube_check_video_id_format( $video_id ) {
+
+    if ( ! is_string( $video_id ) ) {
+        return false;
+    }
+
+    $video_id = trim( $video_id );
+
+    // Check if video ID has 11 characters
+    if ( preg_match( '/^[a-zA-Z0-9_-]{11}$/', $video_id ) ) {
+        return true;
+    }
+
+    return false;
+
+}

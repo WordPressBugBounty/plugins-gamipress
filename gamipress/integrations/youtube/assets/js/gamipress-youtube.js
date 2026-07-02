@@ -100,6 +100,7 @@ function gamipress_youtube_video_change( event ) {
                 type: 'POST',
                 data: {
                     action: 'gamipress_youtube_track_watch_video',
+                    nonce: gamipress.nonce,
                     video_id: id,
                     seconds: gamipress_youtube_videos[id].seconds,
                     duration: gamipress_youtube_videos[id].duration,

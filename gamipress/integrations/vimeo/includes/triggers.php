@@ -114,14 +114,14 @@ function gamipress_vimeo_log_extra_data_fields( $fields, $log_id, $type ) {
 
             $video_id = ct_get_object_meta( $log_id, $prefix . 'video_id', true );
 
-            $url = 'https://player.vimeo.com/video/' . $video_id;
+            $url = esc_url( 'https://player.vimeo.com/video/' . rawurlencode( $video_id ) );
 
             $fields[] = array(
                 'name' 	            => __( 'Video', 'gamipress' ),
                 'desc' 	            => __( 'Video watched by the user.', 'gamipress' ),
                 'id'   	            => $prefix . 'video_id',
                 'type' 	            => 'html',
-                'content'           => '<iframe id="vimeo-player" type="text/html" src="' . $url . '" width="640" height="360" frameborder="0"></iframe>'
+                'content'           => '<iframe id="vimeo-player" type="text/html" src="' . esc_attr( $url ) . '" width="640" height="360" frameborder="0"></iframe>'
             );
             break;
     }
