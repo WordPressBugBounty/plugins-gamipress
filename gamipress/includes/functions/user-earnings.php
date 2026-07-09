@@ -90,7 +90,7 @@ function gamipress_insert_user_earning( $user_id = 0, $data = array(), $meta = a
     $allow = apply_filters( 'gamipress_allow_insert_user_earning_to_user', true, $user_id, $data, $meta );
 	
 	if ( ! $allow ) {
-		return gamipress_get_user_points( $user_id, $points_type );
+		return 0;
 	}
 
     // Store user earning entry
