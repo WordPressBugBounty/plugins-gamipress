@@ -287,6 +287,11 @@
 	border-radius: 100% !important;
 }
 
+/* Compatibility fix between CMB2 & WP 7.0 */
+.cmb2-wrap input[type=radio]:checked:focus {
+	background: var(--wp-admin-theme-color);
+}
+
 @media only screen and (min-width: 850px) {
 
 	#postbox-container-1 #side-sortables .gamipress-box-form .cmb-th label {
@@ -1217,7 +1222,11 @@ body.wp-customizer > .gamipress-select2 {
 	float: right;
 }
 
-.select2-container--default .select2-results__option--highlighted[aria-selected] .result-description {
+.gamipress-select2 .select2-results__option--highlighted[aria-selected] {
+	background-color: var(--wp-admin-theme-color, #5897fb) !important;
+}
+
+.gamipress-select2 .select2-results__option--highlighted[aria-selected] .result-description {
 	color: rgba(255,255,255,0.7);
 }
 
@@ -1345,7 +1354,7 @@ body.wp-customizer > .gamipress-select2 {
 	transition: all 0.2s ease;
 }
 .gamipress-switch input:checked + label:before {
-	background-color: #11a0d2;
+	background-color: var(--wp-admin-theme-color, #11a0d2);
 	border-color: transparent;
 }
 
@@ -1480,7 +1489,7 @@ label[for="_gamipress_sequential"] {
 }
 
 .gamipress-image-options .cmb2-radio-list input:checked + label img {
-	border-color: #1e8cbe;
+	border-color: var(--wp-admin-theme-color, #1e8cbe);
 }
 
 .gamipress-widget-form .gamipress-image-options .cmb2-radio-list li {
@@ -1792,7 +1801,6 @@ label[for="_gamipress_sequential"] {
 	display: inline-block;
 	width: 18px;
 	height: 18px;
-	vertical-align: text-top;
 	margin: 0 2px 0 0;
 }
 
@@ -1861,15 +1869,6 @@ label[for="_gamipress_sequential"] {
 }
 
 /* Fixed save buttons on GamiPress Settings */
-.gamipress_settings input[name="submit-cmb"],
-.gamipress_settings input[name="reset-cmb"] {
-    float: right;
-}
-
-.gamipress_settings input[name="reset-cmb"] {
-    margin-right: 0 !important;
-}
-
 .gamipress_settings input[name="reset-cmb"] {
 	background: #e15151;
 	border: #e15151;
@@ -1907,8 +1906,8 @@ label[for="_gamipress_sequential"] {
         padding: 10px 0;
     }
 
-    .gamipress_settings .gamipress-sticky-bar input[name="reset-cmb"] {
-        margin-right: 19px !important;
+    .gamipress_settings .gamipress-sticky-bar input[name="submit-cmb"] {
+        margin-left: 20px !important;
     }
 
 }
@@ -2448,27 +2447,17 @@ body.toplevel_page_gamipress {
 	white-space: nowrap;
 }
 
-.gamipress-dashboard .dashicons-youtube {
-	background: #e90000 !important;
-}
+.gamipress-dashboard .dashicons-youtube { background: #e90000 !important; }
 
 .gamipress-dashboard .dashicons-facebook-alt,
-.gamipress-dashboard .dashicons-groups {
-	background: #4766a9 !important;
-}
+.gamipress-dashboard .dashicons-groups { background: #4766a9 !important; }
 
-.gamipress-dashboard .dashicons-twitter {
-	background: #139ae7 !important;
-}
+.gamipress-dashboard .dashicons-twitter { background: #139ae7 !important; }
 
 .gamipress-dashboard .dashicons-linkedin,
-.gamipress-dashboard #gamipress-dashboard-social .dashicons-wordpress {
-	background: #0074b3 !important;
-}
+.gamipress-dashboard #gamipress-dashboard-social .dashicons-wordpress { background: #0074b3 !important; }
 
-.gamipress-dashboard .dashicons-email-alt {
-	background: #444 !important;
-}
+.gamipress-dashboard .dashicons-email-alt { background: #444 !important; }
 
 .gamipress-dashboard-blocks-list li span {
 	float: right;

@@ -299,6 +299,15 @@ function gamipress_activity_recount_published_content( $response, $loop, $limit,
             'post'      => $post,
         ) );
 
+         // Trigger post type publishing actions
+        gamipress_trigger_event( array(
+            'event'     => 'gamipress_publish_post_type',
+            'post_id'   => $post->ID,
+            'user_id'   => $post->post_author,
+            'post_type' => $post->post_type,
+            'post'      => $post,
+        ) );
+
         $response['log'] .= sprintf( __( '[Publish a post] Post: %s User: %s Post Type: %s', 'gamipress' ),
             '<a href="' . get_edit_post_link( $post->ID ) . '" target="_blank">' . $post->ID . '</a>',
             '<a href="' . get_edit_user_link( $post->post_author ) . '" target="_blank">' . $post->post_author . '</a>',
