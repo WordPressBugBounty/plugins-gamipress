@@ -14,14 +14,21 @@ if( !defined( 'ABSPATH' ) ) exit;
  * @since 1.0.0
  */
 function gamipress_wpforo_ajax_get_posts() {
+
     // Security check, forces to die if not security passed
     check_ajax_referer( 'gamipress_admin', 'nonce' );
+
+    // Check if user can manage GamiPress
+    if( ! current_user_can( gamipress_get_manager_capability() ) ) {
+        wp_send_json_error( __( 'You\'re not allowed to perform this action.', 'gamipress' ) );
+    }
+    
     global $wpdb;
 
     if( isset( $_REQUEST['post_type'] ) ) {
         
         // Get the user input
-        $search = isset( $_REQUEST['q'] ) ? $wpdb->esc_like( $_REQUEST['q'] ) : '';
+        $search = isset( $_REQUEST['q'] ) ? $wpdb->esc_like( sanitize_text_field( $_REQUEST['q'] ) ) : '';
 
         if( in_array( 'wpforo_forum', $_REQUEST['post_type'] ) ) {
             // Forums
@@ -35,10 +42,15 @@ function gamipress_wpforo_ajax_get_posts() {
             ) );
 
             // Try to find the forums
-            $forums = $wpdb->get_results( $wpdb->prepare(
-                "SELECT * FROM {$table}
-                " . ( ! empty( $search ) ? "WHERE ( title LIKE '%{$search}%' OR  title LIKE '{$search}%' )" : '' )
-            ) );
+            if ( ! empty( $search ) ) {
+                $forums = $wpdb->get_results( $wpdb->prepare(
+                    "SELECT * FROM {$table} WHERE ( title LIKE %s OR title LIKE %s )",
+                    "%%{$search}%%",
+                    "{$search}%%"
+                ) );
+            } else {
+                $forums = $wpdb->get_results( "SELECT * FROM {$table}" );
+            }
 
             // Build the results array
             $results = array();
@@ -57,11 +69,17 @@ function gamipress_wpforo_ajax_get_posts() {
                 foreach ( $results_boards as $board ){
                     if ( $board->boardid !== '0' ){
                         $table = $wpdb->prefix . 'wpforo_' . $board->boardid . '_forums';
-                        // Get the forums
-                        $results_forums = $wpdb->get_results( $wpdb->prepare(
-                            "SELECT * FROM {$table}
-                            " . ( ! empty( $search ) ? "WHERE ( title LIKE '%{$search}%' OR  title LIKE '{$search}%' )" : '' )
-                        ) );
+                        
+                        // Try to find the forums
+                        if ( ! empty( $search ) ) {
+                            $results_forums = $wpdb->get_results( $wpdb->prepare(
+                                "SELECT * FROM {$table} WHERE ( title LIKE %s OR title LIKE %s )",
+                                "%%{$search}%%",
+                                "{$search}%%"
+                            ) );
+                        } else {
+                            $results_forums = $wpdb->get_results( "SELECT * FROM {$table}" );
+                        }
                         
                         foreach ($results_forums as $forum ) {
                             $forum_id = $board->boardid . '-' . $forum->forumid;
@@ -88,11 +106,17 @@ function gamipress_wpforo_ajax_get_posts() {
                 "SELECT boardid FROM {$boards}"
             ) );
 
-            // Try to find the topics
-            $topics = $wpdb->get_results( $wpdb->prepare(
-                "SELECT * FROM {$table}
-                 " . ( ! empty( $search ) ? "WHERE ( title LIKE '%{$search}%' OR  title LIKE '{$search}%' )" : '' )
-            ) );
+            // Try to find the forums
+            if ( ! empty( $search ) ) {
+                $topics = $wpdb->get_results( $wpdb->prepare(
+                    "SELECT * FROM {$table} WHERE ( title LIKE %s OR title LIKE %s )",
+                    "%%{$search}%%",
+                    "{$search}%%"
+                ) );
+            } else {
+                $topics = $wpdb->get_results( "SELECT * FROM {$table}" );
+            }
+            
 
             // Build the results array
             $results = array();
@@ -112,11 +136,17 @@ function gamipress_wpforo_ajax_get_posts() {
                 foreach ( $results_boards as $board ){
                     if ( $board->boardid !== '0' ){
                         $table = $wpdb->prefix . 'wpforo_' . $board->boardid . '_topics';
-                        // Get the topics
-                        $results_topics = $wpdb->get_results( $wpdb->prepare(
-                            "SELECT * FROM {$table}
-                             " . ( ! empty( $search ) ? "WHERE ( title LIKE '%{$search}%' OR  title LIKE '{$search}%' )" : '' )
-                        ) );
+                        
+                        // Try to find the topics
+                        if ( ! empty( $search ) ) {
+                            $results_topics = $wpdb->get_results( $wpdb->prepare(
+                                "SELECT * FROM {$table} WHERE ( title LIKE %s OR title LIKE %s )",
+                                "%%{$search}%%",
+                                "{$search}%%"
+                            ) );
+                        } else {
+                            $results_topics = $wpdb->get_results( "SELECT * FROM {$table}" );
+                        }
                         
                         foreach ($results_topics as $topic ) {
                             $forum_id = $board->boardid . '-' . $topic->forumid;

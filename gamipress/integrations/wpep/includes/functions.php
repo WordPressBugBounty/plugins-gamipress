@@ -33,15 +33,15 @@ function gamipress_wpep_ajax_get_posts() {
         $table = $wpdb->prefix . ( defined( 'WPEP_DB_TABLE_COURSE_SECTION_LESSON' ) ? WPEP_DB_TABLE_COURSE_SECTION_LESSON : 'wpep_section_lesson' );
 
         if ( ! empty( $search ) ){
-            $lessons = $wpdb->prepare(
+            $lessons = $wpdb->get_results( $wpdb->prepare(
                 "SELECT * FROM {$table} 
                 WHERE ( title LIKE %s OR title LIKE %s ) 
                 ORDER BY post_id ASC, order ASC",
                 "%%{$search}%%",
                 "{$search}%%"
-            );
+            ) );
         } else {
-            $lessons = "SELECT * FROM {$table} ORDER BY post_id ASC, order ASC";
+            $lessons = $wpdb->get_results( "SELECT * FROM {$table} ORDER BY post_id ASC, order ASC" );
         }
 
         // Build the results array
