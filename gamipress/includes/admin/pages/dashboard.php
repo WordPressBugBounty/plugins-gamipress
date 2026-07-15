@@ -748,6 +748,7 @@ function gamipress_dashboard_getting_started_docs_box() {
         <hr>
         <li><a href="https://gamipress.com/docs/getting-started/requirements-ui/" target="_blank"><?php esc_html_e( 'Requirements UI', 'gamipress' ); ?></a></li>
         <li><a href="https://gamipress.com/docs/getting-started/events/" target="_blank"><?php esc_html_e( 'Events', 'gamipress' ); ?></a></li>
+        <li><a href="https://gamipress.com/docs/getting-started/credentials/" target="_blank"><?php esc_html_e( 'Credentials', 'gamipress' ); ?></a></li>
         <li><a href="https://gamipress.com/docs/getting-started/badge-builder/" target="_blank"><?php esc_html_e( 'Badge Builder', 'gamipress' ); ?></a></li>
     </ul>
     <?php

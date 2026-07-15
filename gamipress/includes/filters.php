@@ -544,23 +544,30 @@ function gamipress_get_required_achievements_for_achievement_list_markup( $steps
     }
 
 	$output .= '<' . $container .' class="gamipress-achievement-steps gamipress-required-achievements">';
+    $credential = gamipress_get_the_credential();
 
 	// Concatenate our output
 	foreach ( $steps as $step ) {
 
-        $can_earn = true;
+        $earned_status = 'user-has-not-earned';
 
-        if( $user_id === 0 ) {
-            $earned_status = 'user-has-not-earned';
-        } else {
-            // Check if user can earn this step and add the earned class
-            $can_earn = gamipress_can_user_earn_requirement( $step->ID, $user_id );
-            $earned_status = $can_earn ? 'user-has-not-earned' : 'user-has-earned';
-        }
+        if( ! $credential ) {
 
-		// Force earned class if user can't earn this step but has earned it in the past
-		if( ! $can_earn && gamipress_has_user_earned_achievement( $step->ID, $user_id ) ) {
-            $earned_status = 'user-has-earned';
+            $can_earn = true;
+
+            if( $user_id === 0 ) {
+                $earned_status = 'user-has-not-earned';
+            } else {
+                // Check if user can earn this step and add the earned class
+                $can_earn = gamipress_can_user_earn_requirement( $step->ID, $user_id );
+                $earned_status = $can_earn ? 'user-has-not-earned' : 'user-has-earned';
+            }
+
+            // Force earned class if user can't earn this step but has earned it in the past
+            if( ! $can_earn && gamipress_has_user_earned_achievement( $step->ID, $user_id ) ) {
+                $earned_status = 'user-has-earned';
+            }
+
         }
 
 		$title = $step->post_title;
@@ -778,6 +785,8 @@ function gamipress_achievement_times_earned_markup( $achievement_id = 0, $templa
  */
 function gamipress_achievement_global_times_earned_markup( $achievement_id = 0, $template_args = array() ) {
 
+    global $wpdb;
+
     // Grab the current post ID if no achievement_id was specified
     if ( ! $achievement_id ) {
         global $post;
@@ -786,7 +795,12 @@ function gamipress_achievement_global_times_earned_markup( $achievement_id = 0, 
 
     $maximum_earnings = absint( gamipress_get_post_meta( $achievement_id, '_gamipress_global_maximum_earnings' ) );
 
-    $earned_times = gamipress_get_earnings_count( array( 'post_id' => $achievement_id ) );
+    $user_earnings = GamiPress()->db->user_earnings;
+
+    $earned_times = absint( $wpdb->get_var( $wpdb->prepare(
+            "SELECT COUNT( DISTINCT ue.user_id ) FROM {$user_earnings} AS ue WHERE ue.post_id = %d",
+        absint( $achievement_id )
+    ) ) );
 
     /**
      * Filter to override the minimum times required to show the achievement times earned by all users text, by default 1
@@ -809,15 +823,18 @@ function gamipress_achievement_global_times_earned_markup( $achievement_id = 0, 
     $post_type = gamipress_get_post_type( $achievement_id );
     $achievement_type_singular = gamipress_get_achievement_type_singular( $post_type );
 
-    // Setup the times earned text based on if achievements has unlimited times to be earned
+    // Set up the times earned text based on if achievements has unlimited times to be earned
     if( $maximum_earnings === 0 ) {
-        $times_earned_pattern = __( '%d users have earned this %s', 'gamipress' );
-
-        $times_earned_text = sprintf( $times_earned_pattern, $earned_times, $achievement_type_singular );
+        $times_earned_text = sprintf( __( '%d users have earned this %s', 'gamipress' ),
+            $earned_times,
+            $achievement_type_singular
+        );
     } else {
-        $times_earned_pattern = __( '%d of %d users have earned this %s', 'gamipress' );
-
-        $times_earned_text = sprintf( $times_earned_pattern, $earned_times, $maximum_earnings, $achievement_type_singular );
+        $times_earned_text = sprintf( __( '%d of %d users have earned this %s', 'gamipress' ),
+            $earned_times,
+            $maximum_earnings,
+            $achievement_type_singular
+        );
     }
 
     /**
@@ -1236,7 +1253,7 @@ function gamipress_achievement_share_markup( $achievement_id = 0, $template_args
 
     $user_id = get_current_user_id();
 
-    // Guest not supported yet (basically because they has not earned this)
+    // Guest not allowed (basically because they have not earned this)
     if( $user_id === 0 ) {
         return '';
     }
@@ -1257,7 +1274,7 @@ function gamipress_achievement_share_markup( $achievement_id = 0, $template_args
 
     $social_networks = gamipress_get_option( 'social_networks', false );
 
-    // Bail if not social networks enabled
+    // Bail if no social networks enabled
     if( empty( $social_networks ) ) {
         return '';
     }
@@ -1286,7 +1303,7 @@ function gamipress_achievement_share_markup( $achievement_id = 0, $template_args
     );
 
     // Setup vars
-    $url = get_the_permalink( $achievement_id );
+    $url = gamipress_get_credential_url( $achievement_id, $user_id );
     $title = get_the_title( $achievement_id );
     $image = get_the_post_thumbnail_url( $achievement_id );
 
@@ -1430,7 +1447,7 @@ function gamipress_rank_share_markup( $rank_id = 0, $template_args = array() ) {
     );
 
     // Setup vars
-    $url = get_the_permalink( $rank_id );
+    $url = gamipress_get_credential_url( $rank_id, $user_id );
     $title = get_the_title( $rank_id );
     $image = get_the_post_thumbnail_url( $rank_id );
 
@@ -1555,10 +1572,9 @@ function gamipress_render_earned_achievement_text( $achievement_id = 0, $user_id
 
 	if ( gamipress_has_user_earned_achievement( $achievement_id, $user_id ) ) {
 
-		$achievement_types = gamipress_get_achievement_types();
-		$achievement_type = $achievement_types[gamipress_get_post_type( $achievement_id )];
-
-		$earned_message .= '<div class="gamipress-achievement-earned"><p>' . sprintf( __( 'You have earned this %s!', 'gamipress' ), $achievement_type['singular_name'] ) . '</p></div>';
+		$earned_message .= '<div class="gamipress-achievement-earned"><p>'
+            . sprintf( __( 'You have earned this %s!', 'gamipress' ), gamipress_get_achievement_type_singular( gamipress_get_post_type( $achievement_id ), true ) )
+        . '</p></div>';
 
 		if ( $congrats_text = gamipress_get_post_meta( $achievement_id, '_gamipress_congratulations_text' ) ) {
 			$earned_message .= '<div class="gamipress-achievement-congratulations">' . wpautop( $congrats_text ) . '</div>';
@@ -1594,16 +1610,25 @@ function gamipress_has_user_earned_achievement( $achievement_id = 0, $user_id = 
     $user_id = absint( $user_id );
     $achievement_id = absint( $achievement_id );
 
-    if( $user_id === 0 ) {
-        $user_id = get_current_user_id();
-    }
+    if( $user_id === 0 ) $user_id = get_current_user_id();
+    if( $user_id === 0 ) return false;
 
-    if( $user_id === 0 ) {
-        return false;
-    }
+    $cache = gamipress_get_cache( 'has_user_earned_achievement', array(), false );
 
-    $earned = gamipress_get_earnings_count( array( 'user_id' => $user_id, 'post_id' => $achievement_id ) );
-    $earned = $earned > 0;
+    if( isset( $cache[$user_id] ) && isset( $cache[$user_id][$achievement_id] ) ) {
+        // If result already cached, use it
+        $earned = $cache[$user_id][$achievement_id];
+    } else {
+        // Not cached result
+        $earned = gamipress_get_earnings_count( array( 'user_id' => $user_id, 'post_id' => $achievement_id ) );
+        $earned = $earned > 0;
+
+        // Update the cache
+        if( ! isset( $cache[$user_id] ) ) $cache[$user_id] = array();
+        $cache[$user_id][$achievement_id] = $earned;
+
+        gamipress_set_cache( 'has_user_earned_achievement', $cache );
+    }
 
     /**
      * Available filter to override the has user earned achievement result.
@@ -1679,7 +1704,6 @@ function gamipress_get_post_link_without_hidden_achievement( $achievement_id, $r
 		$link = gamipress_generate_post_link_by_post_id( $next_post_id, $rel );
 	}
 
-
 	return $link;
 
 }
@@ -1743,19 +1767,13 @@ function gamipress_generate_post_link_by_post_id( $post_id, $rel ) {
 
 	$post = gamipress_get_post( $post_id );
 
-	if( ! $post ) {
-		return '';
-	}
+	if( ! $post ) return '';
 
     // Title of the post
 	$title = get_the_title( $post->ID );
 
 	if ( empty( $post->post_title ) ) {
-		if( $rel === 'next' ) {
-			$title = __( 'Next Post' );
-		} else {
-			$title = __( 'Previous Post' );
-		}
+		$title = ( $rel === 'next' ) ? __( 'Next Post' ) : __( 'Previous Post' );
 	}
 
 	$nav = ($rel == 'next') ? '%s <span class="meta-nav">→</span>' : '<span class="meta-nav">←</span> %s';
@@ -1777,13 +1795,9 @@ function gamipress_generate_post_link_by_post_id( $post_id, $rel ) {
  */
 function gamipress_log_title_format( $title, $id = null ) {
 
-	if( $id === null ) {
-		return $title;
-	}
+	if( $id === null ) return $title;
 
-	if( empty( $title ) ) {
-		$title = gamipress_get_parsed_log( $id );
-	}
+	if( empty( $title ) ) $title = gamipress_get_parsed_log( $id );
 
 	return $title;
 }
@@ -1887,16 +1901,20 @@ function gamipress_get_rank_requirements_list_markup( $requirements = array(), $
     }
 
 	$output .= '<' . $container .' class="gamipress-rank-requirements gamipress-required-requirements">';
+    $credential = gamipress_get_the_credential();
 
 	// Concatenate our output
 	foreach ( $requirements as $requirement ) {
+        $earned_status = 'user-has-not-earned';
 
-	    if( $user_id === 0 ) {
-            $earned_status = 'user-has-not-earned';
-        } else {
-            // Check if user can earn this requirement and add the earned class
-            $can_earn = gamipress_can_user_earn_requirement( $requirement->ID, $user_id );
-            $earned_status = $can_earn ? 'user-has-not-earned' : 'user-has-earned';
+        if( ! $credential ) {
+            if( $user_id === 0 ) {
+                $earned_status = 'user-has-not-earned';
+            } else {
+                // Check if user can earn this requirement and add the earned class
+                $can_earn = gamipress_can_user_earn_requirement( $requirement->ID, $user_id );
+                $earned_status = $can_earn ? 'user-has-not-earned' : 'user-has-earned';
+            }
         }
 
 		$title = $requirement->post_title;
@@ -1985,10 +2003,9 @@ function gamipress_render_earned_rank_text( $rank_id = 0, $user_id = 0 ) {
 
 	if ( gamipress_has_user_earned_rank( $rank_id, $user_id ) ) {
 
-		$rank_types = gamipress_get_rank_types();
-		$rank_type = $rank_types[gamipress_get_post_type( $rank_id )];
-
-		$earned_message .= '<div class="gamipress-rank-earned"><p>' . sprintf( __( 'You have reached this %s!', 'gamipress' ), $rank_type['singular_name']) . '</p></div>';
+		$earned_message .= '<div class="gamipress-rank-earned"><p>'
+                . sprintf( __( 'You have reached this %s!', 'gamipress' ), gamipress_get_rank_type_singular( gamipress_get_post_type( $rank_id ), true ) )
+            . '</p></div>';
 
 		if ( $congrats_text = gamipress_get_post_meta( $rank_id, '_gamipress_congratulations_text' ) ) {
 			$earned_message .= '<div class="gamipress-rank-congratulations">' . wpautop( $congrats_text ) . '</div>';
@@ -2288,6 +2305,13 @@ function gamipress_earnings_render_column( $column_output, $column_name, $user_e
 			$column_output = date_i18n( get_option( 'date_format' ), strtotime( $user_earning->date ) );
 
 			break;
+        case 'actions':
+
+            $render_credential = ( gamipress_is_achievement( $user_earning->post_type ) || gamipress_is_rank( $user_earning->post_type ) );
+
+            $column_output .= $render_credential ? gamipress_get_credential_link( $user_earning ) : '';
+
+            break;
 	}
 
 	return $column_output;

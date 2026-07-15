@@ -311,10 +311,15 @@ function gamipress_earnings_shortcode( $atts = array(), $content = '' ) {
         $gamipress_template_args['columns']['user']     = __( 'User', 'gamipress' );
     }
 
+    // Previous column label, keep for translation
     $gamipress_template_args['columns']['thumbnail']    = __( 'Thumbnail', 'gamipress' );
+
+    $gamipress_template_args['columns']['thumbnail']    = __( 'Image', 'gamipress' );
     $gamipress_template_args['columns']['description']  = __( 'Description', 'gamipress' );
-    $gamipress_template_args['columns']['date']         = __( 'Date', 'gamipress' );
     $gamipress_template_args['columns']['points']       = __( 'Points', 'gamipress' );
+    $gamipress_template_args['columns']['date']         = __( 'Date', 'gamipress' );
+    $gamipress_template_args['columns']['actions']      = __( 'Actions', 'gamipress' );
+
 
     // Render the earnings template
     ob_start();

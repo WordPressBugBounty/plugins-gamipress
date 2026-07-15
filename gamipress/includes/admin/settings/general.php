@@ -61,12 +61,17 @@ function gamipress_settings_general_meta_boxes( $meta_boxes ) {
             ),
             'disable_shortcodes_editor' => array(
                 'name' => __( 'Disable Shortcodes Editor', 'gamipress' ),
-                'tooltip'   => __( 'Disable the shortcodes editor.', 'gamipress' ) . '<br>'
-                . '<small>' . __( 'Check this option if you are experiencing black screens in your theme settings or in your page builder forms.', 'gamipress' ) . '</small>',
+                'tooltip'   => __( 'Disable the GamiPress shortcodes editor.', 'gamipress' ),
                 'label_cb' => 'cmb_tooltip_label_cb',
                 'type' => 'checkbox',
                 'classes' => 'gamipress-switch',
             ),
+        ) )
+    );
+
+    $meta_boxes['general-advanced-settings'] = array(
+        'title' => gamipress_dashicon( 'admin-settings' ) . __( 'Advanced Settings', 'gamipress' ),
+        'fields' => apply_filters( 'gamipress_general_advanced_settings_fields', array(
             'debug_mode' => array(
                 'name' => __( 'Debug Mode', 'gamipress' ),
                 'tooltip'   => __( 'Enable the GamiPress debug mode.', 'gamipress' ),
@@ -76,6 +81,8 @@ function gamipress_settings_general_meta_boxes( $meta_boxes ) {
             ),
             'clear_cache' => array(
                 'name' => __( 'Clear Cache', 'gamipress' ),
+                'tooltip'   => __( 'Clear the GamiPress internal cache.', 'gamipress' ),
+                'label_cb' => 'cmb_tooltip_label_cb',
                 'type' => 'html',
                 'content_cb' => 'gamipress_clear_cache_content_cb',
             ),

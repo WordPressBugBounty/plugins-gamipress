@@ -198,6 +198,8 @@
 		plural_field.val( plural );
 		slug_field.val( slug );
 
+		slug_field.trigger('keyup');
+
 	});
 
 	// Edit user rank
@@ -573,10 +575,6 @@
         } );
 
     });
-
-	$('body').on('cmb2_add_row', '.cmb-add-group-row', function(e, button) {
-
-	});
 
 	// CMB2 Add Row
 	$(document).on('cmb2_add_row', function(e, added_row) {

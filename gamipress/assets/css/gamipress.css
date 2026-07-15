@@ -519,9 +519,19 @@ img.gamipress-points-thumbnail-inline {
 	Share buttons
    -------------------------------------- */
 
+/* Share buttons visibility */
+.gamipress-achievement:not(:hover) .gamipress-share-buttons-label,
+.gamipress-rank:not(:hover) .gamipress-share-buttons-label,
+.gamipress-achievement:not(:hover) .gamipress-share-buttons,
+.gamipress-rank:not(:hover) .gamipress-share-buttons {
+	opacity: 0;
+}
+
 .gamipress-share-buttons-label {
 	margin-top: 0;
 	margin-bottom: 2px;
+
+	transition: all ease-in-out 150ms;
 }
 
 .gamipress-share-buttons {
@@ -529,6 +539,8 @@ img.gamipress-points-thumbnail-inline {
 	flex-wrap: wrap;
 	margin-left: -2px;
 	margin-right: -2px;
+
+	transition: all ease-in-out 150ms;
 }
 
 .gamipress-share-button {
@@ -624,7 +636,7 @@ and (max-device-width: 1024px) {
 	}
 
 	#gamipress-earnings-table td.gamipress-earnings-col-date {
-		width: 48%;
+		width: 50%;
 		float: left;
 	}
 
@@ -632,6 +644,11 @@ and (max-device-width: 1024px) {
 		width: 50%;
 		text-align: right;
 		float: right;
+	}
+
+	#gamipress-earnings-table td.gamipress-earnings-col-actions {
+		width: 100%;
+		float: left;
 	}
 
 	#gamipress-earnings-table thead tr {
@@ -689,7 +706,7 @@ and (max-device-width: 1024px) {
 }
 
 #gamipress-earnings-table.gamipress-earnings-force-responsive td.gamipress-earnings-col-date {
-	width: 48%;
+	width: 50%;
 	float: left;
 }
 
@@ -697,6 +714,11 @@ and (max-device-width: 1024px) {
 	width: 50%;
 	text-align: right;
 	float: right;
+}
+
+#gamipress-earnings-table.gamipress-earnings-force-responsive td.gamipress-earnings-col-actions {
+	width: 100%;
+	float: left;
 }
 
 #gamipress-earnings-table.gamipress-earnings-force-responsive thead tr {

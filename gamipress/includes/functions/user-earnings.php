@@ -220,7 +220,9 @@ function gamipress_get_last_earning( $query = array() ) {
 
     $query['limit'] = 1;
 
-    return gamipress_get_last_earnings( $query );
+    $results = gamipress_get_last_earnings( $query );
+
+    return count( $results ) === 1 ? $results[0] : $results;
 
 }
 

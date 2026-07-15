@@ -58,6 +58,7 @@ function gamipress_bp_activity_triggers( $triggers ) {
     if ( gamipress_bp_is_active( 'activity' ) ) {
         $triggers[__( 'BuddyBoss Activity', 'gamipress' )] = array(
             'gamipress_bp_publish_activity'                 => __( 'Publish an activity post', 'gamipress' ),
+            'gamipress_bp_publish_text_activity'            => __( 'Publish only text in an activity post', 'gamipress' ),
             'gamipress_bp_delete_activity'                  => __( 'Remove an activity post', 'gamipress' ),
             'gamipress_bp_new_activity_comment'             => __( 'Reply to an activity post', 'gamipress' ),
             'gamipress_bp_get_new_activity_comment'         => __( 'Get a reply on an activity post', 'gamipress' ),
@@ -385,6 +386,7 @@ function gamipress_bp_trigger_get_user_id( $user_id, $trigger, $args ) {
         case 'gamipress_bp_send_message':
         // BuddyPress Activity
         case 'gamipress_bp_publish_activity':
+        case 'gamipress_bp_publish_text_activity':
         case 'gamipress_bp_delete_activity':
         case 'gamipress_bp_new_activity_comment':
         case 'gamipress_bp_get_new_activity_comment':
@@ -519,6 +521,7 @@ function gamipress_bp_log_event_trigger_meta_data( $log_meta, $user_id, $trigger
             $log_meta['friendship_id'] = $args[0];
             break;
         case 'gamipress_bp_publish_activity':
+        case 'gamipress_bp_publish_text_activity':
         case 'gamipress_bp_delete_activity':
         case 'gamipress_bp_favorite_activity':
         case 'gamipress_bp_remove_favorite_activity':
@@ -628,6 +631,7 @@ function gamipress_bp_trigger_duplicity_check( $return, $user_id, $trigger, $sit
             $return = (bool) ( gamipress_get_user_last_log( $user_id, $log_meta ) === false );
             break;
         case 'gamipress_bp_publish_activity':
+        case 'gamipress_bp_publish_text_activity':
         case 'gamipress_bp_delete_activity':
         case 'gamipress_bp_publish_media_activity':
         case 'gamipress_bp_publish_video_activity':

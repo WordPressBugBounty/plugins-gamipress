@@ -361,7 +361,7 @@ function gamipress_manage_user_earnings_columns( $columns = array() ) {
     }
 
     if( current_user_can( gamipress_get_manager_capability() ) ) {
-        $columns['action'] = __( 'Action', 'gamipress' );
+        $columns['action'] = __( 'Actions', 'gamipress' );
     }
 
     return $columns;
@@ -686,6 +686,12 @@ function gamipress_manage_user_earnings_custom_column( $column_name, $object_id 
             ?>
 
             <span class="delete"><a class="error gamipress-revoke-user-earning" href="<?php echo esc_url( wp_nonce_url( $revoke_url, 'gamipress_revoke_achievement' ) ); ?>"><?php _e( 'Revoke Award', 'gamipress' ); ?></a></span>
+
+            <?php if( gamipress_is_achievement( $user_earning->post_id ) || gamipress_is_rank( $user_earning->post_id ) ) : ?>
+                <?php $credential_url = gamipress_get_credential_url( $user_earning ); ?>
+                <br>
+                <a class="gamipress-credential-link" href="<?php echo esc_url( $credential_url ); ?>" target="_blank"><?php _e( 'View Credential', 'gamipress' ); ?></a>
+            <?php endif; ?>
 
             <?php
             break;

@@ -98,7 +98,6 @@ class GamiPress_Shortcodes_Editor {
 		<div id="select_gamipress_shortcode" style="display:none;">
 			<div class="wrap">
 				<h3><?php _e( 'GamiPress shortcode', 'gamipress' ); ?></h3>
-				<p><?php printf( __( 'See the %s page for more information', 'gamipress' ), '<a target="_blank" href="' . admin_url( 'admin.php?page=gamipress_help_support' ) . '">' . __( 'Help/Support', 'gamipress' ) . '</a>' ); ?></p>
 				<div class="alignleft">
 					<select id="select_shortcode"><?php echo $this->get_shortcode_selector(); ?></select>
 				</div>

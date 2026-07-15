@@ -10,14 +10,21 @@ global $gamipress_template_args;
 // Shorthand
 $a = $gamipress_template_args;
 
+$credential = gamipress_get_the_credential();
+
 // Check if user has earned this Achievement, and add an 'earned' class
-$earned = gamipress_has_user_earned_achievement( get_the_ID(), get_current_user_id() );
+if( $credential ) {
+    $earned = true;
+} else {
+    $earned = gamipress_has_user_earned_achievement( get_the_ID(), get_current_user_id() );
+}
 
 // Setup achievement classes
 $classes = array(
     'single-achievement',
     'achievement-wrap',
     ( $earned ? 'user-has-earned' : '' ),
+    ( $credential ? 'is-credential' : '' ),
     'gamipress-layout-' . $a['layout'],
     'gamipress-align-' . $a['align']
 );
@@ -33,8 +40,11 @@ $classes = array(
  */
 $classes = apply_filters( 'gamipress_single_achievement_classes', $classes, get_the_ID(), $a ); ?>
 
-<?php // Check if current user has earned this achievement
-echo gamipress_render_earned_achievement_text( get_the_ID(), get_current_user_id() ); ?>
+<?php if( $credential ) : ?>
+    <?php echo gamipress_get_credential_text( $credential ); ?>
+<?php else : ?>
+    <?php echo gamipress_render_earned_achievement_text( get_the_ID(), get_current_user_id() ); ?>
+<?php endif; ?>
 
 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
@@ -148,8 +158,10 @@ echo gamipress_render_earned_achievement_text( get_the_ID(), get_current_user_id
          */
         do_action( 'gamipress_after_single_achievement_steps', get_the_ID(), $a ); ?>
 
-        <?php // Achievement unlock with points
-        echo gamipress_achievement_unlock_with_points_markup( get_the_ID(), $a ); ?>
+        <?php if( ! $credential ) : ?>
+            <?php // Achievement unlock with points
+            echo gamipress_achievement_unlock_with_points_markup( get_the_ID(), $a ); ?>
+        <?php endif; ?>
 
         <?php // Include achievement earners, if this achievement supports it
         if ( (bool) gamipress_get_post_meta( get_the_ID(), '_gamipress_show_earners' ) ) :
@@ -195,3 +207,6 @@ echo gamipress_render_earned_achievement_text( get_the_ID(), get_current_user_id
     do_action( 'gamipress_after_single_achievement', get_the_ID(), $a ); ?>
 
 </div><!-- .achievement-wrap -->
+
+<?php // Credentials links
+echo gamipress_get_credentials_links_html( get_the_ID(), $a ); ?>

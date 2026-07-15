@@ -262,7 +262,7 @@ function gamipress_blocks_editor_assets() {
 add_action( 'enqueue_block_editor_assets', 'gamipress_blocks_editor_assets' );
 
 /**
- * Localize Gutenberg block assets.
+ * Localize block assets.
  *
  * @since 1.6.0
  */
@@ -301,6 +301,18 @@ function gamipress_localize_blocks_editor_assets() {
 
 }
 add_action( 'enqueue_block_editor_assets', 'gamipress_localize_blocks_editor_assets', 11 );
+
+/**
+ * Enqueue block content assets.
+ *
+ * @since 1.6.0
+ */
+function gamipress_enqueue_block_assets() {
+    if ( is_admin() ) {
+        gamipress_enqueue_scripts();
+    }
+}
+add_action( 'enqueue_block_assets', 'gamipress_enqueue_block_assets', 11 );
 
 /**
  * Enqueue the admin functions script with all required components

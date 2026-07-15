@@ -10,8 +10,10 @@ global $gamipress_template_args;
 // Shorthand
 $a = $gamipress_template_args;
 
+$credential = gamipress_get_the_credential();
+
 // Check if user has earned this rank, rank is earned by default if is the lowest priority of this type
-if( gamipress_is_lowest_priority_rank( get_the_ID() ) ) {
+if( $credential || gamipress_is_lowest_priority_rank( get_the_ID() ) ) {
     $earned = true;
 } else {
     $earned = gamipress_has_user_earned_achievement( get_the_ID(), get_current_user_id() );
@@ -22,6 +24,7 @@ $classes = array(
     'single-rank',
     'rank-wrap',
     ( $earned ? 'user-has-earned' : '' ),
+    ( $credential ? 'is-credential' : '' ),
     'gamipress-layout-' . $a['layout'],
     'gamipress-align-' . $a['align']
 );
@@ -37,8 +40,11 @@ $classes = array(
  */
 $classes = apply_filters( 'gamipress_single_rank_classes', $classes, get_the_ID(), $a ); ?>
 
-<?php // Check if current user has earned this rank
-echo gamipress_render_earned_rank_text( get_the_ID(), get_current_user_id() ); ?>
+<?php if( $credential ) : ?>
+    <?php echo gamipress_get_credential_text( $credential ); ?>
+<?php else : ?>
+    <?php echo gamipress_render_earned_rank_text( get_the_ID(), get_current_user_id() ); ?>
+<?php endif; ?>
 
 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
@@ -57,8 +63,10 @@ echo gamipress_render_earned_rank_text( get_the_ID(), get_current_user_id() ); ?
         <?php // Thumbnail
         echo gamipress_get_rank_post_thumbnail( get_the_ID() ); ?>
 
-        <?php // Share
-        echo gamipress_rank_share_markup( get_the_ID(), $a ); ?>
+        <?php if( ! $credential ) : ?>
+            <?php // Share
+            echo gamipress_rank_share_markup( get_the_ID(), $a ); ?>
+        <?php endif; ?>
     </div>
 
     <?php
@@ -104,8 +112,10 @@ echo gamipress_render_earned_rank_text( get_the_ID(), get_current_user_id() ); ?
          */
         do_action( 'gamipress_after_single_rank_requirements', get_the_ID(), $a ); ?>
 
-        <?php // Rank unlock with points
-        echo gamipress_rank_unlock_with_points_markup( get_the_ID(), $a ); ?>
+        <?php if( ! $credential ) : ?>
+            <?php // Rank unlock with points
+            echo gamipress_rank_unlock_with_points_markup( get_the_ID(), $a ); ?>
+        <?php endif; ?>
 
         <?php // Include rank earners, if this rank supports it
         if ( $show_earners = gamipress_get_post_meta( get_the_ID(), '_gamipress_show_earners' ) ) {
@@ -151,3 +161,6 @@ echo gamipress_render_earned_rank_text( get_the_ID(), get_current_user_id() ); ?
     do_action( 'gamipress_after_single_rank', get_the_ID(), $a ); ?>
 
 </div><!-- .rank-wrap -->
+
+<?php // Credential link
+echo gamipress_get_credentials_links_html( get_the_ID(), $a ); ?>

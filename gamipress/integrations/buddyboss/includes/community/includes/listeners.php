@@ -161,15 +161,16 @@ function gamipress_bp_publish_activity( $content, $user_id, $activity_id ) {
     
     // Images
     $media = bp_activity_get_meta( $activity_id, 'bp_media_ids', true );
-
+    
     // Videos
     $videos = bp_activity_get_meta( $activity_id, 'bp_video_ids', true );
-
+    
     // Documents
     $documents = bp_activity_get_meta( $activity_id, 'bp_document_ids', true );
         
-    if ( !empty( $media ) || !empty( $videos ) || !empty( $documents ) ) {
-        return;
+    if ( empty( $media ) && empty( $videos ) && empty( $documents ) ) {
+        // Trigger write activity stream message only text
+        do_action( 'gamipress_bp_publish_text_activity', $activity_id, $user_id );
     }
 
     // Trigger write activity stream message

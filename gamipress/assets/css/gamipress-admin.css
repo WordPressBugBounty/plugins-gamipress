@@ -821,6 +821,7 @@ body:not(.block-editor-page) #gamipress-earners .ct-ajax-list-table .wp-list-tab
 	margin-top: 5px;
 	color: #757575;
 	font-style: italic;
+	font-size: 13px;
 }
 
 .profile-points input {
@@ -888,6 +889,7 @@ body:not(.block-editor-page) #gamipress-earners .ct-ajax-list-table .wp-list-tab
 	font-weight: 400;
 	color: #757575;
 	font-style: italic;
+	font-size: 13px;
 }
 
 #gamipress-awards-options td img {
