@@ -224,9 +224,14 @@ function gamipress_get_credentials_links_html( $post_id = 0, $args = array() ) {
 
     if( ! $credential ) {
         // Links when not viewing a credential
+
+        $user_earning = gamipress_get_last_earning( array( 'post_id' => $post_id, 'user_id' => $user_id ) );
+        
+        // Only render credential link if user is viewing its own achievement/rank
         if( $user_id === $viewing_user_id ) {
-            // Only render credential link if user is viewing its own achievement/rank
-            $links .= gamipress_get_credential_link( $post_id, $user_id );
+            // Show credential link if user has earned it
+            if( $user_earning )
+                $links .= gamipress_get_credential_link( $user_earning );
         }
 
         /**
