@@ -201,6 +201,7 @@ function gamipress_rank_shortcode( $atts = array(), $content = '' ) {
     // ---------------------------
 
 	$atts['title_size'] = gamipress_sanitize_title_size_option( $atts['title_size'] );
+    $atts['heading_size'] = gamipress_sanitize_title_size_option( $atts['heading_size'] );
 
     // ---------------------------
     // Shortcode Errors

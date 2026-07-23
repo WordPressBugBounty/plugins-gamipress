@@ -259,7 +259,8 @@ function gamipress_get_points_awards_for_points_types_list_markup( $points_award
          * @return string
          */
         $points_awards_heading = apply_filters( 'gamipress_points_awards_heading', $points_awards_heading, $points_awards, $user_id, $template_args );
-
+        $a['heading_size'] = gamipress_sanitize_title_size_option( $a['heading_size'] );
+        
         $output .= '<' . $a['heading_size'] . ' class="gamipress-points-awards-heading">' . $points_awards_heading . '</' . $a['heading_size'] . '>';
 
     }
@@ -386,6 +387,7 @@ function gamipress_get_points_deducts_for_points_types_list_markup( $points_dedu
          * @return string
          */
         $points_deducts_heading = apply_filters( 'gamipress_points_deducts_heading', $points_deducts_heading, $points_deducts, $user_id, $template_args );
+        $a['heading_size'] = gamipress_sanitize_title_size_option( $a['heading_size'] );
 
         $output .= '<' . $a['heading_size'] . ' class="gamipress-points-deducts-heading">' . $points_deducts_heading . '</' . $a['heading_size'] . '>';
 
@@ -538,6 +540,7 @@ function gamipress_get_required_achievements_for_achievement_list_markup( $steps
          * @return string
          */
         $steps_heading = apply_filters( 'gamipress_steps_heading', $steps_heading, $steps, $user_id, $template_args );
+        $a['heading_size'] = gamipress_sanitize_title_size_option( $a['heading_size'] );
 
         $output .= '<' . $a['heading_size'] . ' class="gamipress-achievement-steps-heading">' . $steps_heading . '</' . $a['heading_size'] . '>';
 
@@ -1895,6 +1898,7 @@ function gamipress_get_rank_requirements_list_markup( $requirements = array(), $
          * @return string
          */
         $requirements_heading = apply_filters( 'gamipress_rank_requirements_heading', $requirements_heading, $requirements, $user_id, $template_args );
+        $a['heading_size'] = gamipress_sanitize_title_size_option( $a['heading_size'] );
 
         $output .= '<' . $a['heading_size'] . ' class="gamipress-rank-requirements-heading">' . $requirements_heading . '</' . $a['heading_size'] . '>';
 
