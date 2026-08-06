@@ -195,3 +195,74 @@ function gamipress_tutor_review_course( $comment_id ) {
 }
 add_action( 'tutor_after_rating_placed', 'gamipress_tutor_review_course' );
 
+/**
+ * Submit assignment listener
+ *
+ * @since 1.0.0
+ *
+ * @param int $course_id
+ */
+function gamipress_tutor_submit_assignment( $comment_id ) {
+
+    // Bail if not exists
+    if ( ! class_exists( '\TUTOR_ASSIGNMENTS\Assignments' ) ) {
+        return;
+    }
+
+    // Get assignment info.
+    $submitted_assignment = tutor_utils()->get_assignment_submit_info( $assignment_submit_id );
+    $assignment_id = $submitted_assignment->comment_post_ID;
+
+    $user_id = $submitted_assignment->user_id;
+
+    // Submit an assignment
+    do_action( 'gamipress_tutor_submit_assignment', $assignment_id, $user_id );
+
+    // Submit a specific assignment
+    do_action( 'gamipress_tutor_submit_specific_assignment', $assignment_id, $user_id );
+
+}
+add_action( 'tutor_assignment/after/submitted', 'gamipress_tutor_submit_assignment' );
+
+/**
+ * Evaluate assignment listener
+ *
+ * @since 1.0.0
+ *
+ * @param int 		$submitted_id
+ * @param int 		$course_id
+ * @param int 		$student_id
+ */
+function gamipress_tutor_evaluate_assignment( $submitted_id, $course_id, $student_id ) {
+
+    // Bail if not exists
+    if ( ! class_exists( '\TUTOR_ASSIGNMENTS\Assignments' ) ) {
+        return;
+    }
+
+    // Get assignment info.
+    $submitted_assignment = tutor_utils()->get_assignment_submit_info( $submitted_id );
+    $assignment_id = $submitted_assignment->comment_post_ID;
+    $result = TUTOR_ASSIGNMENTS\Assignments::get_assignment_result( $assignment_id, $student_id );
+    
+    if ( $result === 'pass' ) {
+        // Pass an assignment
+        do_action( 'gamipress_tutor_pass_assignment', $assignment_id, $student_id, $course_id );
+
+        // Pass a specific assignment
+        do_action( 'gamipress_tutor_pass_specific_assignment', $assignment_id, $student_id, $course_id );
+    }
+
+    if ( $result === 'fail' ) {
+
+        // Fail an assignment
+        do_action( 'gamipress_tutor_fail_assignment', $assignment_id, $student_id, $course_id );
+
+        // Fail a specific assignment
+        do_action( 'gamipress_tutor_fail_specific_assignment', $assignment_id, $student_id, $course_id );
+
+    }
+
+}
+add_action( 'tutor_assignment/evaluate/after', 'gamipress_tutor_evaluate_assignment', 10, 3 );
+

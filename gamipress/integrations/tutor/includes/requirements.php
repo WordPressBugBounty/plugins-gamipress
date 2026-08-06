@@ -78,6 +78,10 @@ add_action( 'gamipress_requirement_ui_html_after_achievement_post', 'gamipress_t
  */
 function gamipress_tutor_ajax_update_requirement( $requirement_id, $requirement ) {
 
+    $requirement = wp_parse_args( $requirement, array(
+        'tutor_category' => '',
+    ) );
+
     if( isset( $requirement['trigger_type'] )
         && ( $requirement['trigger_type'] === 'gamipress_tutor_complete_quiz_course_category'
             || $requirement['trigger_type'] === 'gamipress_tutor_pass_quiz_course_category'

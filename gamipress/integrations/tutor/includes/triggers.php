@@ -54,6 +54,15 @@ function gamipress_tutor_activity_triggers( $triggers ) {
         'gamipress_tutor_complete_course_category'  => __( 'Complete a course of a category', 'gamipress' ),
         'gamipress_tutor_review_course'             => __( 'Review a course', 'gamipress' ),
         'gamipress_tutor_review_specific_course'    => __( 'Review a specific course', 'gamipress' ),
+
+        // Assignments
+        'gamipress_tutor_submit_assignment'             => __( 'Submit an assignment', 'gamipress' ),
+        'gamipress_tutor_submit_specific_assignment'    => __( 'Submit a specific assignment', 'gamipress' ),
+        'gamipress_tutor_pass_assignment'               => __( 'Successfully pass an assignment', 'gamipress' ),
+        'gamipress_tutor_pass_specific_assignment'      => __( 'Successfully pass a specific assignment', 'gamipress' ),
+        'gamipress_tutor_fail_assignment'               => __( 'Fail an assignment', 'gamipress' ),
+        'gamipress_tutor_fail_specific_assignment'      => __( 'Fail a specific assignment', 'gamipress' ),
+        
     );
 
     return $triggers;
@@ -95,6 +104,11 @@ function gamipress_tutor_specific_activity_triggers( $specific_activity_triggers
     $specific_activity_triggers['gamipress_tutor_complete_specific_course'] = array( $course );
     $specific_activity_triggers['gamipress_tutor_review_specific_course'] = array( $course );
 
+    // Assignments
+    $specific_activity_triggers['gamipress_tutor_submit_specific_assignment'] = array( 'tutor_assignments' );
+    $specific_activity_triggers['gamipress_tutor_pass_specific_assignment'] = array( 'tutor_assignments' );
+    $specific_activity_triggers['gamipress_tutor_fail_specific_assignment'] = array( 'tutor_assignments' );
+
     return $specific_activity_triggers;
 }
 add_filter( 'gamipress_specific_activity_triggers', 'gamipress_tutor_specific_activity_triggers' );
@@ -125,6 +139,11 @@ function gamipress_tutor_specific_activity_trigger_label( $specific_activity_tri
     $specific_activity_trigger_labels['gamipress_tutor_enroll_specific_course'] = __( 'Enroll the course %s', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_tutor_complete_specific_course'] = __( 'Complete the course %s', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_tutor_review_specific_course'] = __( 'Complete the course %s', 'gamipress' );
+
+    // Assignments
+    $specific_activity_trigger_labels['gamipress_tutor_submit_specific_assignment'] = __( 'Submit the assignment %s', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_tutor_pass_specific_assignment'] = __( 'Pass the assignment %s', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_tutor_fail_specific_assignment'] = __( 'Fail the assignment %s', 'gamipress' );
 
     return $specific_activity_trigger_labels;
 }
@@ -218,6 +237,14 @@ function gamipress_tutor_trigger_get_user_id( $user_id, $trigger, $args ) {
         case 'gamipress_tutor_complete_lesson_course_category':
         case 'gamipress_tutor_complete_course_category':
         case 'gamipress_tutor_enroll_course_category':
+
+        // Assignments
+        case 'gamipress_tutor_submit_assignment':
+        case 'gamipress_tutor_submit_specific_assignment':
+        case 'gamipress_tutor_pass_assignment':
+        case 'gamipress_tutor_pass_specific_assignment':
+        case 'gamipress_tutor_fail_assignment':
+        case 'gamipress_tutor_fail_specific_assignment':
             $user_id = $args[1];
             break;
     }
@@ -248,6 +275,9 @@ function gamipress_tutor_specific_trigger_get_id( $specific_id, $trigger = '', $
         case 'gamipress_tutor_enroll_specific_course':
         case 'gamipress_tutor_complete_specific_course':
         case 'gamipress_tutor_review_specific_course':
+        case 'gamipress_tutor_submit_specific_assignment':
+        case 'gamipress_tutor_pass_specific_assignment':
+        case 'gamipress_tutor_fail_specific_assignment':
             $specific_id = $args[0];
             break;
         case 'gamipress_tutor_complete_quiz_specific_course':
@@ -312,6 +342,19 @@ function gamipress_tutor_log_event_trigger_meta_data( $log_meta, $user_id, $trig
         case 'gamipress_tutor_review_specific_course':
             // Add the course ID
             $log_meta['course_id'] = $args[0];
+            break;
+
+        // Assignments
+        case 'gamipress_tutor_pass_assignment':
+        case 'gamipress_tutor_pass_specific_assignment':
+        case 'gamipress_tutor_fail_assignment':    
+        case 'gamipress_tutor_fail_specific_assignment':
+            $log_meta['assignment_id'] = $args[0];
+            $log_meta['course_id'] = $args[2];
+            break;
+        case 'gamipress_tutor_submit_assignment':    
+        case 'gamipress_tutor_submit_specific_assignment':
+            $log_meta['assignment_id'] = $args[0];
             break;
     }
 

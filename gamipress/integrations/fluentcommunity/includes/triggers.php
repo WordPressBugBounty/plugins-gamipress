@@ -68,6 +68,9 @@ function gamipress_fluentcommunity_activity_triggers( $triggers ) {
         // Delete course
         'gamipress_fluentcommunity_delete_course'               => __( 'Delete any course', 'gamipress' ),
         'gamipress_fluentcommunity_delete_specific_course'      => __( 'Delete a specific course', 'gamipress' ),
+        // Complete lesson
+        'gamipress_fluentcommunity_complete_lesson'             => __( 'Complete any lesson', 'gamipress' ),
+        'gamipress_fluentcommunity_complete_specific_lesson'    => __( 'Complete a specific lesson', 'gamipress' ),
         
     );
 
@@ -116,6 +119,7 @@ function gamipress_fluentcommunity_specific_activity_triggers( $specific_activit
     $specific_activity_triggers['gamipress_fluentcommunity_enroll_specific_course'] = array( 'fluentcommunity_courses' );
     $specific_activity_triggers['gamipress_fluentcommunity_unroll_specific_course'] = array( 'fluentcommunity_courses' );
     $specific_activity_triggers['gamipress_fluentcommunity_delete_specific_course'] = array( 'fluentcommunity_courses' );
+    $specific_activity_triggers['gamipress_fluentcommunity_complete_specific_lesson'] = array( 'fluentcommunity_lessons' );
 
     // Quizzes
     $specific_activity_triggers['gamipress_fluentcommunity_attempt_specific_quiz'] = array( 'fluentcommunity_quizzes' );
@@ -153,6 +157,7 @@ function gamipress_fluentcommunity_specific_activity_trigger_label( $specific_ac
     $specific_activity_trigger_labels['gamipress_fluentcommunity_enroll_specific_course'] = __( 'Enroll in %s course', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_fluentcommunity_unroll_specific_course'] = __( 'Unroll from %s course', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_fluentcommunity_delete_specific_course'] = __( 'Delete %s course', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_fluentcommunity_complete_specific_lesson'] = __( 'Complete %s lesson', 'gamipress' );
 
     // Quizzes
     $specific_activity_trigger_labels['gamipress_fluentcommunity_attempt_specific_quiz'] = __( 'Attempt %s quiz', 'gamipress' );
@@ -219,6 +224,16 @@ function gamipress_fluentcommunity_specific_activity_trigger_post_title( $post_t
                 $post_title = $quiz_title;
             }
             break;
+        // Lessons
+        case 'gamipress_fluentcommunity_complete_specific_lesson':
+            if( absint( $specific_id ) !== 0 ) {
+
+                // Get the lesson title
+                $lesson_title = gamipress_fluentcommunity_get_lesson_title( $specific_id );
+
+                $post_title = $lesson_title;
+            }
+            break;
     }
 
     return $post_title;
@@ -255,6 +270,7 @@ function gamipress_fluentcommunity_specific_activity_trigger_permalink( $permali
         case 'gamipress_fluentcommunity_enroll_specific_course':
         case 'gamipress_fluentcommunity_unroll_specific_course':
         case 'gamipress_fluentcommunity_delete_specific_course':
+        case 'gamipress_fluentcommunity_complete_specific_lesson':
         // Quizzes
         case 'gamipress_fluentcommunity_attempt_specific_quiz':
         case 'gamipress_fluentcommunity_pass_specific_quiz':
@@ -327,6 +343,9 @@ function gamipress_fluentcommunity_trigger_get_user_id( $user_id, $trigger, $arg
         // Delete course
         case 'gamipress_fluentcommunity_delete_course':
         case 'gamipress_fluentcommunity_delete_specific_course':
+        // Complete lesson
+        case 'gamipress_fluentcommunity_complete_lesson':
+        case 'gamipress_fluentcommunity_complete_specific_lesson':
 
         // Quizzes
         // Attempt quiz
@@ -377,6 +396,7 @@ function gamipress_fluentcommunity_specific_trigger_get_id( $specific_id, $trigg
         case 'gamipress_fluentcommunity_enroll_specific_course':
         case 'gamipress_fluentcommunity_unroll_specific_course':
         case 'gamipress_fluentcommunity_delete_specific_course':
+        case 'gamipress_fluentcommunity_complete_specific_lesson':
 
         // Quizzes
         case 'gamipress_fluentcommunity_attempt_specific_quiz':
@@ -457,6 +477,14 @@ function gamipress_fluentcommunity_log_event_trigger_meta_data( $log_meta, $user
         case 'gamipress_fluentcommunity_delete_specific_course': 
             // Add the course ID
             $log_meta['course_id'] = $args[0];
+            break;
+
+        // Complete lesson
+        case 'gamipress_fluentcommunity_complete_lesson':
+        case 'gamipress_fluentcommunity_complete_specific_lesson':
+            // Add the lesson ID
+            $log_meta['lesson_id'] = $args[0];
+            $log_meta['course_id'] = $args[2];
             break;
 
         // Quizzes

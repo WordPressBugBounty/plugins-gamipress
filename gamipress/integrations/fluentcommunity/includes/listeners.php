@@ -431,3 +431,24 @@ function gamipress_fluentcommunity_quiz_submitted( $quizResult, $user, $quiz ) {
 
 }
 add_action( 'fluent_community/quiz/submitted', 'gamipress_fluentcommunity_quiz_submitted', 10, 3 );
+
+/**
+ * Complete lesson listener
+ *
+ * @since  1.0.0
+ *
+ * @param object    $lesson 
+ * @param int       $userId 
+ */
+function gamipress_fluentcommunity_complete_lesson( $lesson, $userId ) {
+
+    $lesson_data = $lesson->getOriginal();
+
+    // Trigger complete any lesson
+    do_action( 'gamipress_fluentcommunity_complete_lesson', $lesson_data['id'], $userId, $lesson_data['space_id'] );
+
+    // Trigger complete specific lesson
+    do_action( 'gamipress_fluentcommunity_complete_specific_lesson', $lesson_data['id'], $userId, $lesson_data['space_id'] );
+
+}
+add_action( 'fluent_community/course/lesson_completed', 'gamipress_fluentcommunity_complete_lesson', 10, 2 );

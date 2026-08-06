@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 7.0
-Stable tag: 7.9.9.2
+Stable tag: 7.9.9.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -382,6 +382,18 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.9.9.3 =
+
+* **New Features**
+* FluentCommunity: New event: Complete any lesson.
+* FluentCommunity: New event: Complete a specific lesson.
+* Tutor LMS: New event: Submit an assignment.
+* Tutor LMS: New event: Submit a specific assignment.
+* Tutor LMS: New event: Successfully pass an assignment.
+* Tutor LMS: New event: Successfully pass a specific assignment.
+* Tutor LMS: New event: Fail an assignment.
+* Tutor LMS: New event: Fail a specific assignment.
 
 = 7.9.9.2 =
 

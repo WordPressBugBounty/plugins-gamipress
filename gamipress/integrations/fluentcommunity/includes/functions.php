@@ -93,6 +93,32 @@ function gamipress_fluentcommunity_ajax_get_posts() {
         wp_send_json_success( $results );
         die;
 
+    } else if( isset( $_REQUEST['post_type'] ) && in_array( 'fluentcommunity_lessons', $_REQUEST['post_type'] ) ) {
+
+        // Return lessons
+        $lessons = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT id, title FROM {$wpdb->prefix}fcom_posts WHERE type = %s AND content_type = %s AND status = %s",
+                'course_lesson',
+                'text',
+                'published'
+            )
+        );  
+
+        foreach ( $lessons as $lesson ) {
+
+            // Results should meet same structure like posts
+            $results[] = array(
+                'ID'    => $lesson->id,
+                'post_title'  => $lesson->title,
+            );   
+
+        }
+
+        // Return our results
+        wp_send_json_success( $results );
+        die;
+
     }
 
 }
@@ -169,5 +195,33 @@ function gamipress_fluentcommunity_get_quiz_title( $quiz_id ) {
     );  
 
     return $quiz;
+
+}
+
+/**
+ * Get the lesson title
+ * 
+ * @param int $lesson_id
+ *
+ * @since 1.0.0
+ */
+function gamipress_fluentcommunity_get_lesson_title( $lesson_id ) {
+
+    global $wpdb;
+
+    // Empty title if no ID provided
+    if( absint( $lesson_id ) === 0 ) {
+        return '';
+    }
+
+    // Get lesson title
+    $lesson = $wpdb->get_var(
+        $wpdb->prepare(
+            "SELECT title FROM {$wpdb->prefix}fcom_posts WHERE id = %d",
+            absint( $lesson_id )
+        )
+    );  
+
+    return $lesson;
 
 }
