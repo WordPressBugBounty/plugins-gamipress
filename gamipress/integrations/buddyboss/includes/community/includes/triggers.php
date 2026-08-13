@@ -63,6 +63,7 @@ function gamipress_bp_activity_triggers( $triggers ) {
             'gamipress_bp_new_activity_comment'             => __( 'Reply to an activity post', 'gamipress' ),
             'gamipress_bp_get_new_activity_comment'         => __( 'Get a reply on an activity post', 'gamipress' ),
             'gamipress_bp_delete_activity_comment'          => __( 'Delete a reply from an activity post', 'gamipress' ),
+            'gamipress_bp_get_delete_activity_comment'      => __( 'Get a reply deleted from an activity post', 'gamipress' ),
             'gamipress_bp_favorite_activity'                => __( 'Like an activity post', 'gamipress' ),
             'gamipress_bp_remove_favorite_activity'         => __( 'Remove a like on an activity post', 'gamipress' ),
             'gamipress_bp_user_favorite_activity'           => __( 'Get a like on an activity post', 'gamipress' ),
@@ -92,6 +93,10 @@ function gamipress_bp_activity_triggers( $triggers ) {
             'gamipress_bp_specific_group_reply_comment'     => __( 'Reply a comment in a specific group', 'gamipress' ),
             'gamipress_bp_group_get_reply_comment'          => __( 'Get a reply on a comment in a group', 'gamipress' ),
             'gamipress_bp_specific_group_get_reply_comment' => __( 'Get a reply on a comment in a specific group', 'gamipress' ),
+            'gamipress_bp_group_delete_comment'              => __( 'Delete a reply in a comment in a group', 'gamipress' ),
+            'gamipress_bp_specific_group_delete_comment'     => __( 'Delete a reply in a comment in a specific group', 'gamipress' ),
+            'gamipress_bp_group_get_delete_comment'          => __( 'Get a reply in a comment deleted in a group', 'gamipress' ),
+            'gamipress_bp_specific_group_get_delete_comment' => __( 'Get a reply in a comment deleted in a specific group', 'gamipress' ),
             'gamipress_bp_group_delete_activity'            => __( 'Remove an activity post from a group', 'gamipress' ),
             'gamipress_bp_specific_group_delete_activity'   => __( 'Remove an activity post from a specific group', 'gamipress' ),
             'gamipress_bp_new_group'                        => __( 'Create a group', 'gamipress' ),
@@ -177,6 +182,8 @@ function gamipress_bp_specific_activity_triggers( $specific_activity_triggers ) 
     $specific_activity_triggers['gamipress_bp_specific_group_delete_activity'] = array( 'bp_groups' );
     $specific_activity_triggers['gamipress_bp_specific_group_reply_comment'] = array( 'bp_groups' );
     $specific_activity_triggers['gamipress_bp_specific_group_get_reply_comment'] = array( 'bp_groups' );
+    $specific_activity_triggers['gamipress_bp_specific_group_delete_comment'] = array( 'bp_groups' );
+    $specific_activity_triggers['gamipress_bp_specific_group_get_delete_comment'] = array( 'bp_groups' );
     $specific_activity_triggers['gamipress_bp_join_specific_group'] = array( 'bp_groups' );
     $specific_activity_triggers['gamipress_bp_delete_specific_group'] = array( 'bp_groups' );
     $specific_activity_triggers['gamipress_bp_leave_specific_group'] = array( 'bp_groups' );
@@ -211,6 +218,8 @@ function gamipress_bp_specific_activity_trigger_label( $specific_activity_trigge
     $specific_activity_trigger_labels['gamipress_bp_specific_group_delete_activity'] = __( 'Remove an activity post from %s group', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_bp_specific_group_reply_comment'] = __( 'Reply a comment on %s group', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_bp_specific_group_get_reply_comment'] = __( 'Get a reply in a comment on %s group', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_bp_specific_group_delete_comment'] = __( 'Delete a comment on %s group', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_bp_specific_group_get_delete_comment'] = __( 'Get a comment deleted on %s group', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_bp_join_specific_group'] = __( 'Join %s group', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_bp_leave_specific_group'] = __( 'Leave %s group', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_bp_request_join_specific_private_group'] = __( 'Request to join %s group', 'gamipress' );
@@ -249,6 +258,8 @@ function gamipress_bp_specific_activity_trigger_post_title( $post_title, $specif
         case 'gamipress_bp_specific_group_delete_activity':
         case 'gamipress_bp_specific_group_reply_comment':
         case 'gamipress_bp_specific_group_get_reply_comment':
+        case 'gamipress_bp_specific_group_delete_comment':
+        case 'gamipress_bp_specific_group_get_delete_comment':
         case 'gamipress_bp_join_specific_group':
         case 'gamipress_bp_delete_specific_group':
         case 'gamipress_bp_leave_specific_group':
@@ -312,6 +323,8 @@ function gamipress_bp_specific_activity_trigger_permalink( $permalink, $specific
         case 'gamipress_bp_specific_group_delete_activity':
         case 'gamipress_bp_specific_group_reply_comment':
         case 'gamipress_bp_specific_group_get_reply_comment':
+        case 'gamipress_bp_specific_group_delete_comment':
+        case 'gamipress_bp_specific_group_get_delete_comment':
         case 'gamipress_bp_join_specific_group':
         case 'gamipress_bp_delete_specific_group':
         case 'gamipress_bp_leave_specific_group':
@@ -391,6 +404,7 @@ function gamipress_bp_trigger_get_user_id( $user_id, $trigger, $args ) {
         case 'gamipress_bp_new_activity_comment':
         case 'gamipress_bp_get_new_activity_comment':
         case 'gamipress_bp_delete_activity_comment':
+        case 'gamipress_bp_get_delete_activity_comment':
         case 'gamipress_bp_favorite_activity':
         case 'gamipress_bp_remove_favorite_activity':
         case 'gamipress_bp_user_favorite_activity':
@@ -406,6 +420,10 @@ function gamipress_bp_trigger_get_user_id( $user_id, $trigger, $args ) {
         case 'gamipress_bp_specific_group_reply_comment':
         case 'gamipress_bp_group_get_reply_comment':
         case 'gamipress_bp_specific_group_get_reply_comment':
+        case 'gamipress_bp_group_delete_comment':
+        case 'gamipress_bp_specific_group_delete_comment':
+        case 'gamipress_bp_group_get_delete_comment':
+        case 'gamipress_bp_specific_group_get_delete_comment':
         case 'gamipress_bp_group_delete_activity':
         case 'gamipress_bp_specific_group_delete_activity':
         case 'gamipress_bp_join_group':
@@ -460,9 +478,11 @@ function gamipress_bp_specific_trigger_get_id( $specific_id, $trigger = '', $arg
         case 'gamipress_bp_specific_group_publish_activity':
         case 'gamipress_bp_specific_group_delete_activity':
         case 'gamipress_bp_specific_group_reply_comment':
+        case 'gamipress_bp_specific_group_delete_comment':
             $specific_id = $args[2];
             break;
         case 'gamipress_bp_specific_group_get_reply_comment':
+        case 'gamipress_bp_specific_group_get_delete_comment':
             $specific_id = $args[3];
             break;
         case 'gamipress_bp_join_specific_group':
@@ -541,6 +561,7 @@ function gamipress_bp_log_event_trigger_meta_data( $log_meta, $user_id, $trigger
         case 'gamipress_bp_new_activity_comment':
         case 'gamipress_bp_get_new_activity_comment':
         case 'gamipress_bp_delete_activity_comment':
+        case 'gamipress_bp_get_delete_activity_comment':
             // Add the comment ID
             $log_meta['comment_id'] = $args[0];
             break;
@@ -550,12 +571,16 @@ function gamipress_bp_log_event_trigger_meta_data( $log_meta, $user_id, $trigger
         case 'gamipress_bp_specific_group_delete_activity':
         case 'gamipress_bp_group_reply_comment':
         case 'gamipress_bp_specific_group_reply_comment':
+        case 'gamipress_bp_group_delete_comment':
+        case 'gamipress_bp_specific_group_delete_comment':
             // Add the activity and group IDs
             $log_meta['activity_id'] = $args[0];
             $log_meta['group_id'] = $args[2];
             break;
         case 'gamipress_bp_group_get_reply_comment':
         case 'gamipress_bp_specific_group_get_reply_comment':
+        case 'gamipress_bp_group_get_delete_comment':
+        case 'gamipress_bp_specific_group_get_delete_comment':
             // Add the activity and group IDs
             $log_meta['activity_id'] = $args[0];
             $log_meta['group_id'] = $args[3];
@@ -643,6 +668,7 @@ function gamipress_bp_trigger_duplicity_check( $return, $user_id, $trigger, $sit
         case 'gamipress_bp_new_activity_comment':
         case 'gamipress_bp_get_new_activity_comment':
         case 'gamipress_bp_delete_activity_comment':
+        case 'gamipress_bp_get_delete_activity_comment':
             // User can not create same activity comment more times, so check it
             $log_meta['comment_id'] = $args[0];
             $return = (bool) ( gamipress_get_user_last_log( $user_id, $log_meta ) === false );

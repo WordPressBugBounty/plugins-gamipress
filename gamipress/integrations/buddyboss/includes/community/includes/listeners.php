@@ -256,7 +256,30 @@ function gamipress_bp_delete_activity_comment( $activity_id, $comment_id ) {
 
     $user_id = bp_loggedin_user_id();
 
+    if( class_exists( 'BP_Activity_Activity' ) ) {
+        $activity = new BP_Activity_Activity( $activity_id );
+        $parent_user_id = $activity->user_id;
+    }
+
+    // Check if user is not the author
+    if ( $parent_user_id === $user_id ) {
+        return;
+    }
+
     do_action( 'gamipress_bp_delete_activity_comment', $comment_id, $user_id );
+    do_action( 'gamipress_bp_get_delete_activity_comment', $comment_id, $parent_user_id, $user_id );
+
+    // If comment in group
+    if ( $activity->component === 'groups' ) {
+
+        $group_id = $activity->item_id;
+
+        do_action( 'gamipress_bp_group_delete_comment', $comment_id, $user_id, $group_id );
+        do_action( 'gamipress_bp_group_get_delete_comment', $comment_id, $parent_user_id, $user_id, $group_id );
+        do_action( 'gamipress_bp_specific_group_delete_comment', $comment_id, $user_id, $group_id );
+        do_action( 'gamipress_bp_specific_group_get_delete_comment', $comment_id, $parent_user_id, $user_id, $group_id );
+
+    }
 }
 add_action( 'bp_activity_delete_comment', 'gamipress_bp_delete_activity_comment', 10, 2 );
 
