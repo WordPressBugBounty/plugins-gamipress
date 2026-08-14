@@ -123,6 +123,15 @@
             lifetime_inputs.hide();
         }
 
+        // Subscription months active
+        var months_active_inputs = $(this).siblings('.wc-subscription-months');
+
+        if( trigger_type === 'gamipress_wc_subscription_months_active' || trigger_type === 'gamipress_wc_specific_subscription_months_active' ) {
+            months_active_inputs.show();
+        } else {
+            months_active_inputs.hide();
+        }
+
     });
 
     // Loop requirement list items to show/hide score input on initial load
@@ -183,6 +192,15 @@
             lifetime_inputs.hide();
         }
 
+        // Subscription months active
+        var months_active_inputs = $(this).find('.wc-subscription-months');
+
+        if( trigger_type === 'gamipress_wc_subscription_months_active' || trigger_type === 'gamipress_wc_specific_subscription_months_active' ) {
+            months_active_inputs.show();
+        } else {
+            months_active_inputs.hide();
+        }
+
     });
 
     $('.requirements-list').on( 'update_requirement_data', '.requirement-row', function(e, requirement_details, requirement) {
@@ -219,6 +237,12 @@
         if( requirement_details.trigger_type === 'gamipress_wc_lifetime_value' ) {
             requirement_details.wc_lifetime_condition = requirement.find( '.wc-lifetime select' ).val();
             requirement_details.wc_lifetime = requirement.find( '.wc-lifetime input' ).val();
+        }
+
+        // Subscription active months
+        if( requirement_details.trigger_type === 'gamipress_wc_subscription_months_active'
+            || requirement_details.trigger_type === 'gamipress_wc_specific_subscription_months_active' ) {
+            requirement_details.wc_subscription_months = requirement.find( '.wc-subscription-months input' ).val();
         }
     });
 

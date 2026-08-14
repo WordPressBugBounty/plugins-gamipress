@@ -2,8 +2,8 @@
 Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flabernardez
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
-Tested up to: 7.0
-Stable tag: 7.9.9.4
+Tested up to: 7.1
+Stable tag: 7.9.9.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -382,6 +382,12 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 7.9.9.5 =
+
+* **New Features**
+* WooCommerce: New event: Subscription active for a number of months.
+* WooCommerce: New event: Specific subscription active for a number of months.
 
 = 7.9.9.4 =
 

@@ -61,6 +61,10 @@ function gamipress_wc_activity_triggers( $triggers ) {
         'gamipress_wc_subscription_renewal'                         => __( 'Renew a subscription product', 'gamipress' ),
         'gamipress_wc_specific_subscription_renewal'                => __( 'Renew a specific subscription product', 'gamipress' ),
         'gamipress_wc_specific_subscription_variation_renewal'      => __( 'Renew a specific subscription variation of a product', 'gamipress' ),
+
+        'gamipress_wc_subscription_months_active'                   => __( 'Subscription active for a number of months', 'gamipress' ),
+        'gamipress_wc_specific_subscription_months_active'          => __( 'Specific subscription active for a number of months', 'gamipress' ),
+
         'gamipress_wc_subscription_cancelled'                       => __( 'Cancel a subscription product', 'gamipress' ),
         'gamipress_wc_specific_subscription_cancelled'              => __( 'Cancel a specific subscription product', 'gamipress' ),
         'gamipress_wc_specific_subscription_variation_cancelled'    => __( 'Cancel a specific subscription variation of a product', 'gamipress' ),
@@ -111,6 +115,7 @@ function gamipress_wc_specific_activity_triggers( $specific_activity_triggers ) 
     $specific_activity_triggers['gamipress_wc_specific_subscription_expired'] = array( 'product' );
     $specific_activity_triggers['gamipress_wc_specific_subscription_variation_purchase'] = array( 'product' );
     $specific_activity_triggers['gamipress_wc_specific_subscription_variation_renewal'] = array( 'product' );
+    $specific_activity_triggers['gamipress_wc_specific_subscription_months_active'] = array( 'product' );
     $specific_activity_triggers['gamipress_wc_specific_subscription_variation_cancelled'] = array( 'product' );
     $specific_activity_triggers['gamipress_wc_specific_subscription_variation_expired'] = array( 'product' );
 
@@ -218,6 +223,7 @@ function gamipress_wc_activity_trigger_label( $title, $requirement_id, $requirem
 
             // Complete a purchase where total is equal, less or greater than a value
             return sprintf( __( 'Complete a purchase where total is %s %s', 'gamipress' ), $conditions[$condition], $purchase_total );
+            break;
         case 'gamipress_wc_lifetime_value':
             $lifetime = ( isset( $requirement['wc_lifetime'] ) ) ? floatval( $requirement['wc_lifetime'] ) : 0;
             $condition = ( isset( $requirement['wc_lifetime_condition'] ) ) ? $requirement['wc_lifetime_condition'] : 'equal';
@@ -225,6 +231,12 @@ function gamipress_wc_activity_trigger_label( $title, $requirement_id, $requirem
 
             // Lifetime value is equal, less or greater than a value
             return sprintf( __( 'Lifetime value %s %s', 'gamipress' ), $conditions[$condition], $lifetime );
+            break;
+        case 'gamipress_wc_subscription_months_active':
+        case 'gamipress_wc_specific_subscription_months_active':
+            $active_time = ( isset( $requirement['wc_subscription_months'] ) ) ? floatval( $requirement['wc_subscription_months'] ) : 0;
+            
+            return sprintf( __( 'Subscription active for %s months', 'gamipress' ), $active_time );
             break;
 
     }
@@ -262,6 +274,7 @@ function gamipress_wc_specific_activity_trigger_label( $specific_activity_trigge
     $specific_activity_trigger_labels['gamipress_wc_specific_subscription_variation_renewal'] = __( 'Renew %s subscription variation', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_wc_specific_subscription_variation_cancelled'] = __( 'Cancel %s subscription variation', 'gamipress' );
     $specific_activity_trigger_labels['gamipress_wc_specific_subscription_variation_expired'] = __( '%s subscription variation expires', 'gamipress' );
+    $specific_activity_trigger_labels['gamipress_wc_specific_subscription_months_active'] = __( 'Subscription %s active', 'gamipress' );
 
     // Memberships
     $specific_activity_trigger_labels['gamipress_wc_specific_membership_added'] = __( 'Get added to %s membership', 'gamipress' );
@@ -323,6 +336,8 @@ function gamipress_wc_trigger_get_user_id( $user_id, $trigger, $args ) {
         case 'gamipress_wc_specific_subscription_variation_renewal':
         case 'gamipress_wc_specific_subscription_variation_cancelled':
         case 'gamipress_wc_specific_subscription_variation_expired':
+        case 'gamipress_wc_subscription_months_active':
+        case 'gamipress_wc_specific_subscription_months_active':
         // Memberships
         case 'gamipress_wc_membership_added':
         case 'gamipress_wc_specific_membership_added':
@@ -381,6 +396,7 @@ function gamipress_wc_specific_trigger_get_id( $specific_id, $trigger, $args ) {
         case 'gamipress_wc_specific_subscription_variation_renewal':
         case 'gamipress_wc_specific_subscription_variation_cancelled':
         case 'gamipress_wc_specific_subscription_variation_expired':
+        case 'gamipress_wc_specific_subscription_months_active':
             $specific_id = $args[0];
             break;
     }
@@ -429,6 +445,8 @@ function gamipress_wc_log_event_trigger_meta_data( $log_meta, $user_id, $trigger
         case 'gamipress_wc_specific_subscription_cancelled':
         case 'gamipress_wc_subscription_expired':
         case 'gamipress_wc_specific_subscription_expired':
+        case 'gamipress_wc_subscription_months_active':
+        case 'gamipress_wc_specific_subscription_months_active':
             // Add the product and order IDs
             $log_meta['product_id'] = $args[0];
             $log_meta['post_id'] = $args[0]; // Post ID added to make column visible on logs list

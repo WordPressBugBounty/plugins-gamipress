@@ -632,6 +632,8 @@ function gamipress_wc_subscription_renewal_listener( $order_id ) {
 
     $user_id = $order->get_user_id();
 
+    $subscriptions = wcs_get_subscriptions_for_renewal_order( $order_id );
+    
     // Loop all items to trigger events on each one purchased
     foreach ( $items as $item ) {
 
@@ -659,6 +661,32 @@ function gamipress_wc_subscription_renewal_listener( $order_id ) {
 
             // Specific product subscription renewal
             do_action( 'gamipress_wc_specific_subscription_renewal', $product_id, $user_id, $order_id );
+
+            foreach ( $subscriptions as $subscription ) {
+                if ( $subscription->has_product( $product_id ) ) {
+                    // Check if active
+                    if ( $subscription->has_status( 'active' ) ) {
+                        
+                        $start_subscription = date( 'Y-m-d', strtotime( $subscription->get_date( 'start' ) ) );
+                        $current_date = date( 'Y-m-d', current_time( 'timestamp' ) );
+                        
+                        $from = date_create( $start_subscription );
+                        $to   = date_create( $current_date );
+
+                        // Calculate the difference in months
+                        $interval = date_diff( $from, $to );
+                        
+                        $months_old = (int) ( ( $interval->y * 12 ) + $interval->m );
+                    }
+                    break;
+                }
+            }
+
+            // Any product subscription months active
+            do_action( 'gamipress_wc_subscription_months_active', $product_id, $user_id, $order_id, $months_old );
+
+            // Specific product subscription months active
+            do_action( 'gamipress_wc_specific_subscription_months_active', $product_id, $user_id, $order_id, $months_old );
 
 
         } // End for of quantities

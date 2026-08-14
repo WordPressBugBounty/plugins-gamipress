@@ -62,6 +62,15 @@ function gamipress_wc_requirement_object( $requirement, $requirement_id ) {
 
     }
 
+    if( isset( $requirement['trigger_type'] )
+        && ( $requirement['trigger_type'] === 'gamipress_wc_subscription_months_active'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_months_active' ) ) {
+
+        // Subscription months active
+        $requirement['wc_subscription_months'] = gamipress_get_post_meta( $requirement_id, '_gamipress_wc_subscription_months', true );
+
+    }
+
     return $requirement;
 }
 add_filter( 'gamipress_requirement_object', 'gamipress_wc_requirement_object', 10, 2 );
@@ -159,6 +168,16 @@ function gamipress_wc_requirement_ui_fields( $requirement_id, $post_id ) {
     </span>
 
     <?php
+
+    // Subscription months active
+    $subscription_months = gamipress_get_post_meta( $requirement_id, '_gamipress_wc_subscription_months', true );
+
+    ?>
+    <span class="wc-subscription-months">
+        <input type="text" value="<?php echo esc_attr( $subscription_months ); ?>" size="5" maxlength="5" placeholder="6" />
+    </span>
+
+    <?php
 }
 add_action( 'gamipress_requirement_ui_html_after_achievement_post', 'gamipress_wc_requirement_ui_fields', 10, 2 );
 
@@ -210,6 +229,15 @@ function gamipress_wc_ajax_update_requirement( $requirement_id, $requirement ) {
         // Lifetime
         gamipress_update_post_meta( $requirement_id, '_gamipress_wc_lifetime_condition', $requirement['wc_lifetime_condition'] );
         gamipress_update_post_meta( $requirement_id, '_gamipress_wc_lifetime', $requirement['wc_lifetime'] );
+
+    }
+
+    if( isset( $requirement['trigger_type'] )
+        && ( $requirement['trigger_type'] === 'gamipress_wc_subscription_months_active'
+            || $requirement['trigger_type'] === 'gamipress_wc_specific_subscription_months_active' ) ) {
+
+        // Subscription months active
+        gamipress_update_post_meta( $requirement_id, '_gamipress_wc_subscription_months', $requirement['wc_subscription_months'] );
 
     }
 }

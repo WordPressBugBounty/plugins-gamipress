@@ -83,6 +83,17 @@ function gamipress_wc_check_if_meets_requirements( $requirement_id, $trigger, $a
         $return = (bool) ( gamipress_number_condition_matches( $lifetime, $required_value, $condition ) );
     }
 
+    // Subscription months active
+    if( $trigger === 'gamipress_wc_subscription_months_active' || $trigger === 'gamipress_wc_specific_subscription_months_active' ) {
+
+        $months_old = absint( $args[3] );
+
+        $required_months_old = absint( gamipress_get_post_meta( $requirement_id, '_gamipress_wc_subscription_months', true ) );
+
+        // True if there is months old is equal to required months old
+        $return = (bool) ( $months_old >= $required_months_old );
+    }
+
     return $return;
 
 }
