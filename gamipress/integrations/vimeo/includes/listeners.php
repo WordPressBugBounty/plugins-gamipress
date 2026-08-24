@@ -14,6 +14,11 @@ function gamipress_vimeo_track_watch_video_listener() {
     // Security check, forces to die if not security passed
     check_ajax_referer( 'gamipress', 'nonce' );
 
+    // Check if user can manage GamiPress
+    if( ! current_user_can( gamipress_get_manager_capability() ) ) {
+        wp_send_json_error( __( 'You\'re not allowed to perform this action.', 'gamipress' ) );
+    }
+
     $events_triggered   = array();
     $user_id            = ( isset( $_REQUEST['user_id'] ) ? $_REQUEST['user_id'] : get_current_user_id() );
     $video_id           = ( isset( $_REQUEST['video_id'] ) ? sanitize_text_field( $_REQUEST['video_id'] ) : '' );
