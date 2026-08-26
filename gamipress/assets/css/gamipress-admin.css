@@ -288,8 +288,9 @@
 }
 
 /* Compatibility fix between CMB2 & WP 7.0 */
-.cmb2-wrap input[type=radio]:checked:focus {
-	background: var(--wp-admin-theme-color);
+.cmb2-wrap input[type=radio]:checked:focus,
+.cmb2-wrap input[type="checkbox"]:checked:focus {
+    background: var(--wp-admin-theme-color);
 }
 
 @media only screen and (min-width: 850px) {
