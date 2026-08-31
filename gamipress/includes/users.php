@@ -111,11 +111,6 @@ add_action( 'delete_user', 'gamipress_on_delete_user', 10, 2 );
  */
 function gamipress_get_user_achievements( $args = array() ) {
 
-	// If not properly upgrade to required version fallback to compatibility function
-	if( ! is_gamipress_upgraded_to( '1.2.8' ) ) {
-		return gamipress_get_user_achievements_old( $args );
-	}
-
 	// Setup our default args
 	$defaults = array(
 		'user_id'          => 0,     					// The given user's ID
@@ -236,11 +231,6 @@ function gamipress_get_user_achievements( $args = array() ) {
  * @return bool 		The updated umeta ID on success, false on failure
  */
 function gamipress_update_user_achievements( $args = array() ) {
-
-	// If not properly upgrade to required version fallback to compatibility function
-	if( ! is_gamipress_upgraded_to( '1.2.8' ) ) {
-		return gamipress_update_user_achievements_old( $args );
-	}
 
 	// Setup our default args
 	$defaults = array(

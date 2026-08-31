@@ -68,7 +68,7 @@
 .menu-top.toplevel_page_gamipress .wp-submenu li:nth-child(6),
 .menu-top.toplevel_page_gamipress .wp-submenu li:nth-child(8),
 .menu-top.toplevel_page_gamipress .wp-submenu li:nth-child(11),
-.menu-top.toplevel_page_gamipress .wp-submenu li:nth-child(14) {
+.menu-top.toplevel_page_gamipress .wp-submenu li:nth-child(13) {
 	border-top: 1px solid #666;
 }
 
@@ -2098,7 +2098,7 @@ body.toplevel_page_gamipress {
 }
 
 .gamipress-dashboard .meta-box-sortables {
-	margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .gamipress-dashboard .postbox .inside,
@@ -2127,6 +2127,7 @@ body.toplevel_page_gamipress {
 	cursor: auto;
 	user-select: auto;
 	font-size: 16px;
+	padding: 8px 10px !important;
 }
 
 .gamipress-dashboard .postbox .hndle .button {
@@ -2289,12 +2290,14 @@ body.toplevel_page_gamipress {
 }
 
 .gamipress-dashboard .gamipress-dashboard-video .gamipress-dashboard-video-image {
-	height: 59px;
+	height: 60px;
 	overflow: hidden;
+	margin-right: 6px;
 }
 
 .gamipress-dashboard .gamipress-dashboard-video .gamipress-dashboard-video-image img {
 	margin-top: -13px;
+	margin-left: -10px;
 }
 
 .gamipress-dashboard .gamipress-dashboard-video .gamipress-dashboard-video-details .gamipress-dashboard-video-title {
@@ -2331,6 +2334,7 @@ body.toplevel_page_gamipress {
 	clear: both;
 	text-align: center;
 	font-size: 16px;
+	margin: 0 auto;
 	padding-top: 20px;
 }
 
@@ -2342,6 +2346,8 @@ body.toplevel_page_gamipress {
 
 .gamipress-dashboard .gamipress-dashboard-add-ons-section,
 .gamipress-dashboard .gamipress-dashboard-assets-section {
+	display: flex !important;
+    flex-wrap: wrap;
 	margin: 0 !important;
 }
 
@@ -2387,6 +2393,11 @@ body.toplevel_page_gamipress {
 	.gamipress-dashboard .plugin-card:nth-child(3n+1) {
 		clear: none;
 	}
+}
+
+/* Docs */
+.gamipress-dashboard .gamipress-dashboard-docs-section .postbox-header .hndle {
+	padding-bottom: 0 !important;
 }
 
 /* Plugins */
