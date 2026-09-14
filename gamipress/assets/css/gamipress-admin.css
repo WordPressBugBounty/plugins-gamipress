@@ -288,9 +288,8 @@
 }
 
 /* Compatibility fix between CMB2 & WP 7.0 */
-.cmb2-wrap input[type=radio]:checked:focus,
-.cmb2-wrap input[type="checkbox"]:checked:focus {
-    background: var(--wp-admin-theme-color);
+.cmb2-wrap input[type=radio]:checked:focus {
+	background: var(--wp-admin-theme-color);
 }
 
 @media only screen and (min-width: 850px) {
@@ -1159,13 +1158,14 @@ body.wp-customizer > .gamipress-select2 {
 
 .gamipress-select2 .select2-selection--multiple .select2-selection__rendered li {
 	border-radius: 0;
-	padding: 2px 5px 2px;
+	padding: 2px 5px 2px 22px;
 	vertical-align: middle;
 	margin-bottom: 0 !important;
 }
 
 .gamipress-select2 .select2-selection--multiple .select2-selection__choice__remove {
-	line-height: 10px;
+	line-height: 18px;
+	padding-bottom: 2px !important;
 	font-size: 18px;
 	vertical-align: top;
 	margin-top: 1px;
@@ -2098,7 +2098,7 @@ body.toplevel_page_gamipress {
 }
 
 .gamipress-dashboard .meta-box-sortables {
-    margin-bottom: 0 !important;
+	margin-bottom: 0 !important;
 }
 
 .gamipress-dashboard .postbox .inside,
@@ -2334,7 +2334,6 @@ body.toplevel_page_gamipress {
 	clear: both;
 	text-align: center;
 	font-size: 16px;
-	margin: 0 auto;
 	padding-top: 20px;
 }
 
@@ -2346,8 +2345,6 @@ body.toplevel_page_gamipress {
 
 .gamipress-dashboard .gamipress-dashboard-add-ons-section,
 .gamipress-dashboard .gamipress-dashboard-assets-section {
-	display: flex !important;
-    flex-wrap: wrap;
 	margin: 0 !important;
 }
 

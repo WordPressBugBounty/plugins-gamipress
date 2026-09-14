@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 7.1
-Stable tag: 8.0.0
+Stable tag: 8.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -214,6 +214,7 @@ Increase form completion and participation by rewarding your users submissions.
 * [Kali Forms](https://gamipress.com/add-ons/kali-forms-integration/)
 * [weForms](https://gamipress.com/add-ons/weforms-integration/)
 * [Brizy](https://gamipress.com/add-ons/brizy-integration/)
+* [MetForm](https://gamipress.com/add-ons/metform-integration/)
 
 = Other integrations =
 
@@ -443,6 +444,23 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 8.0.2 =
+
+* **Bug Fixes**
+* Youtube: Fixed bug related to event ajax function.
+* Vimeo: Fixed bug related to event ajax function.
+
+= 8.0.1 =
+
+* **New Features**
+* New integration: MetForm.
+* MetForm: New event: Submit a form.
+* MetForm: New event: Submit a specific form.
+* MetForm: New event: Submit a specific field value.
+* MetForm: New event: Submit a specific field value on a specific form.
+* **Improvements**
+Updated the CMB2 library to the latest version.
 
 = 8.0.0 =
 
