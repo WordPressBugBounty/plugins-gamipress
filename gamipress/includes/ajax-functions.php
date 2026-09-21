@@ -20,7 +20,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 function gamipress_ajax_get_achievements() {
     // Security check, forces to die if not security passed
     check_ajax_referer( 'gamipress', 'nonce' );
-
+    
 	// Send back our successful response
 	wp_send_json_success( gamipress_achievements_shortcode_query( $_REQUEST ) );
 

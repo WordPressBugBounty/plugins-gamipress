@@ -1012,25 +1012,25 @@ function gamipress_get_rank_earners( $rank_id = 0, $args = array() ) {
 
     $args = wp_parse_args( $args, $defaults );
 
+    // Sanitization
+    $args['limit'] = absint( $args['limit'] );
+    $args['order'] = gamipress_validate_from_array( strtoupper( $args['order'] ), array( 'ASC', 'DESC' ), 'DESC' );
+
     // Setup FROM
-    if( ! empty( $args['from'] ) ) {
+    if( ! empty( $args['from'] ) )
         $from .= $args['from'];
-    }
 
     // Setup WHERE
-    if( ! empty( $args['where'] ) ) {
+    if( ! empty( $args['where'] ) )
         $where .= $args['where'];
-    }
 
     // Setup LIMIT
-    if( $args['limit'] > 0 ) {
+    if( $args['limit'] > 0 )
         $limit = '0, ' . $args['limit'];
-    }
 
     // Setup ORDER BY
-    if( ! empty( $args['orderby'] ) ) {
+    if( ! empty( $args['orderby'] ) )
         $order_by = $args['orderby'] . ' ' .  $args['order'];
-    }
 
     $earners = $wpdb->get_col(
         "SELECT u.user_id
