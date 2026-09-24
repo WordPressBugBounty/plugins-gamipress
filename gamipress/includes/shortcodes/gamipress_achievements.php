@@ -402,7 +402,7 @@ function gamipress_achievements_shortcode_query( $args = array() ) {
 
     // Sanitization
     $limit = absint( $limit );
-    $offset = absint( $limit );
+    $offset = absint( $offset );
     $order = gamipress_validate_from_array( strtoupper( $order ), array( 'ASC', 'DESC' ), 'DESC' );
 
     // Turn no attributes to false
