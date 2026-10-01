@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 7.1
-Stable tag: 8.0.4
+Stable tag: 8.0.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -263,6 +263,7 @@ Gamify your CRM, Affiliate Program, Event Booking, Job Boards even your Support 
 * [AffiliatePress](https://gamipress.com/add-ons/affiliatepress-integration/)
 * [BookingPress](https://gamipress.com/add-ons/bookingpress-integration/)
 * [Mail Mint](https://gamipress.com/add-ons/mail-mint-integration/)
+* [MailerPress](https://gamipress.com/add-ons/mailerpress-integration/)
 
 [View all integrations](https://gamipress.com/integrations/)
 
@@ -444,6 +445,20 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 8.0.5 =
+
+* **New Features**
+* New integration: MailerPress.
+* MailerPress: New event: A tag added.
+* MailerPress: New event: Specific tag added.
+* MailerPress: New event: Added to a list.
+* MailerPress: New event: Added to a specific list.
+* MailerPress: New event: A tag removed.
+* MailerPress: New event: Specific tag removed.
+* MailerPress: New event: Removed from a list.
+* MailerPress: New event: Removed from specific list.
+* MailerPress: New event: Register as a contact.
 
 = 8.0.4 =
 
