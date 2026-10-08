@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 7.1
-Stable tag: 8.0.5
+Stable tag: 8.0.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -445,6 +445,14 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 8.0.6 =
+
+* **Security Fixes**
+* Improved private's log handling for the logs block and shortcode.
+* Added capability check to log extra data box.
+* Improved auth callback for the GamiPress user metas (mainly for REST API updates).
+* Added more capability check to all user-related requests.
 
 = 8.0.5 =
 

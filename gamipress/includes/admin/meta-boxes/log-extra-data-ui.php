@@ -309,6 +309,10 @@ function gamipress_get_log_extra_data_ui_ajax_handler() {
     // Security check, forces to die if not security passed
     check_ajax_referer( 'gamipress_admin', 'nonce' );
 
+    // Check user capabilities
+    if( ! current_user_can( gamipress_get_manager_capability() ) )
+        wp_send_json_error( __( 'You are not allowed to perform this action.', 'gamipress' ) );
+
     ct_setup_table( 'gamipress_logs' );
 
     $ct_object = ct_get_object( absint( $_REQUEST['object_id'] ) );

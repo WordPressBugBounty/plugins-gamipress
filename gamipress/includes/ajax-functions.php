@@ -47,10 +47,14 @@ function gamipress_ajax_get_logs() {
 
     $atts = $_REQUEST;
     
-	// Change the atribute to display only public logs if current user is different
+	// Change the attribute to display only public logs if current user is different
     if( $atts['access'] !== 'public' ) {
-        if ( get_current_user_id() !== absint( $atts['user_id'] ) )
-            $atts['access'] = 'public';
+        $current_user_id = get_current_user_id();
+
+        // If user is not logged in, force to public
+        if ( $current_user_id === 0 ) $atts['access'] = 'public';
+        // If user ID is different from logged in, force to public
+        if ( $current_user_id !== absint( $atts['user_id'] ) ) $atts['access'] = 'public';
     }
 	
     // Unset non required shortcode atts
@@ -59,7 +63,7 @@ function gamipress_ajax_get_logs() {
 
 	// Sanitize
     foreach( $atts as $attr => $value ) {
-        $atts[$attr] = sanitize_text_field( $value );
+        $value = sanitize_text_field( $value );
 		$atts[$attr] = str_replace( array( '[', ']' ), '', $value);
     }
 

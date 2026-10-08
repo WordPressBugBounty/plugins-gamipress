@@ -24,7 +24,7 @@ function gamipress_register_users_metas() {
             'single'            => true,
             'show_in_rest'      => true,
             'sanitize_callback' => 'absint',
-            'auth_callback'     => '__return_true'
+            'auth_callback'     => 'gamipress_user_metas_auth_callback'
         );
 
         /**
@@ -49,7 +49,7 @@ function gamipress_register_users_metas() {
             'single'            => true,
             'show_in_rest'      => true,
             'sanitize_callback' => 'absint',
-            'auth_callback'     => '__return_true'
+            'auth_callback'     => 'gamipress_user_metas_auth_callback'
         );
 
         /**
@@ -68,6 +68,21 @@ function gamipress_register_users_metas() {
 
 }
 add_action( 'init', 'gamipress_register_users_metas' );
+
+/**
+ * User's meta auth callback
+ *
+ * @since 8.0.6
+ *
+ * @param bool      $allowed
+ * @param string    $meta_key
+ * @param int       $user_id
+ *
+ * @return bool
+ */
+function gamipress_user_metas_auth_callback( $allowed, $meta_key, $user_id ) {
+    return current_user_can( gamipress_get_manager_capability() );
+}
 
 /**
  * Remove all user logs and earnings when is deleted from the database.
