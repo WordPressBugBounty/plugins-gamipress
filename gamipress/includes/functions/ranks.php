@@ -1013,7 +1013,7 @@ function gamipress_get_rank_earners( $rank_id = 0, $args = array() ) {
     $args = wp_parse_args( $args, $defaults );
 
     // Sanitization
-    $args['limit'] = absint( $args['limit'] );
+    $args['limit'] = (int) $args['limit'];
     $args['order'] = gamipress_validate_from_array( strtoupper( $args['order'] ), array( 'ASC', 'DESC' ), 'DESC' );
 
     // Setup FROM
