@@ -3708,7 +3708,7 @@ body.toplevel_page_gamipress {
 	opacity: 1;
 }
 
-	/* Badge Builder Icons */
+/* Badge Builder Icons */
 .gamipress-badge-builder .dashicons-image-rotate.dashicons-image-rotate-right {
     transform: rotateY(180deg);
 }
@@ -3862,4 +3862,9 @@ body.toplevel_page_gamipress {
 
 .gamipress-sortable-multicheck .cmb2-list li.ui-sortable-helper::before {
     cursor: move;
+}
+
+/* Badge Builder: Fix notices */
+.gamipress-badge-builder .notice {
+	display: none !important;
 }
