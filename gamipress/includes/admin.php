@@ -203,6 +203,13 @@ function gamipress_get_try_option() {
         );
     }
 
+    if( ! class_exists( 'WhatAvatar' ) ) {
+        $options[] = array(
+            'label' => __( 'Try WhatAvatar!', 'gamipress' ),
+            'slug' => 'whatavatar'
+        );
+    }
+
     $count = count( $options );
 
     // Bail if no options found
