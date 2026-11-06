@@ -285,13 +285,19 @@ function gamipress_query_logs( $args ) {
 
                 if( is_array( $field_value ) ) {
 
-                    if( $type === 'integer' ) {
-                        $field_value = implode( ", ", $field_value );
-                    } else {
-                        $field_value = "'" . implode( "', '", $field_value ) . "'";
+                    $placeholders = array();
+                    foreach ( $field_value as $val ) {
+                        if ( $type === 'integer' ) {
+                            $placeholders[] = '%d';
+                            $query_args[] = intval( $val );
+                        } else {
+                            $placeholders[] = '%s';
+                            $query_args[] = strval( $val );
+                        }
                     }
+                    $placeholders_str = implode( ', ', $placeholders );
+                    $where[] = "l.{$field} {$compare} ({$placeholders_str})";
 
-                    $where[] = "l.{$field} {$compare} ({$field_value})";
                 } else {
 
                     if( $type === 'integer' ) {
@@ -317,13 +323,18 @@ function gamipress_query_logs( $args ) {
                 // If meta value is an array then need to compare using IN operator
                 if( is_array( $field_value ) ) {
 
-                    if( $type === 'integer' ) {
-                        $field_value = implode( ", ", $field_value );
-                    } else {
-                        $field_value = "'" . implode( "', '", $field_value ) . "'";
+                    $placeholders = array();
+                    foreach ( $field_value as $val ) {
+                        if ( $type === 'integer' ) {
+                            $placeholders[] = '%d';
+                            $query_args[] = intval( $val );
+                        } else {
+                            $placeholders[] = '%s';
+                            $query_args[] = strval( $val );
+                        }
                     }
-
-                    $where[] = "lm{$index}.meta_value {$compare} ({$field_value})";
+                    $placeholders_str = implode( ', ', $placeholders );
+                    $where[] = "lm{$index}.meta_value {$compare} ({$placeholders_str})";
 
                 } else {
                     // Meta query in format: 'key' =>'value'

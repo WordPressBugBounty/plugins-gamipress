@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 7.1
-Stable tag: 8.1.1
+Stable tag: 8.1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -250,6 +250,7 @@ Gamify your CRM, Affiliate Program, Event Booking, Job Boards even your Support 
 * [BookingPress](https://gamipress.com/add-ons/bookingpress-integration/)
 * [Mail Mint](https://gamipress.com/add-ons/mail-mint-integration/)
 * [MailerPress](https://gamipress.com/add-ons/mailerpress-integration/)
+* [WhatAvatar](https://gamipress.com/add-ons/whatavatar-integration/)
 
 [View all integrations](https://gamipress.com/integrations/)
 
@@ -272,7 +273,7 @@ Other teams have integrated GamiPress into their plugins, apps and themes, inclu
 🤖 [AutomatorWP](https://wordpress.org/plugins/automatorwp/) - Automator plugin that connects +300 plugins, platforms and sites together with support to webhooks.
 🔗 [ShortLinks Pro](https://wordpress.org/plugins/shortlinkspro/) - Link management plugin for shortened URLs & branded affiliate links.
 📋 [BBForms](https://wordpress.org/plugins/bbforms/) - Code form plugin designed to help you build multipurpose forms in seconds!
-👤 [WhatAvatar](https://wordpress.org/plugins/whatavatar/) - Powerful avatar editor for creating unique avatars without uploading personal photos.
+👤 [WhatAvatar](https://wordpress.org/plugins/whatavatar/) - Avatar editor for WordPress to bring custom avatars without uploading photos.
 
 == Installation ==
 
@@ -396,6 +397,11 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 8.1.2 =
+
+* **Bug Fixes**
+Fixed vulnerability.
 
 = 8.1.1 =
 
