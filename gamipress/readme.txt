@@ -3,7 +3,7 @@ Contributors: gamipress, rubengc, eneribs, dioni00, tinocalvo, pacogon, flaberna
 Tags: gamification, points, achievements, ranks, badges
 Requires at least: 4.4
 Tested up to: 7.1
-Stable tag: 8.1.2
+Stable tag: 8.1.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -251,6 +251,8 @@ Gamify your CRM, Affiliate Program, Event Booking, Job Boards even your Support 
 * [Mail Mint](https://gamipress.com/add-ons/mail-mint-integration/)
 * [MailerPress](https://gamipress.com/add-ons/mailerpress-integration/)
 * [WhatAvatar](https://gamipress.com/add-ons/whatavatar-integration/)
+* [User Registration & Membership](https://gamipress.com/add-ons/user-registration-membership-integration/)
+* [PublishPress Cart](https://gamipress.com/add-ons/publishpress-cart-integration/)
 
 [View all integrations](https://gamipress.com/integrations/)
 
@@ -397,6 +399,23 @@ No, We're unable to provide custom development services, as our focus is develop
 Also, you can check [our customize section](https://gamipress.com/customize/) where you can find a huge number of code snippets to help you customize GamiPress!
 
 == Changelog ==
+
+= 8.1.3 =
+
+* **New Features**
+* New integration: PublishPress Cart.
+* PublishPress Cart: New event: Purchase any product.
+* PublishPress Cart: New event: Purchase a specific product.
+* PublishPress Cart: New event: Refund an order for any product.
+* PublishPress Cart: New event: Refund an order for a specific product.
+* PublishPress Cart: New event: Cancel a subscription for any product.
+* PublishPress Cart: New event: Cancel a subscription for a specific product.
+* PublishPress Cart: New event: Renew a subscription for any product.
+* PublishPress Cart: New event: Renew a subscription for a specific product.
+* New integration: User Registration & Membership.
+* User Registration & Membership: New event: Register new user.
+* User Registration & Membership: New event: Sign up for a membership.
+* User Registration & Membership: New event: Sign up for a specific membership.
 
 = 8.1.2 =
 
