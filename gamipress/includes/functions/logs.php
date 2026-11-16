@@ -256,6 +256,9 @@ function gamipress_query_logs( $args ) {
             }
 
             $compare = ( is_array( $value ) && isset( $value['compare'] ) ? $value['compare'] : $default_compare );
+            
+            // To get validated compartor
+            $compare = gamipress_get_sql_valid_comparator( $compare );
 
             // Field type
             $default_type = 'string';
@@ -932,5 +935,25 @@ function gamipress_update_log_meta( $log_id, $meta_key, $meta_value, $prev_value
     ct_reset_setup_table();
 
     return $meta_id;
+
+}
+
+/**
+ * Whitelist for comparison operators 
+ *
+ * @since 8.1.2
+ *
+ * @param string $comparator   comparator.
+ * 
+ * @return string $comparator   comparator.
+ */
+function gamipress_get_sql_valid_comparator( $comparator ) {
+
+    // Comparators allowed
+    $valid = array( '=', '!=', '<', '>', '<=', '>=', 'IN', 'NOT IN', 'LIKE', 'NOT LIKE', 'BETWEEN' );
+
+    if( ! in_array( $comparator, $valid, true ) ) return '=';
+
+    return $comparator;
 
 }
