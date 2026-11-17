@@ -264,9 +264,7 @@ function gamipress_show_admin_bar_menu() {
     }
 
     // Bail if admin bar menu disabled
-    if( (bool) gamipress_get_option( 'disable_admin_bar_menu', false ) ) {
-        return false;
-    }
+    if( ! (bool) gamipress_get_option( 'admin_bar', false ) ) return false;
 
     return true;
 
@@ -513,9 +511,7 @@ function gamipress_try_admin_bar_submenu( $wp_admin_bar ) {
     }
 
     // Bail if admin bar menu disabled
-    if( (bool) gamipress_get_option( 'disable_admin_bar_menu', false ) ) {
-        return;
-    }
+    if( ! (bool) gamipress_get_option( 'admin_bar', false ) ) return false;
 
     $option = gamipress_get_try_option();
 

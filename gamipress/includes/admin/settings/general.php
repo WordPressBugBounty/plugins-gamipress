@@ -52,9 +52,9 @@ function gamipress_settings_general_meta_boxes( $meta_boxes ) {
                 'label_cb' => 'cmb_tooltip_label_cb',
                 'type' => 'size',
             ),
-            'disable_admin_bar_menu' => array(
-                'name' => __( 'Disable Top Bar Menu', 'gamipress' ),
-                'tooltip'   => __( 'Disable the GamiPress top bar menu.', 'gamipress' ),
+            'admin_bar' => array(
+                'name' => __( 'Enable Admin Bar Menu', 'gamipress' ),
+                'tooltip'   => __( 'Enable the GamiPress admin bar menu.', 'gamipress' ),
                 'label_cb' => 'cmb_tooltip_label_cb',
                 'type' => 'checkbox',
                 'classes' => 'gamipress-switch',

@@ -241,6 +241,8 @@ add_action( 'admin_enqueue_scripts', 'gamipress_admin_enqueue_scripts' );
  */
 function gamipress_enqueue_admin_bar_scripts() {
 
+    if( ! (bool) gamipress_get_option( 'admin_bar', false ) ) return false;
+
     wp_enqueue_style( 'gamipress-admin-bar-css' );
 
 }
