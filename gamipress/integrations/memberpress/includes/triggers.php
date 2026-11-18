@@ -58,9 +58,9 @@ function gamipress_memberpress_specific_activity_triggers( $specific_activity_tr
     // Purchase
     $specific_activity_triggers['gamipress_memberpress_specific_product_purchase'] = array( 'memberpressproduct' );
     $specific_activity_triggers['gamipress_memberpress_specific_lifetime_product_purchase'] = array( 'memberpressproduct' );
-    $specific_activity_triggers['gamipress_memberpress_specific_recurring_product_purchase'] = array( 'memberpressproduct' );
-    $specific_activity_triggers['gamipress_memberpress_specific_product_cancelled'] = array( 'memberpressproduct' );
-    $specific_activity_triggers['gamipress_memberpress_specific_product_suspended'] = array( 'memberpressproduct' );
+    $specific_activity_triggers['gamipress_memberpress_specific_recurring_product_purchase'] = array( 'memberpress_recurring' );
+    $specific_activity_triggers['gamipress_memberpress_specific_product_cancelled'] = array( 'memberpress_recurring' );
+    $specific_activity_triggers['gamipress_memberpress_specific_product_suspended'] = array( 'memberpress_recurring' );
     $specific_activity_triggers['gamipress_memberpress_complete_specific_lesson'] = array( 'mpcs-lesson' );
     $specific_activity_triggers['gamipress_memberpress_complete_lesson_specific_course'] = array( ' mpcs-course' );
     $specific_activity_triggers['gamipress_memberpress_start_specific_course'] = array( ' mpcs-course' );
@@ -94,6 +94,38 @@ function gamipress_memberpress_specific_activity_trigger_label( $specific_activi
     return $specific_activity_trigger_labels;
 }
 add_filter( 'gamipress_specific_activity_trigger_label', 'gamipress_memberpress_specific_activity_trigger_label' );
+
+/**
+ * Get plugin specific activity trigger post title
+ *
+ * @since  1.0.0
+ *
+ * @param  string   $post_title
+ * @param  integer  $specific_id
+ * @param  string   $trigger_type
+ *
+ * @return string
+ */
+function gamipress_memberpress_specific_activity_trigger_post_title( $post_title, $specific_id, $trigger_type ) {
+
+    switch( $trigger_type ) {
+        case 'gamipress_memberpress_specific_recurring_product_purchase':
+        case 'gamipress_memberpress_specific_product_cancelled':
+        case 'gamipress_memberpress_specific_product_suspended':
+            if( absint( $specific_id ) !== 0 ) {
+
+                // Get the post title
+                $post_title = gamipress_memberpress_get_post_title( $specific_id );
+
+            }
+            break;
+    }
+
+    return $post_title;
+
+}
+add_filter( 'gamipress_specific_activity_trigger_post_title', 'gamipress_memberpress_specific_activity_trigger_post_title', 10, 3 );
+
 
 /**
  * Get user for a given trigger action.

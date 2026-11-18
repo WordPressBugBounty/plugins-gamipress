@@ -74,6 +74,7 @@ final class GamiPress_Integration_MemberPress {
         if( $this->meets_requirements() ) {
 
             require_once GAMIPRESS_MEMBERPRESS_DIR . 'includes/admin.php';
+            require_once GAMIPRESS_MEMBERPRESS_DIR . 'includes/functions.php';
             require_once GAMIPRESS_MEMBERPRESS_DIR . 'includes/listeners.php';
             require_once GAMIPRESS_MEMBERPRESS_DIR . 'includes/triggers.php';
 
