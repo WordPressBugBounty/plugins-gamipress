@@ -502,8 +502,9 @@ ul.gamipress-rank-earners-list li .earner-display-name {
 
 /* Inline points image */
 img.gamipress-points-thumbnail-inline {
-	height: 1.1em;
-	width: auto;
+	display: inline-block !important;
+	height: 1.1em !important;
+	width: auto !important;
 	vertical-align: middle !important;
 	margin-top: -0.3em;
 }

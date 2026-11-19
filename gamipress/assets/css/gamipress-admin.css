@@ -149,6 +149,11 @@
 	color: #fff;
 }
 
+.button.gamipress-button-success .dashicons,
+.button.gamipress-button-danger .dashicons {
+	color: #fff !important;
+}
+
 /* -------------------------------------------
 	Dashboard widgets
    ------------------------------------------- */
@@ -574,6 +579,7 @@ li.requirement-row.requirement-disabled {
 .gamipress-add-requirement .dashicons,
 .gamipress-save-requirements .dashicons {
 	line-height: 2 !important;
+	vertical-align: top !important;
 	opacity: 0.8;
 	margin-right: 4px;
 	margin-left: -4px;
@@ -2335,6 +2341,7 @@ body.toplevel_page_gamipress {
 	text-align: center;
 	font-size: 16px;
 	padding-top: 20px;
+	width: 100%;
 }
 
 /* Dashboard: Add-ons & Assets */
@@ -2345,6 +2352,8 @@ body.toplevel_page_gamipress {
 
 .gamipress-dashboard .gamipress-dashboard-add-ons-section,
 .gamipress-dashboard .gamipress-dashboard-assets-section {
+	display: flex !important;
+	flex-wrap: wrap;
 	margin: 0 !important;
 }
 
